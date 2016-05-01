@@ -1,0 +1,10 @@
+{block content}
+{snippet flashMessages}
+    <div n:foreach="$flashes as $flash" class="alert alert-general {$flash->type}">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="vertical_align_container">
+            {$flash->message}
+        </div>
+    </div>
+{/snippet}      
+{/block}   

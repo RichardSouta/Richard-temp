@@ -1,0 +1,131 @@
+@import url("reset.css");
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    background: #fefefe;
+    color:#333;
+    padding-top: 50px;
+}
+
+p {
+    padding: 10px;
+    
+}
+
+
+
+#header {
+    margin: 0 auto;
+    //height: 40px !important;
+    background: #5cb85c;
+    //border-radius: 10px;
+    border-bottom: 1px solid #00eb72;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+.navbar-header a{
+    color: white;
+    font-size: 15px;
+}
+
+
+#content {
+    background: #FEFEFE;
+    //border-radius: 10px;
+    //border: 1px solid #ebebeb;
+    //margin: 5px;
+}
+
+
+
+#footer {
+    height: 50px;
+    background: #5cb85c;
+    color: white;
+    font-size: 15px;
+    //float:right !important;
+}
+
+.menu{
+      float:right;
+
+}
+/*homepage*/
+#homepage {
+  padding: 0 !important;
+}
+/*top navigation*/
+.navbar {
+  margin-bottom: 0;
+  padding: 0.25em;
+}
+/*navigation*/
+#main-navigation {
+  position: relative;
+  padding: 0 !important;
+  border-right: 1px solid #000;
+  height: 100vh;
+  background: #fafafa;
+}
+
+#main-navigation ul {
+  position: relative;
+  list-style:none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+#main-navigation ul li {
+  text-align: center;
+  width: 100%;
+  padding: 1em 0;
+  background: #efefef;
+}                     
+#main-navigation ul li:hover {
+  background: #aaaaaa;
+}
+
+
+/*content*/
+#main-content {
+  padding: 0 !important;
+}
+
+/*zdroj http://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal2 */
+/* The Modal (background) */
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}

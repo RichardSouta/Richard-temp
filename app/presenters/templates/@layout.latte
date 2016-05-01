@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>iCollector</title>
+ 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+ 
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <!-- Latest jQuerry-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{$basePath}/css/style.css">
+</head>
+<body>
+<!-- Hlavička -->
+<nav class="navbar navbar-default navbar-fixed-top" id="header">
+  <div class="container-fluid">
+    <div class="navbar-header" > 
+      <a href="{link Homepage:}">iCollector</a>
+    </div>
+    <div class="navbar-right">
+      {if (!($user->isLoggedIn()))}
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Sign Up</button>
+          <a href="{link Register:}" class="btn btn-primary">Register</a>
+      {else}
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Dropdown
+        <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="{link Homepage:Logout}">Action</a></li>
+        <li><a href="{link Homepage:Logout}">Another action</a></li>
+        <li><a href="{link Homepage:Logout}">Something else here</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="{link Homepage:Logout}">Odhlásit</a></li>
+        </ul>
+      </div>
+      {/if}
+    </div>
+  </div>
+</nav>
+<!--tělo-->
+<div class="container-fluid" id="homepage">
+  <div class="row">
+      <div class="col-xs-4 col-md-2  col-lg-1" id="main-navigation">
+        <ul>
+          <li>Menu item 1</li>
+          <li>Menu item 2</li>
+        </ul>
+      </div>
+      <div class="col-xs-8 col-md-10 col-lg-11" id="main-content">
+
+        {block content}{/block}
+
+      </div>
+      <!--patička-->
+      <div class="col-xs-12" id="footer">
+        <div class="container/fluid">
+          <div class="col-xs-4">
+            <p>icollector</p>
+          </div>
+          <div class="col-xs-4">
+            <p>2016</p>
+          </div>
+          <div class="col-xs-4">
+            <p>Have you read the <a href="{link Terms:}">Terms &amp; Conditions</a> yet?</p>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+   
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        {control signInForm}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> 
+ 
+
+</body>
+</html>
