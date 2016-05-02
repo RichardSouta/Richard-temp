@@ -1,6 +1,15 @@
 {block content}
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
+<nav class="navbar navbar-inverse" id="submenu">
+<a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil</a>
+</nav>
+  <div class="container-fluid"> 
+  
+  <div class="col-md-2"></div>
+  <div class="col-md-6" id="collectible"><img src="{$collectible->picture}" class="img-responsive"></div>
+  <div class="col-md-4">
+  <p>Název: {$collectible->name}
+  <p>Popis: {$collectible->description}
+  <p>Původ: {$collectible->origin}
   </div>
-  </nav>
+  </div>
 {/block}

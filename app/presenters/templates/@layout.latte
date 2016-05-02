@@ -30,12 +30,12 @@
       {else}
       <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Dropdown
+        {$user->getIdentity()->firstName}
         <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="{link Homepage:Logout}">Action</a></li>
-        <li><a href="{link Homepage:Logout}">Another action</a></li>
+        <li><a href="{link User:}">Profil</a></li>
+        <li><a href="{link Collectible:new}">Přidat předmět</a></li>
         <li><a href="{link Homepage:Logout}">Something else here</a></li>
         <li role="separator" class="divider"></li>
         <li><a href="{link Homepage:Logout}">Odhlásit</a></li>
@@ -61,7 +61,7 @@
       </div>
       <!--patička-->
       <div class="col-xs-12" id="footer">
-        <div class="container/fluid">
+        <div class="container-fluid">
           <div class="col-xs-4">
             <p>icollector</p>
           </div>

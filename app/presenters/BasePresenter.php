@@ -23,13 +23,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	{
 		$this->database = $database;
 	}
+    public function getBasePath()
+{  
+  return $this->getHttpRequest()->getUrl()->getBasePath();
+}
   
   public function beforeRender() 
  { 
-  $userID= $this->user->getId();
-  if(isset($userID)) {
-  $this->template->userDB=$this->database->table('users')->get($userID);
-  }
+  
+  
  }
  
  protected function createComponentSignInForm()
@@ -39,12 +41,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	$form->addText('username', 'Username:')
 			->setRequired('Please enter your username.');
 
-		$form->addPassword('password', 'Password:')
+		$form->addPassword('password', 'heslo:')
 			->setRequired('Please enter your password.');
 
-		$form->addCheckbox('remember', 'Keep me signed in');
+		$form->addCheckbox('remember', 'Zůstat přihlášen');
 
-		$form->addSubmit('send', 'Sign in');
+		$form->addSubmit('send', 'Přihlásit');
 
 		// call method signInFormSubmitted() on success
 		$form->onSuccess[] = $this->signInFormSubmitted;

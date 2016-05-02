@@ -32,7 +32,7 @@ p {
 }
 .navbar-header a{
     color: white;
-    font-size: 15px;
+    font-size: 25px;
 }
 
 
@@ -52,9 +52,61 @@ p {
     font-size: 15px;
     //float:right !important;
 }
+.dropdown {
+    background-color:transparent !important;
+}
 
-.menu{
-      float:right;
+.dropdown-menu {
+    display: none;
+    //position: absolute;
+    background-color: #f9f9f9;
+    top: 30px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-menu a {
+    color: black;
+    //padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+#submenu{
+    color:white;
+    padding:10px;
+    font-size: 25px;
+
+}
+
+#collectible img{
+    max-height: 70vh;
+
+}
+.polozka{
+    padding:10px;
+    border: 1px solid;
+    font-size: 20px;
+    margin: 0 auto !important;
+    
+
+}
+.polozka img{
+    max-height: 200px;
+    margin: 0 auto;
+}
+#submenu a{
+    color:white;
 
 }
 /*homepage*/
@@ -71,8 +123,20 @@ p {
   position: relative;
   padding: 0 !important;
   border-right: 1px solid #000;
-  height: 100vh;
+  height: 85vh;
   background: #fafafa;
+}
+
+#profil{
+  color: #5cb85c;
+  font-size: 25px;
+  padding:20px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#profil img{
+  max-width:150px;
 }
 
 #main-navigation ul {

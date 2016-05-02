@@ -8,7 +8,7 @@ $configurator = new Nette\Configurator;
 $configurator->enableDebugger(__DIR__ . '/../log');
 
 $configurator->setTempDirectory(__DIR__ . '/../temp');
-
+define('WWW_DIR', realpath(__DIR__ . '/../www'));
 $configurator->createRobotLoader()
 	->addDirectory(__DIR__)
 	->register();

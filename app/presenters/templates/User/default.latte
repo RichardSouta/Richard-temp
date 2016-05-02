@@ -1,0 +1,31 @@
+{block content}
+<nav class="navbar navbar-inverse navbar-static-top" id="submenu">
+  <div class="container-fluid">
+  </div>
+  <a n:href="User:edit">Upravit profil</a>
+  </nav>
+  
+
+
+  <div id="profil">
+  <h1>{$user->identity->username}</h1>
+  <center><img src="{$user->identity->picture}" class="img-responsive img-rounded"></center>
+  <p><div class="col-xs-12">{$user->identity->description}</div>
+  </div>
+
+    {foreach $collectibles as $collectible}
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="polozka">
+                <div class="polozka_head">
+                  <a href="{link Colectible:,$collectible->collectible_id}"><img class="img-responsive" src="http://img.cda.pl/obr/oryginalne/850ca7d90566b9ed82c60d9d50771230.jpg"></a>
+                </div>
+                <div class="polozka_body">
+                  <h3>Titulek</h3>
+                  <p>Popisek</p>
+                </div>                
+              </div>
+            </div>
+            {/foreach}
+            <p><center><button type="button" class="btn btn-success btn-lg active"><a n:href="Collectible:new"><span style="color:white; text-decoration-color:white">Přidat nový předmět</span></a></button></center>
+
+{/block}
