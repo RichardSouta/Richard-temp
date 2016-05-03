@@ -34,9 +34,9 @@
         <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="{link User:}">Profil</a></li>
+        <li><a href="{link User:,$user->identity->id}">Profil</a></li>
         <li><a href="{link Collectible:new}">Přidat předmět</a></li>
-        <li><a href="{link Homepage:Logout}">Something else here</a></li>
+        <li><a href="{link Chat:}">Moje konverzace</a></li>
         <li role="separator" class="divider"></li>
         <li><a href="{link Homepage:Logout}">Odhlásit</a></li>
         </ul>
@@ -54,7 +54,7 @@
           <li>Menu item 2</li>
         </ul>
       </div>
-      <div class="col-xs-8 col-md-10 col-lg-11" id="main-content">
+      <div class="col-xs-8 col-md-10 col-lg-11" id="content">
 
         {block content}{/block}
 
@@ -85,14 +85,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Přihlášení</h4>
       </div>
       <div class="modal-body">
         {control signInForm}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

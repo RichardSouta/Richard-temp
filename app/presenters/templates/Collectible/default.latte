@@ -1,12 +1,18 @@
 {block content}
+{if $user->identity->id==$collectible->user_id}
 <nav class="navbar navbar-inverse" id="submenu">
 <a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil</a>
 </nav>
+{/if}
+
   <div class="container-fluid"> 
   
   <div class="col-md-2"></div>
   <div class="col-md-6" id="collectible"><img src="{$collectible->picture}" class="img-responsive"></div>
   <div class="col-md-4">
+  Vlastník: {$vlastnik->firstName} {$vlastnik->surname}
+  <div class="img-responsive"><img src="{$vlastnik->picture}" class="img-circle"></div>
+  <p> Předmět
   <p>Název: {$collectible->name}
   <p>Popis: {$collectible->description}
   <p>Původ: {$collectible->origin}

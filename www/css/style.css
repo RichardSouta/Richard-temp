@@ -26,7 +26,7 @@ p {
     //height: 40px !important;
     background: #5cb85c;
     //border-radius: 10px;
-    border-bottom: 1px solid #00eb72;
+    border-bottom: 1px #00eb72;
     padding-left: 10px;
     padding-top: 10px;
 }
@@ -38,14 +38,30 @@ p {
 
 #content {
     background: #FEFEFE;
+    border-left: 1px solid #000 !important;
+    height: 100%;
     //border-radius: 10px;
     //border: 1px solid #ebebeb;
-    //margin: 5px;
+}
+
+#content-user {
+    #content;
+    margin-bottom: 50px;
+}
+
+#new, new button, new a, new p{
+    margin: 0 auto;
+    position:absolute;
+    color:white;
+    text-decoration-color:white;
+    bottom:-50px;
 }
 
 
 
 #footer {
+    position:relative;
+    bottom:0px;
     height: 50px;
     background: #5cb85c;
     color: white;
@@ -122,8 +138,8 @@ p {
 #main-navigation {
   position: relative;
   padding: 0 !important;
-  border-right: 1px solid #000;
-  height: 85vh;
+  border-right: 1px solid #000 !important;
+  height: 100vh;
   background: #fafafa;
 }
 

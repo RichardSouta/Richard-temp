@@ -11,8 +11,8 @@ class CollectiblePresenter extends BasePresenter
   public $id;
 	public function renderDefault($id)
 	{
-	    $this->template->collectible=$this->database->table('collectibles')->get($id);      
-     
+	    $collectible=$this->template->collectible=$this->database->table('collectibles')->get($id);      
+      $this->template->vlastnik=$this->database->table('users')->get($collectible["user_id"]);
 	}
   
   public function renderEdit($id)

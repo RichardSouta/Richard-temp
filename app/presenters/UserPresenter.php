@@ -9,10 +9,11 @@ use Nette\Utils\Strings;
 
 class UserPresenter extends BasePresenter
 {
-  public $page;
-	public function renderDefault($page=1)
+  public $id, $page;
+	public function renderDefault($id,$page=1)
 	{
-	    $collectibles=$this->database->table('collectibles')->select('*')->limit(27)->fetchAll();      
+  
+	    $collectibles=$this->database->table('collectibles')->select('*')->where("user_id",$id)->limit(27)->fetchAll();      
       $paginator = new Nette\Utils\Paginator;
       $paginator->setItemCount(count($collectibles)); // celkový počet položek (např. článků)
       $paginator->setItemsPerPage(9); // počet položek na stránce
