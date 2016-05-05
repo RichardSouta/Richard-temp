@@ -25,23 +25,23 @@ class CollectiblePresenter extends BasePresenter
 	{
     $form = new Form;
     $form->addProtection();
-    $form->addText('name', 'Název předmětu')->setRequired();  
+    $form->addText('name', 'Název předmětu')->setRequired()->setAttribute('class','form-control');  
 
-    $form->addTextArea('description', 'Popis předmětu')->setRequired();
+    $form->addTextArea('description', 'Popis předmětu')->setRequired()->setAttribute('class','form-control');
 
-    $form->addTextArea('origin', 'Původ předmětu')->setRequired();
+    $form->addTextArea('origin', 'Původ předmětu')->setRequired()->setAttribute('class','form-control');
 
     $categories=$this->database->table('categories')->select('*')->fetchPairs('category_id','name');
-    $form->addSelect('category','Kategorie',$categories);
+    $form->addSelect('category','Kategorie',$categories)->setAttribute('class','form-control');
 
 
-    $form->addUpload('img', 'Foto předmětu')->addRule(Form::IMAGE, 'Cover must be JPEG, PNG or GIF.');
+    $form->addUpload('img', 'Foto předmětu')->addRule(Form::IMAGE, 'Cover must be JPEG, PNG or GIF.')->setAttribute('class','form-control');
 
 
 
 
 
-    $form->addSubmit('send', 'nový předmět')->setRequired();
+    $form->addSubmit('send', 'nový předmět')->setRequired()->setAttribute('class','form-control');
 
   	$form->onSuccess[] = $this->collectibleFormSubmitted;
 		return $form;
@@ -82,18 +82,18 @@ class CollectiblePresenter extends BasePresenter
     $form = new Form;
     $form->addProtection();
     $data=$this->database->table('collectibles')->get($this->getParameter('id'));
-    $form->addText('name', 'název')->setValue($data->name)->setRequired();
+    $form->addText('name', 'název')->setValue($data->name)->setRequired()->setAttribute('class','form-control');
 
-    $form->addTextArea('description', 'popis')->setValue($data->description)->setRequired();
+    $form->addTextArea('description', 'popis')->setValue($data->description)->setAttribute('class','form-control')->setRequired();
 
-    $form->addTextArea('origin', 'původ')->setValue($data->origin)->setRequired();
+    $form->addTextArea('origin', 'původ')->setValue($data->origin)->setAttribute('class','form-control')->setRequired();
 
     $categories=$this->database->table('categories')->select('*')->fetchPairs('category_id','name');
-    $form->addSelect('category','kategorie',$categories)->setValue($data->category_id);
+    $form->addSelect('category','kategorie',$categories)->setValue($data->category_id)->setAttribute('class','form-control');
 
-    $form->addUpload('img', 'Upload your image')->setRequired(false)->addCondition(Form::FILLED)->addRule(Form::IMAGE, 'Cover must be JPEG, PNG or GIF.');
+    $form->addUpload('img', 'Upload your image')->setAttribute('class','form-control')->setRequired(false)->addCondition(Form::FILLED)->addRule(Form::IMAGE, 'Cover must be JPEG, PNG or GIF.');
 
-    $form->addSubmit('send', 'Upravit předmět')->setRequired();
+    $form->addSubmit('send', 'Upravit předmět')->setAttribute('class','form-control')->setRequired();
 
   	$form->onSuccess[] = $this->collectibleEditFormSubmitted;
 

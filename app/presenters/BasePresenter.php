@@ -38,19 +38,20 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	{
   $form = new Form;
   $form->addProtection();
-	$form->addText('username', 'Username:')
+	$form->addText('username', 'Username:')->setAttribute('class','form-control')
 			->setRequired('Please enter your username.');
 
-		$form->addPassword('password', 'heslo:')
+		$form->addPassword('password', 'heslo:')->setAttribute('class','form-control')
 			->setRequired('Please enter your password.');
 
-		$form->addCheckbox('remember', 'Zůstat přihlášen');
+		$form->addCheckbox('remember', 'Zůstat přihlášen')->setAttribute('class','form-control');
 
-		$form->addSubmit('send', 'Přihlásit');
+		$form->addSubmit('send', 'Přihlásit')->setAttribute('class','form-control');
 
 		// call method signInFormSubmitted() on success
 		$form->onSuccess[] = $this->signInFormSubmitted;
-
+    $renderer = $form->getRenderer();
+    
 		return $form;
 	}
 
@@ -80,5 +81,46 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$this->flashMessage('You have been signed out.');
 		$this->redirect('Homepage:');
 	}
- 
+  
+  protected function createComponentSearchForm()
+	{
+  $form = new Form;
+  $form->addProtection();
+	$form->addText('search')->setAttribute('class','form-control')->setAttribute('placeholder','kategorie');
+		// call method signInFormSubmitted() on success
+		$form->onSuccess[] = $this->searchFormSubmitted;
+
+		return $form;
+	}
+
+  public function searchFormSubmitted($form)
+	{
+		$values = $form->getValues();
+
+		$this->redirect('Category:',$values->search);
+	}
+/*  
+  protected function createComponentOptionForm()
+	{
+  $form = new Form;
+  $form->addProtection();
+  $options = array(
+    'g' => 'galerie',
+    's' => 'seznam',);
+$form->addRadioList('option','', $options)->setAttribute('class','form-control')->getSeparatorPrototype()->setName(NULL);
+
+
+		// call method signInFormSubmitted() on success
+		$form->onSuccess[] = $this->optionFormSubmitted;
+
+		return $form;
+	}
+
+  public function optionFormSubmitted($form)
+	{
+		$values = $form->getValues();
+
+		$this->redirect('Category:',$values->option);
+	}
+*/ 
 }

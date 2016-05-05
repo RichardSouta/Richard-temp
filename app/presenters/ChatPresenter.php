@@ -20,7 +20,7 @@ class ChatPresenter extends BasePresenter
   return new Multiplier(function ($itemId) {
     $form = new Form;
     $form->addProtection();
-    $form->addText('text')->setAttribute('placeholder','Type a message…');
+    $form->addText('text')->setAttribute('placeholder','Type a message…')->setAttribute('class','form-control');
     $form->addSubmit('send', 'Send');
     $form->addHidden('itemId', $itemId);
     $form->onSuccess[] = $this->messageFormSubmitted;

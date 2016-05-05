@@ -20,7 +20,7 @@
 <!-- Hlavička -->
 <nav class="navbar navbar-default navbar-fixed-top" id="header">
   <div class="container-fluid">
-    <div class="navbar-header" > 
+    <div class="navbar-header" id="logo"> 
       <a href="{link Homepage:}">iCollector</a>
     </div>
     <div class="navbar-right">
@@ -47,19 +47,20 @@
 </nav>
 <!--tělo-->
 <div class="container-fluid" id="homepage">
-  <div class="row">
-      <div class="col-xs-4 col-md-2  col-lg-1" id="main-navigation">
+ 
+      <div class="col-xs-1 col-md-1 col-lg-1" id="main-navigation">
         <ul>
-          <li>Menu item 1</li>
+          <!--<li><a n:href="Category:">Kategorie</a></li>-->
+          <li>{control searchForm}</li>
           <li>Menu item 2</li>
         </ul>
       </div>
-      <div class="col-xs-8 col-md-10 col-lg-11" id="content">
+      <div class="col-xs-11 col-md-11 col-lg-11" id="content">
 
         {block content}{/block}
 
       </div>
-      <!--patička-->
+      <!--patička
       <div class="col-xs-12" id="footer">
         <div class="container-fluid">
           <div class="col-xs-4">
@@ -72,8 +73,7 @@
             <p>Have you read the <a href="{link Terms:}">Terms &amp; Conditions</a> yet?</p>
           </div>
         </div>
-      </div>
-  </div>
+      </div>-->
 </div>
    
 

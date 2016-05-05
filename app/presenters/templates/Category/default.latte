@@ -1,3 +1,27 @@
 {block content}
+<div class="jumbotron">
+          <div class="container">
+            <h1>iCollector</h1>
+            <p>Aplikace pro všechny sběratele</p>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="row" id="galeriewrapper">
 
+           {foreach $collectibles as $collectible}
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" id="galerie">
+              <div class="polozka">
+                <div class="polozka_head">
+                <center><h3>{$collectible->name}</h3></center>
+                  <a href="{link Collectible:,$collectible->collectible_id}"><img class="img-responsive" src="{$collectible->picture}" title="{$collectible->description}"></a>
+                </div>
+                <div class="polozka_body">
+                  {ifset $collectible->category}<center>Kategorie: {$collectible->category}</center>{/ifset}
+                </div>                
+              </div>
+            </div>
+            {/foreach}      
+        
+          </div>
+        </div>
 {/block}

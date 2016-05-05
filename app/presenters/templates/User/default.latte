@@ -4,6 +4,7 @@
   <div class="container-fluid">
   </div>
   <a n:href="User:edit">Upravit profil</a>
+  <button type="button" class="btn btn-success btn-lg active"><a n:href="Collectible:new"><span style="color:white;">Přidat nový předmět</span></a></button>
   </nav>
   
   {/if}
@@ -16,20 +17,18 @@
   <p><div class="col-xs-12">{$user->identity->description}</div>
   </div>
 
-    {foreach $collectibles as $collectible}
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+     {foreach $collectibles as $collectible}
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" id="galerie">
               <div class="polozka">
                 <div class="polozka_head">
-                  <a href="{link Collectible:,$collectible->collectible_id}"><img class="img-responsive" src="{$collectible->picture}"></a>
+                <center><h3>{$collectible->name}</h3></center>
+                  <a href="{link Collectible:,$collectible->collectible_id}"><img class="img-responsive" src="{$collectible->picture}" title="{$collectible->description}"></a>
                 </div>
                 <div class="polozka_body">
-                  <h3>Název: {$collectible->name}</h3>
-                  <p>Popis: {$collectible->description}</p>
-                  {ifset $collectible->category}<p>Kategorie: {$collectible->category}</p>{/ifset}
+                  {ifset $collectible->category}<center>Kategorie: {$collectible->category}</center>{/ifset}
                 </div>                
               </div>
             </div>
-            {/foreach}       
-            <center><div id="new"><button type="button" class="btn btn-success btn-lg active"><a n:href="Collectible:new"><span style="color:white;">Přidat nový předmět</span></a></button></div></center>
+            {/foreach}
 
 {/block}

@@ -26,34 +26,34 @@ class UserPresenter extends BasePresenter
 	{
     $form = new Form;
     $form->addProtection();
-    $form->addUpload('avatar', 'Avatar:')
+    $form->addUpload('avatar', 'Avatar:')->setAttribute('class','form-control')
     ->setRequired(false)
     ->addCondition(Form::FILLED)
     ->addRule(Form::IMAGE, 'Avatar musí být JPEG, PNG nebo GIF.');
-     $form->addText('username', 'Your username')->setValue($this->getUser()->getIdentity()->username)
+     $form->addText('username', 'Your username')->setValue($this->getUser()->getIdentity()->username)->setAttribute('class','form-control')
     ->setRequired();
 
-     $form->addText('email', 'Your e-mail')->setValue($this->getUser()->getIdentity()->email)
+     $form->addText('email', 'Your e-mail')->setValue($this->getUser()->getIdentity()->email)->setAttribute('class','form-control')
     ->setRequired()
     ->addRule(Form::EMAIL, 'Please fill in your valid adress')
     ->emptyValue = '@';
 
-    $form->addText('description', 'Change description')->setValue($this->getUser()->getIdentity()->description);
+    $form->addText('description', 'Change description')->setValue($this->getUser()->getIdentity()->description)->setAttribute('class','form-control');
 
-    $form->addPassword('password', 'Your password')
+    $form->addPassword('password', 'Your password')->setAttribute('class','form-control')
     ->setRequired(false)
     ->addCondition(Form::FILLED)
     ->addRule(Form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaky', 6)
     ->addRule(Form::PATTERN, 'Musí obsahovat číslici', '.*[0-9].*');
 
-    $form->addPassword('passwordVerify', 'Your password second time')
+    $form->addPassword('passwordVerify', 'Your password second time')->setAttribute('class','form-control')
     ->setRequired(false)
     ->addCondition(Form::FILLED)
     ->addRule(Form::EQUAL, 'Zadané hesla se neshodují', $form['password']);
 
-    $form->addText('phone', 'Add your phone number')->setValue($this->getUser()->getIdentity()->phone);
+    $form->addText('phone', 'Add your phone number')->setValue($this->getUser()->getIdentity()->phone)->setAttribute('class','form-control');
 
-    $form->addSubmit('send', 'Edit your profile');
+    $form->addSubmit('send', 'Edit your profile')->setAttribute('class','form-control');
 
   	$form->onSuccess[] = $this->profileFormSubmitted;
 		return $form;

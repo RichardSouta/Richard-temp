@@ -8,22 +8,16 @@
 
 body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 13px;
+    font-size: 15px;
     background: #fefefe;
     color:#333;
     padding-top: 50px;
+    height:100%;
 }
-
-p {
-    padding: 10px;
-    
-}
-
 
 
 #header {
     margin: 0 auto;
-    //height: 40px !important;
     background: #5cb85c;
     //border-radius: 10px;
     border-bottom: 1px #00eb72;
@@ -35,15 +29,29 @@ p {
     font-size: 25px;
 }
 
+#logo {
+     border-bottom:none;
+}
 
 #content {
+    position:relative;
+    left:8.25vw;
     background: #FEFEFE;
     border-left: 1px solid #000 !important;
     height: 100%;
     //border-radius: 10px;
     //border: 1px solid #ebebeb;
 }
-
+.form-control button{
+background:#5cb85c;
+}
+#frm-profileForm{
+padding-bottom:20px;
+}
+th,td{
+  padding:15px;
+  text-align: center
+}
 #content-user {
     #content;
     margin-bottom: 50px;
@@ -60,14 +68,17 @@ p {
 
 
 #footer {
-    position:relative;
-    bottom:0px;
+    position:absolute;
+    top:calc(100vh - 50px) !important;
+    bottom:50px;
     height: 50px;
+    margin-top:10px;
+    padding-top: 10px;
     background: #5cb85c;
     color: white;
-    font-size: 15px;
-    //float:right !important;
+    font-size: 25px;
 }
+
 .dropdown {
     background-color:transparent !important;
 }
@@ -99,10 +110,21 @@ p {
 }
 
 #submenu{
+
     color:white;
     padding:10px;
     font-size: 25px;
 
+}
+
+#galerie{
+    padding:0 !important;
+    
+
+}
+
+#galeriewrapper{
+    
 }
 
 #collectible img{
@@ -110,15 +132,18 @@ p {
 
 }
 .polozka{
-    padding:10px;
-    border: 1px solid;
-    font-size: 20px;
-    margin: 0 auto !important;
+    //padding:10px;
+    border: 1px ridge;
+    //border-top: 1px solid #000 !important;    
+    font-size: 2.25vh;
+    font-weight: bold;
+    margin: 0 !important;
+    height: 30vh;
     
 
 }
 .polozka img{
-    max-height: 200px;
+    max-height: 25vh;
     margin: 0 auto;
 }
 #submenu a{
@@ -136,10 +161,11 @@ p {
 }
 /*navigation*/
 #main-navigation {
-  position: relative;
+  position: fixed;
+  left:0;
+  //width: 200px;
   padding: 0 !important;
-  border-right: 1px solid #000 !important;
-  height: 100vh;
+  //border-right: 1px solid #000 !important;
   background: #fafafa;
 }
 
@@ -158,11 +184,17 @@ p {
 #main-navigation ul {
   position: relative;
   list-style:none;
+  //width: 200px;
   padding: 0;
   margin: 0;
   width: 100%;
 }
+#main-navigation th{
+ padding:0px !important;
+}
 #main-navigation ul li {
+  position: relative;
+  //width: 200px;
   text-align: center;
   width: 100%;
   padding: 1em 0;
