@@ -30,7 +30,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
   
   public function beforeRender() 
  { 
+  if ($this->user->isLoggedIn())
+  if ($this->user->identity->confirmedEmail!=1) {
+  $this->getUser()->logout();
   
+  $this->flashMessage('aktivujte prosím svůj e-mail','danger');
+  $this->redirect('Homepage:');
+  }
   
  }
  
@@ -46,7 +52,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
 		$form->addCheckbox('remember', 'Zůstat přihlášen')->setAttribute('class','form-control');
 
-		$form->addSubmit('send', 'Přihlásit')->setAttribute('class','form-control');
+		$form->addSubmit('send', 'Přihlásit')->setAttribute('class','form-control')->setAttribute('id','submit_button');
 
 		// call method signInFormSubmitted() on success
 		$form->onSuccess[] = $this->signInFormSubmitted;

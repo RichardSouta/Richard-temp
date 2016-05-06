@@ -12,15 +12,19 @@ class UserPresenter extends BasePresenter
   public $id, $page;
 	public function renderDefault($id,$page=1)
 	{
-  
-	    $collectibles=$this->database->table('collectibles')->select('*')->where("user_id",$id)->limit(27)->fetchAll();      
+      $this->template->uzivatel=$this->database->table('users')->get($id);
+	    $collectibles=$this->database->table('collectibles')->select('*')->where("user_id",$id)->fetchAll();      
       $paginator = new Nette\Utils\Paginator;
       $paginator->setItemCount(count($collectibles)); // celkový počet položek (např. článků)
-      $paginator->setItemsPerPage(9); // počet položek na stránce
+      $paginator->setItemsPerPage(8); // počet položek na stránce
       $paginator->setPage($page); // číslo aktuální stránky, číslováno od 1
       $this->template->paginator=$paginator;
       $this->template->collectibles=array_slice($collectibles, $paginator->getOffset(),$paginator->getLength());
 	}
+  public function renderEdit($id)
+	{
+   if($this->user->identity->id!=$id) $this->redirect('User:',$id);
+  }
   
      protected function createComponentProfileForm()
 	{
@@ -53,7 +57,7 @@ class UserPresenter extends BasePresenter
 
     $form->addText('phone', 'Add your phone number')->setValue($this->getUser()->getIdentity()->phone)->setAttribute('class','form-control');
 
-    $form->addSubmit('send', 'Edit your profile')->setAttribute('class','form-control');
+    $form->addSubmit('send', 'Edit your profile')->setAttribute('class','form-control')->setAttribute('id','submit_button');
 
   	$form->onSuccess[] = $this->profileFormSubmitted;
 		return $form;

@@ -25,8 +25,8 @@
     </div>
     <div class="navbar-right">
       {if (!($user->isLoggedIn()))}
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Sign Up</button>
-          <a href="{link Register:}" class="btn btn-primary">Register</a>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Přihlásit</button>
+          <a href="{link Register:}" class="btn btn-primary">Registrovat</a>
       {else}
       <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -89,6 +89,7 @@
       </div>
       <div class="modal-body">
         {control signInForm}
+        <a href="{link LostPassword:}" id="forgot_pass"><button class="btn btn-primary btn-large">Zapomenuté heslo?</button></a>
       </div>
     </div>
   </div>

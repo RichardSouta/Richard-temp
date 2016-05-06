@@ -13,11 +13,80 @@ class RouterFactory
 	/**
 	 * @return Nette\Application\IRouter
 	 */
-	public static function createRouter()
+	public function createRouter()
 	{
 		$router = new RouteList;
+    $router[] = new Route('collectible/edit/<id>', 'Collectible:edit');
+    $router[] = new Route('collectible/new', 'Collectible:new');
+    $router[] = new Route('collectible[/<default>]/<id>', array(
+    'presenter' => 'Collectible',
+    'action' => 'default',
+    'id' => array(
+        Route::FILTER_IN => function ($url) {
+            return self::urlToId($url);
+        },
+        Route::FILTER_OUT => function ($id) {
+            return self::idToUrl($id);
+        },
+    ),
+));
+    $router[] = new Route('user/edit/<id>',array(
+    'presenter' => 'User',
+    'action' => 'edit',
+    'id' => array(
+        Route::FILTER_IN => function ($url) {
+            return self::urlToId2($url);
+        },
+        Route::FILTER_OUT => function ($id) {
+            return self::idToUrl2($id);
+        },
+    ),
+));
+
+    $router[] = new Route('user[/<default>]/<id>',array(
+    'presenter' => 'User',
+    'action' => 'default',
+    'id' => array(
+        Route::FILTER_IN => function ($url) {
+            return self::urlToId2($url);
+        },
+        Route::FILTER_OUT => function ($id) {
+            return self::idToUrl2($id);
+        },
+    ),
+));
+
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;
 	}
+  protected $database; 
+	public function __construct(Nette\Database\Context $database)
+	{
+		$this->database = $database;
+	}
+  public function idToUrl($id)
+  {    
+    $urlTile=str_replace(" ","-",$this->database->table('collectibles')->get($id)->name);
+    $url=$id."-".$urlTile;
+    setlocale(LC_CTYPE, 'en_US');
+    return urlencode($url);
+  }
+  public function urlToId($url)
+  {
+    $pole=explode("-",$url);
+    return $pole[0];
+  }
+  
+  public function idToUrl2($id)
+  {    
+    $url=str_replace(" ","-",$this->database->table('users')->get($id)->username);
+    setlocale(LC_CTYPE, 'en_US');
+    return urlencode($url);
+  }
+  public function urlToId2($url)
+  {
+    $id=$this->database->table('users')->where('username=?',$url)->fetch()->user_id;
+    return $id;
+  }
 
 }

@@ -10,18 +10,19 @@ use Nette\Application\UI\Multiplier;
 
 class ChatPresenter extends BasePresenter
 {
-  public $id1,$id2;
-	public function renderDefault()
+  public $id,$id2;
+	public function renderDefault($id)
 	{
-	 $this->template->chats=$this->database->query("SELECT DISTINCT user_id,surname,firstName,picture FROM (SELECT u.user_id,u.firstName,u.surname,u.picture,`timestamp` FROM messages join users u on u.user_id=`reciever_id` WHERE `reciever_id`=1 UNION SELECT u2.user_id,u2.firstName,u2.surname,u2.picture,`timestamp` FROM messages join users u2 on u2.user_id=`sender_id` WHERE `sender_id`=1 ORDER BY timestamp DESC) AS t")->fetchAll();   
+	 $this->template->chats=$this->database->query("SELECT DISTINCT user_id,surname,firstName,picture FROM (SELECT u.user_id,u.firstName,u.surname,u.picture,`timestamp` FROM messages join users u on u.user_id=`reciever_id` WHERE `reciever_id`=? UNION SELECT u2.user_id,u2.firstName,u2.surname,u2.picture,`timestamp` FROM messages join users u2 on u2.user_id=`sender_id` WHERE `sender_id`=? ORDER BY timestamp DESC) AS t",$id,$id)->fetchAll();   
 	}
+  //todo
    protected function createComponentMessageForm()
 	{
   return new Multiplier(function ($itemId) {
     $form = new Form;
     $form->addProtection();
     $form->addText('text')->setAttribute('placeholder','Type a message…')->setAttribute('class','form-control');
-    $form->addSubmit('send', 'Send');
+    $form->addSubmit('send', 'Send')->setAttribute('class','form-control')->setAttribute('id','submit_button');
     $form->addHidden('itemId', $itemId);
     $form->onSuccess[] = $this->messageFormSubmitted;
     $renderer = $form->getRenderer();

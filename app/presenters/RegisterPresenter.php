@@ -16,32 +16,32 @@ class RegisterPresenter extends BasePresenter
 {
     $form = new Form;
     $form->addProtection();
-    $form->addText('firstName', 'Vaše křestní jméno')
+    $form->addText('firstName', 'Vaše křestní jméno')->setAttribute('class','form-control')
         ->setRequired();
 
-    $form->addText('surname', 'Příjmení')
+    $form->addText('surname', 'Příjmení')->setAttribute('class','form-control')
         ->setRequired();
 
-    $form->addText('username', 'username')
+    $form->addText('username', 'username')->setAttribute('class','form-control')
     ->setRequired();
 
-     $form->addText('email', 'Váš e-mail')
+     $form->addText('email', 'Váš e-mail')->setAttribute('class','form-control')
     ->setRequired('Choose an e-mail')
     ->addRule(Form::EMAIL, 'Please fill in your valid adress')
     ->emptyValue = '@';
 
-    $form->addPassword('password', 'heslo')
+    $form->addPassword('password', 'heslo')->setAttribute('class','form-control')
     ->setRequired('Choose a password')
     ->addRule(Form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaky', 6)
     ->addRule(Form::PATTERN, 'Musí obsahovat číslici', '.*[0-9].*');
 
-    $form->addPassword('passwordVerify', 'heslo znovu')
+    $form->addPassword('passwordVerify', 'heslo znovu')->setAttribute('class','form-control')
     ->addRule(Form::FILLED, 'Zadejte heslo ještě jednou pro kontrolu')
     ->addRule(Form::EQUAL, 'Zadané hesla se neshodují', $form['password']);
 
     $link = Nette\Utils\Html::el('a')->href($this->link('//Terms:default'))->target("_blank")->setText('Souhlasím s podmínkami');
     $label = Html::el()->setHtml($link);
-    $form->addCheckbox('agree', $label)
+    $form->addCheckbox('agree', $label)->setAttribute('class','form-control')
     ->addRule(Form::EQUAL, 'Je potřeba souhlasit s podmínkami', TRUE);
     
 /*  $link = Nette\Utils\Html::el('a')->href($this->link('//LostPassword:default'))->setText('Forggot your password?');
@@ -52,7 +52,7 @@ class RegisterPresenter extends BasePresenter
 
 
 
-    $form->addSubmit('send', 'Registrovat se');
+    $form->addSubmit('send', 'Registrovat se')->setAttribute('class','form-control')->setAttribute('id','submit_button');
     $form->onSuccess[] = $this->registerFormSubmitted;
 
    
@@ -78,7 +78,7 @@ $values = $form->getValues();
     $mail = new Message;
     $mail->setFrom('lokaleat@gmail.com')
     ->addTo($values->email)
-    ->setSubject('Welcome to LokalEat')
+    ->setSubject('Vítej mezi sběrateli na iCollector')
     ->setHTMLBody('<style>.wrapper{width:100%;height:auto;}.container{max-width: 90%;margin:0 auto;}.mail_header{background-color:#5cb85c;padding: 0.5em;}.mail_body{text-align:center;margin-top: 1em;}.mail_body p{max-width: 80%; margin: 1em auto;}.large{font-size: 1.5em;margin-top: 2em;}.bottom{margin-top: 2em;}.confirm_button{background-color:#5cb85c; padding: 0.5em; margin: 150px auto 0;}.confirm_button a {text-decoration: none; color: #000;}.confirm_button:hover{opacity:0.9;}</style><div class="wrapper"><div class="container"><div class="mail_header">LokalEat</div><div class="mail_body"><p class="large">Ahoj ' . $values->firstName . ', Vítej na iCollector </p><p> Tvoje registrace byla úspěšná, prosím potvrď svůj e-mail kliknutím na odkaz níže. Team iCollector</p><p class="bottom"><span class="confirm_button">' . $link . '</span></p></div></div>');
     $mailer = new Nette\Mail\SmtpMailer(array(
         'host' => 'smtp.gmail.com',

@@ -13,7 +13,7 @@ class LostPasswordPresenter extends BasePresenter
    {
      if($this->database->table('users')->select('*')->where("security = ?",$token)->count()==0)
      {
-     $this->flashMessage('You have been redirected for security reasons, please try again.');
+     $this->flashMessage('Z bezpečnostních důvodů jsi byl přesměrován, prosím zkus to znovu.');
      $this->redirect('LostPassword:');
      }
    } 
@@ -23,12 +23,12 @@ class LostPasswordPresenter extends BasePresenter
     $form = new Form;
 
 
-     $form->addText('email', 'Your e-mail')
-    ->setRequired('Choose an e-mail')
-    ->addRule(Form::EMAIL, 'Please fill in your valid adress')
+     $form->addText('email')->setAttribute('class','form-control')
+    ->setRequired('Zadejte e-mail')
+    ->addRule(Form::EMAIL, 'Prosím zadejte svojí e-mail adresu.')
     ->emptyValue = '@';
 
-    $form->addSubmit('send', 'Confirm your e-mail');
+    $form->addSubmit('send', 'Potvrďte svůj e-mail')->setAttribute('class','form-control')->setAttribute('id','submit_button');
     $form->onSuccess[] = $this->emailFormSubmitted;
 
     $renderer = $form->getRenderer();
@@ -46,12 +46,12 @@ public function emailFormSubmitted($form)
     $token = Nette\Utils\Strings::random();
     $this->database->table('users')->where("email = ?",$values->email)->update(array('security' => $token));    
     $data=$this->database->table('users')->select('*')->where("email = ?",$values->email)->fetch();
-    $link = Nette\Utils\Html::el('a')->href($this->link('//LostPassword:new', $token))->setText('Change your password');
+    $link = Nette\Utils\Html::el('a')->href($this->link('//LostPassword:new', $token))->setText('Změnit heslo');
     $mail = new Message;
     $mail->setFrom('lokaleat@gmail.com')
     ->addTo($values->email)
-    ->setSubject('Renew your password')
-    ->setHTMLBody('<style>.wrapper{width:100%;height:auto;}.container{max-width: 90%;margin:0 auto;}.mail_header{background-color:#fcdb00;padding: 0.5em;}.mail_body{text-align:center;margin-top: 1em;}.mail_body p{max-width: 80%; margin: 1em auto;}.large{font-size: 1.5em;margin-top: 2em;}.bottom{margin-top: 2em;}.confirm_button{background-color:#fcdb00; padding: 0.5em; margin: 150px auto 0;}.confirm_button a {text-decoration: none; color: #000;}.confirm_button:hover{opacity:0.9;}</style><div class="wrapper"><div class="container"><div class="mail_header">LokalEat</div><div class="mail_body"><p class="large">Hello ' . $data->firstName . ', Welcome to LokalEat</p><p>Your registration was successful, please confirm your email address by clicking the link below and activate your account. Make sure to let us know at support@lokaleat.com if you come across any issues during registration or if you come across any other questions.</p><p class="bottom"><span class="confirm_button">' . $link . '</span></p></div></div>');
+    ->setSubject('Obnovit heslo')
+    ->setHTMLBody('<style>.wrapper{width:100%;height:auto;}.container{max-width: 90%;margin:0 auto;}.mail_header{background-color:#5cb85c;padding: 0.5em;}.mail_body{text-align:center;margin-top: 1em;}.mail_body p{max-width: 80%; margin: 1em auto;}.large{font-size: 1.5em;margin-top: 2em;}.bottom{margin-top: 2em;}.confirm_button{background-color:#5cb85c; padding: 0.5em; margin: 150px auto 0;}.confirm_button a {text-decoration: none; color: #000;}.confirm_button:hover{opacity:0.9;}</style><div class="wrapper"><div class="container"><div class="mail_header">iCollector</div><div class="mail_body"><p class="large">Ahoj ' . $data->firstName . ',</p><p>Pro změnu hesla klikni na tlačítko níže.</p><p>V případě, že jsi o ní nezažádal, ignoruj prosím tuto zprávu.</p><p>Tvůj team iCollector</p><p class="bottom"><span class="confirm_button">' . $link . '</span></p></div></div>');
     $mailer = new Nette\Mail\SmtpMailer(array(
         'host' => 'smtp.gmail.com',
         'username' => 'lokaleat@gmail.com',
@@ -60,7 +60,7 @@ public function emailFormSubmitted($form)
     ));
     $mailer->send($mail);
 
-    $this->flashMessage('Email has been sent.', 'success');
+    $this->flashMessage('E-mail byl odeslán.', 'success');
     $this->redirect('this');
     
 }
@@ -69,16 +69,16 @@ public function emailFormSubmitted($form)
 {
     $form = new Form;
 
-    $form->addPassword('password', 'Your password')
+    $form->addPassword('password', 'Vaše heslo')->setAttribute('class','form-control')
     ->setRequired('Choose a password')
     ->addRule(Form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaky', 6)
     ->addRule(Form::PATTERN, 'Musí obsahovat číslici', '.*[0-9].*');
 
-    $form->addPassword('passwordVerify', 'Your password second time')
+    $form->addPassword('passwordVerify', 'Vaše heslo podruhé')->setAttribute('class','form-control')
     ->addRule(Form::FILLED, 'Zadejte heslo ještě jednou pro kontrolu')
     ->addRule(Form::EQUAL, 'Zadané hesla se neshodují', $form['password']);
 
-    $form->addSubmit('send', 'Change password');
+    $form->addSubmit('send', 'Změnit heslo')->setAttribute('class','form-control')->setAttribute('id','submit_button');
     $form->onSuccess[] = $this->newPasswordFormSubmitted;
 
     $renderer = $form->getRenderer();
@@ -96,7 +96,7 @@ $values = $form->getValues();
     try{
         $this->database->table('users')->where("security = ?",$this->getParam("token"))->update(array('security' => NULL, 'password' => password_hash($values->password, PASSWORD_DEFAULT)));
 
-    $this->flashMessage('Your password has been changed', 'success');
+    $this->flashMessage('Vaše heslo bylo úspěšně změněno.', 'success');
     $this->redirect('Homepage:'); }
     catch(\PDOException $e) {
                 throw $e;

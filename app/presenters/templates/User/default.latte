@@ -3,21 +3,26 @@
 <nav class="navbar navbar-inverse navbar-static-top" id="submenu">
   <div class="container-fluid">
   </div>
-  <a n:href="User:edit">Upravit profil</a>
-  <button type="button" class="btn btn-success btn-lg active"><a n:href="Collectible:new"><span style="color:white;">Přidat nový předmět</span></a></button>
-  </nav>
+  <a href="{link User:edit,$presenter->getParameter("id")}">Upravit profil</a>
+  <div class="navbar-right">
+<a n:href="Collectible:new"><span style="color:white;">Přidat nový předmět</span></a>&nbsp;&nbsp;
+</div>
+</nav>
   
   {/if}
   
 
 
   <div id="profil">
-  <h1>{$user->identity->username}</h1>
-  <center><img src="{$user->identity->picture}" class="img-responsive img-rounded"></center>
-  <p><div class="col-xs-12">{$user->identity->description}</div>
+  <h1>{$uzivatel->username}</h1>
+  <center><img src="{$uzivatel->picture}" class="img-responsive img-rounded"></center>
+ <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-envelope"></span> Poslat zprávu</button>
+  <p><div class="col-xs-12">{$uzivatel->description}</div>
   </div>
-
-     {foreach $collectibles as $collectible}
+         <div class="container-fluid">
+          <div class="row">
+           <div class="col-xs-12">
+          {foreach $collectibles as $collectible}
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" id="galerie">
               <div class="polozka">
                 <div class="polozka_head">
@@ -29,6 +34,8 @@
                 </div>                
               </div>
             </div>
-            {/foreach}
-
+            {/foreach}       
+           </div>
+          </div>
+        </div>
 {/block}

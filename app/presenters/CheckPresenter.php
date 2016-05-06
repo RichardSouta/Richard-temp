@@ -32,6 +32,7 @@ class CheckPresenter extends BasePresenter
           
            // $this->redirect('Homepage:default');
         }
+        $this->redirect('Homepage:');
     }
 
     

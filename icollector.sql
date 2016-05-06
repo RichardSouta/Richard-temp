@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Počítač: localhost
--- Vytvořeno: Čtv 05. kvě 2016, 16:34
+-- Vytvořeno: Pát 06. kvě 2016, 01:18
 -- Verze serveru: 5.6.28
 -- Verze PHP: 5.5.30
 
@@ -29,10 +29,18 @@ USE `icollector`;
 --
 
 CREATE TABLE `categories` (
-  `category_id` int(10) NOT NULL DEFAULT '0',
-  `name` varchar(40) NOT NULL,
+  `category_id` int(10) NOT NULL,
+  `name` varchar(40) DEFAULT NULL,
   `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Vypisuji data pro tabulku `categories`
+--
+
+INSERT INTO `categories` (`category_id`, `name`, `description`) VALUES
+(1, NULL, NULL),
+(2, 'zvíře', NULL);
 
 -- --------------------------------------------------------
 
@@ -57,11 +65,13 @@ CREATE TABLE `collectibles` (
 INSERT INTO `collectibles` (`collectible_id`, `name`, `origin`, `description`, `user_id`, `category_id`, `picture`) VALUES
 (1, 'Bradavičák', 'Nevim', 'Toho chci', 1, NULL, '/icollector/www/images/location/icollector1.jpg'),
 (3, 'Gulliver', 'Zakoupen na aukro.cz. Reklamní předmět Kofoly.', 'Největší ze všech.', 1, NULL, '/icollector/www/images/location/icollector3.JPG'),
-(4, 'Motýl', 'Chycen na poli.', 'Krásný motýlek.', 1, NULL, '/icollector/www/images/location/icollector4.jpg'),
-(5, 'Tigr', 'Z buše.', 'Hezký tygr.', 1, NULL, '/icollector/www/images/location/icollector5.jpg'),
-(6, 'Motýl', 'z pole', 'motýlek', 1, NULL, '/icollector/www/images/location/icollector6.jpg'),
-(7, 'Motýl', 'z lessa', 'pěkný', 1, NULL, '/icollector/www/images/location/icollector7.jpg'),
-(8, 'Pavel', 'ze školy', 'kluk', 1, NULL, '/icollector/www/images/location/icollector8.jpg');
+(4, 'Motýl', 'Chycen na poli.', 'Krásný motýlek.', 4, 2, '/icollector/www/images/location/icollector4.jpg'),
+(5, 'Tigr', 'Z buše.', 'Hezký tygr.', 1, 2, '/icollector/www/images/location/icollector5.jpg'),
+(6, 'Motýl', 'z pole', 'motýlek', 1, 2, '/icollector/www/images/location/icollector6.jpg'),
+(7, 'Motýl', 'z lessa', 'pěkný', 1, 2, '/icollector/www/images/location/icollector7.jpg'),
+(8, 'Pavel', 'ze školy', 'kluk', 1, NULL, '/icollector/www/images/location/icollector8.jpg'),
+(9, 'Motýl', 'jů', 'motýlek', 1, 2, '/icollector/www/images/location/icollector9.jpg'),
+(10, 'Motýl', 'ju', 'hm', 1, 2, '/icollector/www/images/location/icollector10.jpg');
 
 -- --------------------------------------------------------
 
@@ -129,9 +139,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `firstName`, `surname`, `username`, `password`, `email`, `confirmedEmail`, `security`, `notification`, `regDateTime`, `description`, `phone`, `picture`) VALUES
-(1, 'Richard', 'Šouta', 'icollector', '$2y$10$9vVo5UU6CaSGRTx1G1vASOImn.oW2XIugul/q7l1MIQI8yw0/xfmm', 'riky@souta.cz', 'fotz8muyhb', NULL, NULL, '2016-04-29 16:41:03', 'Sbírám známky.', '777777777777', '/icollector/www/images/user/icollector.jpg'),
-(4, 'Zina', 'Tsapiv', 'zinkamay', '$2y$10$AYHtzTtV7BDOLAmJeKhjNO7gDwRiT7uWolKw30mMQC.eA1oEgBHTO', 'driger.miska@seznam.cz', 'hao3eisig1', NULL, NULL, '2016-05-02 03:30:14', NULL, NULL, NULL),
-(5, 'Richard', 'Král', 'kral', '$2y$10$v29PmN2Ns0Ru4aopEzTGF.1X/PL.XNK28wIV1qx26C9tsLpOis0Ue', 'richard@souta.cz', 'wb9l2ymfct', NULL, NULL, '2016-05-02 03:32:36', NULL, NULL, NULL);
+(1, 'Richard', 'Šouta', 'icollector', '$2y$10$9vVo5UU6CaSGRTx1G1vASOImn.oW2XIugul/q7l1MIQI8yw0/xfmm', 'riky@souta.cz', '1', 'shvr1yn6hj', NULL, '2016-04-29 16:41:03', 'Sbírám známky.', '777777777777', '/icollector/www/images/user/icollector.jpg'),
+(4, 'Zina', 'Tsapiv', 'zinkamay', '$2y$10$AYHtzTtV7BDOLAmJeKhjNO7gDwRiT7uWolKw30mMQC.eA1oEgBHTO', 'driger.miska@seznam.cz', '1', NULL, NULL, '2016-05-02 03:30:14', NULL, NULL, NULL),
+(5, 'Richard', 'Král', 'kral', '$2y$10$v29PmN2Ns0Ru4aopEzTGF.1X/PL.XNK28wIV1qx26C9tsLpOis0Ue', 'richard@souta.cz', '1', NULL, NULL, '2016-05-02 03:32:36', NULL, NULL, NULL),
+(7, 'Richard', 'Šouta', 'sour00', '$2y$10$kw8csusNvySCnEZTchNGeuKyYt0mDQvr2AqsELNQ5P41JM8pDaNp2', 'sour00@vse.cz', '1', NULL, NULL, '2016-05-05 19:10:43', NULL, NULL, NULL);
 
 --
 -- Klíče pro exportované tabulky
@@ -142,6 +153,7 @@ INSERT INTO `users` (`user_id`, `firstName`, `surname`, `username`, `password`, 
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`),
+  ADD UNIQUE KEY `name` (`name`),
   ADD KEY `category_id` (`category_id`);
 
 --
@@ -188,10 +200,15 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT pro tabulku `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `category_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT pro tabulku `collectibles`
 --
 ALTER TABLE `collectibles`
-  MODIFY `collectible_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `collectible_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pro tabulku `comments`
 --
@@ -211,12 +228,7 @@ ALTER TABLE `topics`
 -- AUTO_INCREMENT pro tabulku `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT pro tabulku `categories`
---  
-ALTER TABLE `categories`
-  MODIFY `category_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Omezení pro exportované tabulky
 --

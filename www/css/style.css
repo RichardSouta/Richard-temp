@@ -39,22 +39,37 @@ body {
     background: #FEFEFE;
     border-left: 1px solid #000 !important;
     height: 100%;
+    padding-left:0px !important;
+    padding-right:0px !important;
     //border-radius: 10px;
     //border: 1px solid #ebebeb;
 }
-.form-control button{
+
+#submit_button{
+margin-top:20px;
+height:50px;
+color:white;
+font-size:25px;
 background:#5cb85c;
 }
 #frm-profileForm{
 padding-bottom:20px;
-}
+} 
 th,td{
+  margin: auto;
   padding:15px;
+  padding-top:0px !important;
   text-align: center
 }
 #content-user {
     #content;
     margin-bottom: 50px;
+}
+
+#message{
+    position: relative;
+    left:10%;
+    bottom:100px;
 }
 
 #new, new button, new a, new p{
@@ -110,21 +125,29 @@ th,td{
 }
 
 #submenu{
-
     color:white;
     padding:10px;
     font-size: 25px;
 
 }
-
+#collectible{
+    margin-top:2%;
+}
 #galerie{
     padding:0 !important;
     
-
 }
-
-#galeriewrapper{
-    
+#seznam{    
+    text-align:center;
+    font-size:20px;
+}
+#seznam table{
+    position:relative;
+    left:25%;
+    margin-top:10px;
+}
+#seznam tr{
+    margin:10px;
 }
 
 #collectible img{
@@ -180,7 +203,15 @@ th,td{
 #profil img{
   max-width:150px;
 }
-
+#forgot_pass{
+ position:absolute;
+ right:20px;
+ top:20px;
+}
+#restore_form{
+padding-top:50px;
+padding-left:50px;
+}
 #main-navigation ul {
   position: relative;
   list-style:none;

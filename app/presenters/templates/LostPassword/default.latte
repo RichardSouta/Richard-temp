@@ -1,0 +1,20 @@
+{block content}
+{snippet flashMessages}
+    <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="vertical_align_container">
+            {$flash->message}
+        </div>
+    </div>
+{/snippet}
+<div class="container-fluid">
+    <div class="row" id="restore_form">
+       <div class="col-xs-2"></div> <div class="col-xs-6">
+            <h2>Zapomenuté heslo?<br><span class="thin">Zadejste svůj e-mail pro obnovení hesla.</span></h2>
+        </div><div class="col-xs-4"></div>
+         <div class="col-xs-2"></div> <div class="col-xs-6"><div class="col-xs-4"></div>
+            {control emailForm}
+        </div>
+    </div>
+</div>
+{/block}
