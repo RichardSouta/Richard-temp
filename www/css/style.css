@@ -36,13 +36,21 @@ body {
 
 }
 #content {
-    position:relative;
+    
     //top:200px;
     //height: 100%;
     padding-left:0px !important;
     padding-right:0px !important;
+    margin-left:0px !important;
+    margin-right:0px !important;
     //border-radius: 10px;
     //border: 1px solid #ebebeb;
+}
+
+#intro{
+position:relative;
+left:16.6666%;
+width:83.3334%;
 }
 
 #submit_button{
@@ -150,6 +158,8 @@ border-radius: 10px;
     font-size:20px;
 }
 #galerie_odsazeni{
+    position:relative;
+    left:0;
     margin-bottom:20px;
 }
 @media (min-width: 1200px) {
@@ -198,7 +208,9 @@ border-radius: 10px;
      -moz-border-radius: 20px;
      border-radius: 20px;
 }
-
+#active{
+  background: gold;
+}
 
 .chat-window:hover{
 background: #aaaaaa;
@@ -314,13 +326,20 @@ padding-top:50px;
 padding-left:50px;
 }
 #submenu{
-position: fixed;
-  left:16.6666%;
-
-    
-
+position:relative;
+left:16.6666%;
+max-width:83.3334%;
+color:white;
+padding:10px;
+font-size: 25px;
+}
+.navbar-right{
+  margin-right: 0px !important;
 }
 #main-navigation {
+margin-left: 0px !important;
+  position:fixed;
+  top:50px;
   height:100%;
   left:0px;
   width:16.6666%;
@@ -333,28 +352,6 @@ position: fixed;
   border-bottom-right-radius:30px;
 }
 
-#main-navigation tr {
-  position: relative;
-  list-style:none;
-  //width: 200px;
-  padding: 10px;
-  margin: 10px;
-  width: 100%;
-}
-#main-navigation th{
- padding:0px !important;
-}
-#main-navigation tr td {
-  position: relative;
-  //width: 200px;
-  text-align: center;
-  width: 100%;
-  padding: 1em 0;
-  background: #7cc67c;
-}                     
-#main-navigation tr td:hover {
-  background: #aaaaaa;
-}
 
 
 /*content*/

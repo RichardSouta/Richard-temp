@@ -47,18 +47,19 @@
 </nav>
 <!--tělo-->
 <div class="container-fluid" id="homepage">
-      <div class="col-lg-2" id="main-navigation">
+      
+      <div id="intro">
+
+        {block intro}{/block}
+
+      </div>
+      <div class="col-xs-12"  id="content">
+      {block content}{/block}
+      </div>
+      
+      <div id="main-navigation">
           <p>{control searchForm}
           <p><a n:href="Club:new">Sběratelský klub</a>
-      </div>
-      <div class="col-lg-10">
-      {block intro}{/block}
-        </div>
-                  
-      <div id="content">
-
-        {block content}{/block}
-
       </div>
       <!--patička
       <div class="col-xs-12" id="footer">

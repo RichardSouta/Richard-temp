@@ -1,8 +1,6 @@
 {block content}         
 {if $user->identity->id==$presenter->getParameter("id")}
-<nav class="navbar navbar-inverse navbar-static-top" id="submenu">
-  <div class="container-fluid">
-  </div>
+<nav class="navbar navbar-inverse" id="submenu">
   <a href="{link User:edit,$presenter->getParameter("id")}">Upravit profil</a>
   <div class="navbar-right">
 <a n:href="Collectible:new"><span style="color:white;">Přidat nový předmět</span></a>&nbsp;&nbsp;
@@ -19,11 +17,9 @@
  {if (($user->isLoggedIn()))}<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal"><span class="glyphicon glyphicon-envelope"></span> Poslat zprávu</button>{/if}
   <p><div class="col-xs-12">{$uzivatel->description}</div>
   </div>
-         <div class="container-fluid">
-          <div class="row">
-           <div class="col-xs-12">
+         <div class="col-xs-12" id="galerie_odsazeni">
           {foreach $collectibles as $collectible}
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" id="galerie">
+            <div class="col-xs-6  col-sm-4 col-md-3 pet" id="galerie">
               <div class="polozka">
                 <div class="polozka_head">
                 <center><h3>{$collectible->name}</h3></center>
@@ -36,8 +32,6 @@
             </div>
             {/foreach}       
            </div>
-          </div>
-        </div>
         
         <!-- Modal -->
 <div class="modal fade" id="zpravaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
