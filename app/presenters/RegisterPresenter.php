@@ -41,7 +41,7 @@ class RegisterPresenter extends BasePresenter
 
     $link = Nette\Utils\Html::el('a')->href($this->link('//Terms:default'))->target("_blank")->setText('Souhlasím s podmínkami');
     $label = Html::el()->setHtml($link);
-    $form->addCheckbox('agree', $label)
+    $form->addCheckbox('agree', $label)->setAttribute('class','form-control')
     ->addRule(Form::EQUAL, 'Je potřeba souhlasit s podmínkami', TRUE);
     
 /*  $link = Nette\Utils\Html::el('a')->href($this->link('//LostPassword:default'))->setText('Forggot your password?');

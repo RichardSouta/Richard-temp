@@ -12,7 +12,7 @@ class CollectiblePresenter extends BasePresenter
 	public function renderDefault($id)
 	{
 	    $collectible=$this->template->collectible=$this->database->table('collectibles')->get($id);
-      if(!empty($collectible["category_id"]))$this->template->category=$this->database->table('categories')->get($collectible["category_id"])->name;      
+      $this->template->category=$this->database->table('categories')->get($collectible["category_id"])->name;      
       $this->template->vlastnik=$this->database->table('users')->get($collectible["user_id"]);
 	}
   

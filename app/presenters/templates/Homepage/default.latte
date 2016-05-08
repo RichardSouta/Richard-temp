@@ -1,5 +1,10 @@
 {block content}
-        
+<div class="jumbotron">
+          <div class="container">
+            <h1>iCollector</h1>
+            <p>Aplikace pro všechny sběratele</p>
+          </div>
+        </div>
         <div class="container-fluid">
           <div class="row">
            {snippet flashMessages}
@@ -7,12 +12,12 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         
             {$flash->message}
-              
+       
     </div>
 {/snippet}
-          <div class="col-xs-12" id="galerie_odsazeni">
+          <div class="col-xs-12">
           {foreach $collectibles as $collectible}
-            <div class="col-xs-6  col-sm-4 col-md-3 pet" id="galerie">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" id="galerie">
               <div class="polozka">
                 <div class="polozka_head">
                 <center><h3>{$collectible->name}</h3></center>
@@ -26,15 +31,6 @@
             {/foreach}       
            </div>
            
-          </div>
-        </div>
-{/block}
-{block intro}
-
-<div class="jumbotron">
-          <div class="container">
-            <h1>iCollector</h1>
-            <p>Aplikace pro všechny sběratele</p>
           </div>
         </div>
 {/block}

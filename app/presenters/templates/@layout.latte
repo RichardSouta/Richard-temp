@@ -47,15 +47,15 @@
 </nav>
 <!--tělo-->
 <div class="container-fluid" id="homepage">
-      <div class="col-lg-2" id="main-navigation">
-          <p>{control searchForm}
-          <p><a n:href="Club:new">Sběratelský klub</a>
+ 
+      <div class="col-xs-1 col-md-1 col-lg-1" id="main-navigation">
+        <ul>
+          <!--<li><a n:href="Category:">Kategorie</a></li>-->
+          <li>{control searchForm}</li>
+          <li>Menu item 2</li>
+        </ul>
       </div>
-      <div class="col-lg-10">
-      {block intro}{/block}
-        </div>
-                  
-      <div id="content">
+      <div class="col-xs-11 col-md-11 col-lg-11" id="content">
 
         {block content}{/block}
 
@@ -89,7 +89,7 @@
       </div>
       <div class="modal-body">
         {control signInForm}
-        <a href="{link LostPassword:}" id="forgot_pass"><button class="btn btn-info btn-xs">Zapomenuté heslo?</button></a>
+        <a href="{link LostPassword:}" id="forgot_pass"><button class="btn btn-primary btn-large">Zapomenuté heslo?</button></a>
       </div>
     </div>
   </div>
