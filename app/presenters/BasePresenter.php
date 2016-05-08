@@ -50,7 +50,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$form->addPassword('password', 'heslo:')->setAttribute('class','form-control')
 			->setRequired('Please enter your password.');
 
-		$form->addCheckbox('remember', 'Zůstat přihlášen')->setAttribute('class','form-control');
+		$form->addCheckbox('remember', 'Zůstat přihlášen');
 
 		$form->addSubmit('send', 'Přihlásit')->setAttribute('class','form-control')->setAttribute('id','submit_button');
 
@@ -95,7 +95,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	$form->addText('search')->setAttribute('class','form-control')->setAttribute('placeholder','kategorie');
 		// call method signInFormSubmitted() on success
 		$form->onSuccess[] = $this->searchFormSubmitted;
-
+    
 		return $form;
 	}
 

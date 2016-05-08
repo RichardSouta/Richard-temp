@@ -12,7 +12,7 @@ body {
     background: #fefefe;
     color:#333;
     padding-top: 50px;
-    height:100%;
+    //height:100%;
 }
 
 
@@ -32,13 +32,13 @@ body {
 #logo {
      border-bottom:none;
 }
+#content-head{
 
+}
 #content {
     position:relative;
-    left:8.25vw;
-    background: #FEFEFE;
-    border-left: 1px solid #000 !important;
-    height: 100%;
+    //top:200px;
+    //height: 100%;
     padding-left:0px !important;
     padding-right:0px !important;
     //border-radius: 10px;
@@ -46,12 +46,11 @@ body {
 }
 
 #submit_button{
-margin-top:20px;
-height:50px;
+height:40px;
 color:white;
-font-size:25px;
-background:#5cb85c;
-}
+font-size:18px;
+background: #4cae4c;;
+}   
 #frm-profileForm{
 padding-bottom:20px;
 } 
@@ -61,15 +60,29 @@ th,td{
   padding-top:0px !important;
   text-align: center
 }
-#content-user {
-    #content;
-    margin-bottom: 50px;
-}
+
 
 #message{
     position: relative;
     left:10%;
     bottom:100px;
+}
+.message-incoming{
+float:left;
+padding:10px;
+width:500px;
+margin-top:10px;
+margin-bottom:10px;
+margin-left:10px;
+border-radius: 10px;
+}
+.message-outcoming{
+float:right;
+padding:10px;
+width:500px;
+margin-top:20px;
+margin-right:10px;
+border-radius: 10px;
 }
 
 #new, new button, new a, new p{
@@ -124,12 +137,7 @@ th,td{
     background-color: #3e8e41;
 }
 
-#submenu{
-    color:white;
-    padding:10px;
-    font-size: 25px;
 
-}
 #collectible{
     margin-top:2%;
 }
@@ -141,6 +149,23 @@ th,td{
     text-align:center;
     font-size:20px;
 }
+#galerie_odsazeni{
+    margin-bottom:20px;
+}
+@media (min-width: 1200px) {
+  .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+    float: left;
+  }
+  
+.pet{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  float: left;
+  width: 20%;
+}
+}
 #seznam table{
     position:relative;
     left:25%;
@@ -149,7 +174,95 @@ th,td{
 #seznam tr{
     margin:10px;
 }
+#chat{
+    position:relative;
+    left:100px;
+    margin-top:20px;
+}
+#chat-window-wrapper{
+   position:relative;
+   left:-20px;
+   overflow-y: auto;
+   width:220px;
+   height:800px;
+}
+.chat-window{
+     position:relative;
+     width:200px;
+     height:200px;
+     padding:10px;
+     text-align: center;
+     background: #efefef;
+     margin:1px;
+     -webkit-border-radius: 20px;
+     -moz-border-radius: 20px;
+     border-radius: 20px;
+}
 
+
+.chat-window:hover{
+background: #aaaaaa;
+}
+
+.chat-window img{
+    max-width:150px;
+    max-height:150px;
+}
+
+#chat a{
+    color: #000000;
+    text-decoration: none;
+}
+.chat-detail{
+    position:absolute;
+    top:20px;
+    width:600px;
+    height:750px;
+    left:215px;
+    //padding:20px;
+    margin-top:30px;
+    overflow-y: auto;
+}
+#chat-message{
+    position:absolute;
+    top:800px;
+    left:215px;
+    width:600px;
+    height:50px;
+    //border:1px solid;
+}
+#chat-message input[type="submit"]{
+    margin:5px;
+    position:absolute;
+    top:0px;
+    width:100px;
+    right:0px;
+    color:white;
+    background:#5cb85c;
+}
+
+label > input[name="agree"]{
+    margin:5px;
+    padding:5px;
+
+    
+}
+
+label > input[name="remember"]{
+    margin:5px;
+    padding:5px;
+
+    
+}
+
+#chat-message input[type="text"]{
+    margin:5px;
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:490px;
+    right:0px;
+}
 #collectible img{
     max-height: 70vh;
 
@@ -183,14 +296,6 @@ th,td{
   padding: 0.25em;
 }
 /*navigation*/
-#main-navigation {
-  position: fixed;
-  left:0;
-  //width: 200px;
-  padding: 0 !important;
-  //border-right: 1px solid #000 !important;
-  background: #fafafa;
-}
 
 #profil{
   color: #5cb85c;
@@ -203,35 +308,51 @@ th,td{
 #profil img{
   max-width:150px;
 }
-#forgot_pass{
- position:absolute;
- right:20px;
- top:20px;
-}
+
 #restore_form{
 padding-top:50px;
 padding-left:50px;
 }
-#main-navigation ul {
+#submenu{
+position: fixed;
+  left:16.6666%;
+
+    
+
+}
+#main-navigation {
+  height:100%;
+  left:0px;
+  width:16.6666%;
+  color:white;
+  height:200px;  
+    padding:10px;
+    font-size: 25px;
+  text-align: center;
+  background: #7cc67c;
+  border-bottom-right-radius:30px;
+}
+
+#main-navigation tr {
   position: relative;
   list-style:none;
   //width: 200px;
-  padding: 0;
-  margin: 0;
+  padding: 10px;
+  margin: 10px;
   width: 100%;
 }
 #main-navigation th{
  padding:0px !important;
 }
-#main-navigation ul li {
+#main-navigation tr td {
   position: relative;
   //width: 200px;
   text-align: center;
   width: 100%;
   padding: 1em 0;
-  background: #efefef;
+  background: #7cc67c;
 }                     
-#main-navigation ul li:hover {
+#main-navigation tr td:hover {
   background: #aaaaaa;
 }
 
@@ -241,6 +362,11 @@ padding-left:50px;
   padding: 0 !important;
 }
 
+#forgot_pass{
+ position:absolute;
+ right:10px;
+ top:40px;
+}
 /*zdroj http://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal2 */
 /* The Modal (background) */
 
@@ -258,7 +384,12 @@ padding-left:50px;
     text-decoration: none;
     cursor: pointer;
 }
-
+.modal-content{
+    top:30vh;
+    left:30%;
+    position:absolute;
+    width:500px
+}
 .modal-header {
     padding: 2px 16px;
     background-color: #5cb85c;

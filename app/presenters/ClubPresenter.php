@@ -3,16 +3,58 @@
 namespace App\Presenters;
 use Nette\Application\UI\Form as Form;
 use Nette;
-use Nette\Utils\Html;
+use App\Model;
 use Nette\Utils\Strings;
-use Nette\Mail\Message;
-use Nette\Mail\SendmailMailer;
+use Nette\Application\UI\Multiplier;
 
 
-class RegisterPresenter extends BasePresenter
+class ClubPresenter extends BasePresenter
 {
-	
-	protected function createComponentRegisterForm()
+  public $id;
+	public function renderDefault($id)
+	{
+ 
+	}
+  
+  public function renderNew($id)
+	{
+ 
+	}
+  public function renderShow($id)
+	{
+ 
+	}
+  protected function createComponentNewClubForm()
+	{
+
+    $form = new Form;
+    $form->addProtection();
+    $form->addText('title')->setAttribute('placeholder','Zadejte název klubu')->setAttribute('class','form-control');
+    $form->addTextArea('message')->setAttribute('class','form-control');
+    
+    $form->addSubmit('send', 'Založit klub')->setAttribute('class','form-control')->setAttribute('id','submit_button');
+    $form->onSuccess[] = $this->newClubFormSubmitted;
+    $renderer = $form->getRenderer();
+    $renderer->wrappers['controls']['container'] = NULL;
+    $renderer->wrappers['pair']['container'] = NULL;
+    $renderer->wrappers['label']['container'] = NULL;
+    $renderer->wrappers['control']['container'] = NULL;
+		return $form;
+    
+  }
+ public function newClubFormSubmitted($form,$values)
+	{
+  if(!empty($values->text)){
+        $this->database->table('messages')->insert(array(
+        'sender_id' => $this->getUser()->id,
+        'text' => $values->text,
+        'reciever_id' => $this->getParameter('id'),
+        ));
+        }
+  $this->redirect('Club:show');
+  }
+  
+  	protected function createComponentRegisterForm()
 {
     $form = new Form;
     $form->addProtection();
@@ -97,5 +139,6 @@ $values = $form->getValues();
                 
             }
 }
+  
 
 }
