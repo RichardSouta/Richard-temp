@@ -9,5 +9,4 @@ use Nette\Mail\SendmailMailer;
 
 class TermsPresenter extends BasePresenter
 {
-}    
-?>
+}

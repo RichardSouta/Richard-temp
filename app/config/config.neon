@@ -15,13 +15,13 @@ application:
 		*: App\*Module\Presenters\*Presenter
 
 
-session:
-	expiration: 14 days
-
-
 services:
 	- App\Model\UserManager
 	- App\Forms\FormFactory
 	- App\Forms\SignFormFactory
 	- App\RouterFactory
 	router: @App\RouterFactory::createRouter
+
+nette:
+	session:
+		autoStart: true

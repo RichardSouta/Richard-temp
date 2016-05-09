@@ -39,4 +39,3 @@ class CheckPresenter extends BasePresenter
     
     
 }
-?>

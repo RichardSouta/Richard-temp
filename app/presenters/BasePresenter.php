@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Presenters;
 use Nette\Application\UI\Form as Form;
 use Nette;
@@ -30,6 +29,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
   
   public function beforeRender() 
  { 
+
   if ($this->user->isLoggedIn())
   if ($this->user->identity->confirmedEmail!=1) {
   $this->getUser()->logout();
