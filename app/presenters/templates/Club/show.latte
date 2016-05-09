@@ -1,3 +1,16 @@
-{control block}
+{block content}
+<div id="club-show">
+<h1>{$title}</h1>
 
-{control}
+{foreach $comments as $comment}
+<div class="komentar-hlavicka">
+<a n:href="User:,$comment->user_id"><img src="{$comment->picture}" class="img-responsive img-circle komentar-foto"></a><span><a n:href="User:,$comment->user_id">{$comment->username}</a> {$comment->datetime|date:'d.m.Y H:i'}</span>
+</div>
+<div class="komentar">
+<h2>{$comment->text}</h2>
+</div>
+{/foreach}
+
+{control clubForm}
+</div>
+{/block}

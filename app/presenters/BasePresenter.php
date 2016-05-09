@@ -95,7 +95,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	$form->addText('search')->setAttribute('class','form-control')->setAttribute('placeholder','kategorie');
 		// call method signInFormSubmitted() on success
 		$form->onSuccess[] = $this->searchFormSubmitted;
-    
+     $renderer = $form->getRenderer();
+    $renderer->wrappers['controls']['container'] = NULL;
+    $renderer->wrappers['pair']['container'] = NULL;
+    $renderer->wrappers['label']['container'] = NULL;
+    $renderer->wrappers['control']['container'] = NULL;
 		return $form;
 	}
 
