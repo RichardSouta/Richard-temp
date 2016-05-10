@@ -18,7 +18,10 @@ class CollectiblePresenter extends BasePresenter
   
   public function renderEdit($id)
 	{
-	    //$this->template->collectible=$this->database->table('collectibles')->get($id);      
+	     if (!($this->user->isLoggedIn())){
+      $this->redirect('Homepage:');
+      
+      }     
      
 	}
   

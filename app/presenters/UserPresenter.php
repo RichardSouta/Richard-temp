@@ -23,6 +23,10 @@ class UserPresenter extends BasePresenter
 	}
   public function renderEdit($id)
 	{
+  if (!($this->user->isLoggedIn())){
+      $this->redirect('Homepage:');
+      
+      }  
    if($this->user->identity->id!=$id) $this->redirect('User:',$id);
   }
   

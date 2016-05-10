@@ -30,14 +30,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
   public function beforeRender() 
  { 
 
-  if ($this->user->isLoggedIn())
-  if ($this->user->identity->confirmedEmail!=1) {
-  $this->getUser()->logout();
-  
-  $this->flashMessage('aktivujte prosím svůj e-mail','danger');
-  $this->redirect('Homepage:');
+  if ($this->user->isLoggedIn()){
+      if ($this->user->identity->confirmedEmail!=1) {
+      $this->getUser()->logout();
+      
+      $this->flashMessage('aktivujte prosím svůj e-mail','danger');
+      $this->redirect('Homepage:');
+      }
   }
-  
  }
  
  protected function createComponentSignInForm()

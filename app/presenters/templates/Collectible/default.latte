@@ -1,5 +1,5 @@
 {block content}
-{if $user->identity->id==$collectible->user_id}
+{if $user->isLoggedIn()&&$user->identity->id==$collectible->user_id}
 <nav class="navbar navbar-inverse" id="submenu">
 <a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil</a>
 <div class="navbar-right">

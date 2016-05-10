@@ -11,9 +11,16 @@ use Nette\Application\UI\Multiplier;
 class ClubPresenter extends BasePresenter
 {
   public $id,$page;
+  public function renderNew()
+  {
+    if (!($this->user->isLoggedIn())){
+      $this->redirect('Homepage:');
+      
+      }  
+  }
 	public function renderDefault($page)
 	{
- $this->template->topics=$this->database->query('SELECT title, picture, username, datetime, topics.topic_id,users.user_id FROM topics JOIN comments on topics.topic_id=comments.topic_id join users on comments.user_id=users.user_id')->fetchAll();
+ $this->template->topics=$this->database->query('Select title, cid as user_id, username, picture, cda as datetime, tid as topic_id FROM(SELECT title, comments.user_id as cid, comments.datetime as cda, topics.topic_id as tid FROM topics JOIN comments on topics.topic_id=comments.topic_id LIMIT 1) as t JOIN users ON users.user_id=cid')->fetchAll();
 	}
 
   public function renderShow($id)
