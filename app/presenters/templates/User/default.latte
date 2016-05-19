@@ -32,6 +32,13 @@
             </div>
             {/foreach}       
            </div>
+           <div class="row" id="pages">
+                        <div class="col-xs-12">
+                        {for $i = 1; $i <= $paginator->getPageCount();$i++}
+                            <a class="page_link {if $paginator->getPage()==$i} page_link_active {/if}" href="{link User:,'id' =>$presenter->getParameter('id'),'page' => $i}">{$i}</a>
+                        {/for}
+                        </div>
+          </div>
         
         <!-- Modal -->
 <div class="modal fade" id="zpravaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

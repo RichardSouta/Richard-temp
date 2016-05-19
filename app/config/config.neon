@@ -24,4 +24,4 @@ services:
 
 nette:
 	session:
-		autoStart: true
+		autoStart: true 

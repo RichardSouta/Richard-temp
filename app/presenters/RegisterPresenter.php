@@ -7,7 +7,6 @@ use Nette\Utils\Html;
 use Nette\Utils\Strings;
 use Nette\Mail\Message;
 use Nette\Mail\SendmailMailer;
-use Nette\Security;
 
 
 class RegisterPresenter extends BasePresenter
@@ -72,7 +71,7 @@ $values = $form->getValues();
         'email' => $values->email,
         'username' => $values->username,
         'confirmedEmail' =>$token,
-        'password' => password_hash($values->password, PASSWORD_DEFAULT),
+        'password' => Nette\Security\Passwords::hash($values->password),
 
     ));
     $link = Nette\Utils\Html::el('a')->href($this->link('//Check:verify', $token))->setText('Potvrdit registraci');

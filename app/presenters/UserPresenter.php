@@ -16,10 +16,11 @@ class UserPresenter extends BasePresenter
 	    $collectibles=$this->database->table('collectibles')->select('*')->where("user_id",$id)->fetchAll();      
       $paginator = new Nette\Utils\Paginator;
       $paginator->setItemCount(count($collectibles)); // celkový počet položek (např. článků)
-      $paginator->setItemsPerPage(8); // počet položek na stránce
+      $paginator->setItemsPerPage(10); // počet položek na stránce
       $paginator->setPage($page); // číslo aktuální stránky, číslováno od 1
       $this->template->paginator=$paginator;
       $this->template->collectibles=array_slice($collectibles, $paginator->getOffset(),$paginator->getLength());
+      
 	}
   public function renderEdit($id)
 	{

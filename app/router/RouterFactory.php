@@ -17,6 +17,9 @@ class RouterFactory
 	{
 		$router = new RouteList;
     $router[] = new Route('collectible/edit/<id>', 'Collectible:edit');
+    $router[] = new Route('collectible/trade/<id>', 'Collectible:trade');
+    $router[] = new Route('collectible/final/<id>', 'Collectible:final');
+    $router[] = new Route('collectible/confirm/<id>', 'Collectible:confirm');
     $router[] = new Route('collectible/new', 'Collectible:new');
     $router[] = new Route('collectible[/<default>]/<id>', array(
     'presenter' => 'Collectible',

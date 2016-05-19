@@ -17,7 +17,7 @@
             <div class="chat-detail">
             {foreach $messages as $message}
             <div class={if $message->reciever_id==$user->identity->id}"bg-primary message-outcoming"{else}"bg-warning message-incoming"{/if}>
-            {$message->text}<span style="float:right">{$message->timestamp|date:'d.m.Y H:i'}</span>
+            {!html_entity_decode($message->text)}<span style="float:right">{$message->timestamp|date:'d.m.Y H:i'}</span>
             </div>
             {/foreach}
             

@@ -3,7 +3,7 @@
 <nav class="navbar navbar-inverse" id="submenu">
 <a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil</a>
 <div class="navbar-right">
-Vyměnit předmět&nbsp;&nbsp;
+<a n:href="Collectible:trade, $presenter->getParameter('id')">Vyměnit předmět&nbsp;&nbsp;</a>
 </div>
 </nav>
 {/if}
@@ -33,4 +33,19 @@ Vyměnit předmět&nbsp;&nbsp;
    <p><div class="col-xs-12">{$vlastnik->description}</div>
   </div>
   </div>
+  
+          <!-- Modal -->
+<div class="modal fade" id="zpravaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Poslat zprávu uživateli {$vlastnik->username}</h4>
+      </div>
+      <div class="modal-body">
+        {control messageForm-$vlastnik->user_id}
+      </div>
+    </div>
+  </div>
+</div> 
 {/block}

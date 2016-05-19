@@ -93,6 +93,10 @@ margin-right:10px;
 border-radius: 10px;
 }
 
+.trade{ 
+background:#5cb85c;
+}
+
 #new, new button, new a, new p{
     margin: 0 auto;
     position:absolute;
@@ -496,4 +500,32 @@ margin-top:20px;
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
+}
+
+/*------------PAGINATION------------*/
+#pages {
+  text-align: center;
+  margin: 2em auto 0; 
+}
+  
+#pages .page_link, #pages .page_link:visited {
+    color: #62a5cc;
+    background: transparent;
+    padding: 0.25em 0.5em;
+    border-radius: 3px;
+    margin: 0 0.15em;
+    border: 2px solid #62a5cc;
+    text-align: center;
+    font-weight: 600; 
+}
+    
+#pages .page_link:hover, #pages .page_link:visited:hover {
+      background: #62a5cc;
+      color: white;
+      text-decoration: none; 
+}
+
+#pages .page_link_active {
+    background: #62a5cc !important;
+    color: white !important; 
 }
