@@ -141,7 +141,7 @@ class CollectiblePresenter extends BasePresenter
 	{
   if ($values['img']->isOk()) {
     //$id = $this->database->query("SHOW TABLE STATUS LIKE 'collectibles' ")->fetch()->Auto_increment;
-    $file=$this->database->table('collectibles')->get($this->getParameter('id'))->cover;
+    $file=$this->database->table('collectibles')->get($this->getParameter('id'))->picture;
     if (!(empty($file)))unlink(WWW_DIR.substr($file,15));
     $filename = $this->getUser()->identity->data['username'].$this->getParam("id");
     $targetPath = $this->presenter->basePath;
