@@ -46,6 +46,8 @@ public function emailFormSubmitted($form)
     $token = Nette\Utils\Strings::random();
     $this->database->table('users')->where("email = ?",$values->email)->update(array('security' => $token));    
     $data=$this->database->table('users')->select('*')->where("email = ?",$values->email)->fetch();
+    
+    if(!(empty($data))){
     $link = Nette\Utils\Html::el('a')->href($this->link('//LostPassword:new', $token))->setText('Změnit heslo');
     $mail = new Message;
     $mail->setFrom('lokaleat@gmail.com')
@@ -62,7 +64,10 @@ public function emailFormSubmitted($form)
 
     $this->flashMessage('E-mail byl odeslán.', 'success');
     $this->redirect('this');
-    
+    } else{
+    $this->flashMessage('E-mail nebyl nalezen.', 'warning');
+    $this->redirect('this');
+    }
 }
 
    protected function createComponentNewPasswordForm()
