@@ -28,7 +28,10 @@ body {
     color: white;
     font-size: 25px;
 }
-
+.jumbotron{
+background-color: #f5f580 !important;
+color: #5cb85c !important;
+}
 #logo {
      border-bottom:none;
 }
@@ -57,7 +60,7 @@ width:83.3334%;
 height:40px;
 color:white;
 font-size:18px;
-background: #4cae4c;;
+background: #4cae4c;
 }   
 #frm-profileForm{
 padding-bottom:20px;

@@ -95,7 +95,10 @@ class CollectiblePresenter extends BasePresenter
     $pripona = pathinfo($values['img']->getSanitizedName(), PATHINFO_EXTENSION);
     $cil=WWW_DIR."/images/collectible/$filename.$pripona";
     $cil2=$targetPath."images/collectible/$filename.$pripona";
-    $values['img']->move($cil);
+    $image=$values['img']->toImage();
+    $image->resize(1280, 1240);
+    $image->sharpen();
+    $image->save($cil);
     }
     
 		$this->database->table('collectibles')->insert(array(
@@ -142,14 +145,17 @@ class CollectiblePresenter extends BasePresenter
   if ($values['img']->isOk()) {
     //$id = $this->database->query("SHOW TABLE STATUS LIKE 'collectibles' ")->fetch()->Auto_increment;
     $file=$this->database->table('collectibles')->get($this->getParameter('id'))->picture;
-    if (!(empty($file)))unlink(WWW_DIR.substr($file,15));
+    if (!(empty($file)))unlink(WWW_DIR.substr($file,4));
     $filename = $this->getUser()->identity->data['username'].$this->getParam("id");
     $targetPath = $this->presenter->basePath;
 
     $pripona = pathinfo($values['img']->getSanitizedName(), PATHINFO_EXTENSION);
     $cil=WWW_DIR."/images/collectible/$filename.$pripona";
     $cil2=$targetPath."images/collectible/$filename.$pripona";
-    $values['img']->move($cil);
+    $image=$values['img']->toImage();
+    $image->resize(1280, 1240);
+    $image->sharpen();
+    $image->save($cil);
     }
 		$this->database->table('collectibles')->get($this->getParameter('id'))->update(array(
 

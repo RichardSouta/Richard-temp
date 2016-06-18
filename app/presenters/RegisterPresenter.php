@@ -79,23 +79,20 @@ $values = $form->getValues();
     $mail->setFrom('info@icollector.info')
     ->addTo($values->email)
     ->setSubject('Vítej mezi sběrateli na iCollector')
-    ->setHTMLBody('<style>.wrapper{width:100%;height:auto;}.container{max-width: 90%;margin:0 auto;}.mail_header{background-color:#5cb85c;padding: 0.5em;}.mail_body{text-align:center;margin-top: 1em;}.mail_body p{max-width: 80%; margin: 1em auto;}.large{font-size: 1.5em;margin-top: 2em;}.bottom{margin-top: 2em;}.confirm_button{background-color:#5cb85c; padding: 0.5em; margin: 150px auto 0;}.confirm_button a {text-decoration: none; color: #000;}.confirm_button:hover{opacity:0.9;}</style><div class="wrapper"><div class="container"><div class="mail_header">LokalEat</div><div class="mail_body"><p class="large">Ahoj ' . $values->firstName . ', Vítej na iCollector </p><p> Tvoje registrace byla úspěšná, prosím potvrď svůj e-mail kliknutím na odkaz níže. Team iCollector</p><p class="bottom"><span class="confirm_button">' . $link . '</span></p></div></div>');
-    $mailer = new Nette\Mail\SmtpMailer(array(
-        'host' => 'smtp.savana.cz',
-        'username' => 'info@icollector.info',
-        'password' => 'prim21',
-        'secure' => 'ssl',
-));
+    ->setHTMLBody('<style>.wrapper{width:100%;height:auto;}.container{max-width: 90%;margin:0 auto;}.mail_header{background-color:#5cb85c;padding: 0.5em;}.mail_body{text-align:center;margin-top: 1em;}.mail_body p{max-width: 80%; margin: 1em auto;}.large{font-size: 1.5em;margin-top: 2em;}.bottom{margin-top: 2em;}.confirm_button{background-color:#5cb85c; padding: 0.5em; margin: 150px auto 0;}.confirm_button a {text-decoration: none; color: #000;}.confirm_button:hover{opacity:0.9;}</style><div class="wrapper"><div class="container"><div class="mail_header">iCollector</div><div class="mail_body"><p class="large">Ahoj ' . $values->firstName . ', Vítej na iCollector </p><p> Tvoje registrace byla úspěšná, prosím potvrď svůj e-mail kliknutím na odkaz níže. Team iCollector</p><p class="bottom"><span class="confirm_button">' . $link . '</span></p></div></div>');
+    $mailer = new SendmailMailer;
     $mailer->send($mail);
 
-    $this->flashMessage('Děkujeme za registraci', 'success');
+    $this->flashMessage('Děkujeme za registraci. Nyní prosím přejděte do e-mailu pro potvrzení registrace. Může to trvat několik minut, případně být ve SPAMu dle Vašeho poskytovatele e-mailu.', 'success');
     $this->redirect('Homepage:'); }
     catch(\PDOException $e) {
                 if(Strings::contains($e, 'username')) {$form['username']->addError('Username is already taken');}
                 if(Strings::contains($e, 'email')) {$form['email']->addError('Email is already used');}
-                else throw $e;
+                //else throw $e;
                 
             }
 }
+
+
 
 }

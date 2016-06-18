@@ -79,7 +79,10 @@ class UserPresenter extends BasePresenter
     $pripona = pathinfo($values['avatar']->getSanitizedName(), PATHINFO_EXTENSION);
     $cil=WWW_DIR."/images/user/$filename.$pripona";
     $cil2=$targetPath."images/user/$filename.$pripona";
-    $values['avatar']->move($cil);
+    $image=$values['avatar']->toImage();
+    $image->resize(200, 200);
+    $image->sharpen();
+    $image->save($cil);
     }
 
 

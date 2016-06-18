@@ -1,9 +1,11 @@
-{block content}
+{block intro}
 <div class="jumbotron">
           <div class="container">
             <h1>iCollector</h1>
-            <p>Přidání nové kategorie</p>
+            <p n:block="title">Přidání nové kategorie</p>
           </div>
         </div>
+{/block}
+{block content}
 <center>{control categoryForm}</center>
 {/block}
