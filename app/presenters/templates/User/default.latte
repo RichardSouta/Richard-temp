@@ -16,6 +16,7 @@
   <center><img src="{$uzivatel->picture}" class="img-responsive img-rounded"></center>
  {if (($user->isLoggedIn()))}<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal"><span class="glyphicon glyphicon-envelope"></span> Poslat zprávu</button>{/if}
   <p><div class="col-xs-12">{$uzivatel->description}</div>
+  {control categoryForm}
   </div>
          <div class="col-xs-12" id="galerie_odsazeni">
           {foreach $collectibles as $collectible}

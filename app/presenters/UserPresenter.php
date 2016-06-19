@@ -9,11 +9,12 @@ use Nette\Application\UI\Multiplier;
 
 class UserPresenter extends BasePresenter
 {
-  public $id, $page;
-	public function renderDefault($id,$page=1)
+  public $id, $page, $category;
+	public function renderDefault($id,$page=1,$category)
 	{
       $this->template->uzivatel=$this->database->table('users')->get($id);
-	    $collectibles=$this->database->table('collectibles')->select('*')->where("user_id",$id)->fetchAll();      
+      if(isset($category)) $collectibles=$this->database->table('collectibles')->select('*')->where("user_id=? AND category_id=?",$id,$category)->fetchAll();
+	    else $collectibles=$this->database->table('collectibles')->select('*')->where("user_id",$id)->fetchAll();      
       $paginator = new Nette\Utils\Paginator;
       $paginator->setItemCount(count($collectibles)); // celkový počet položek (např. článků)
       $paginator->setItemsPerPage(10); // počet položek na stránce
@@ -142,5 +143,32 @@ class UserPresenter extends BasePresenter
         }
   $this->redirect('Chat:');
   }
+  
+   protected function createComponentCategoryForm()
+	{
+  $form = new Form;
+  $form->addProtection();
+	  $categories=$this->database->query('SELECT DISTINCT categories.category_id,categories.name
+FROM `collectibles`
+JOIN categories ON categories.category_id = collectibles.category_id
+JOIN users ON users.user_id = collectibles.user_id
+WHERE collectibles.user_id =1
+AND categories.name IS NOT NULL ')->fetchPairs('category_id','name');
+    $form->addSelect('category','',$categories)->setAttribute('class','form-control')->setAttribute('onchange',"document.getElementById('frm-categoryForm').submit();") ->setPrompt('Všechny kategorie');;
+		$form->onSuccess[] = $this->categoryFormSubmitted;
+     $renderer = $form->getRenderer();
+    $renderer->wrappers['controls']['container'] = NULL;
+    $renderer->wrappers['pair']['container'] = NULL;
+    $renderer->wrappers['label']['container'] = NULL;
+    $renderer->wrappers['control']['container'] = NULL;
+		return $form;
+	}
+
+  public function categoryFormSubmitted($form)
+	{
+		$values = $form->getValues();
+
+		$this->redirect('User:',array( "id" => $this->getParameter('id'), "category" => $values->category));
+	}
 
 }
