@@ -92,8 +92,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	{
   $form = new Form;
   $form->addProtection();
-	$form->addText('search')->setAttribute('class','form-control')->setAttribute('placeholder','kategorie');
-		// call method signInFormSubmitted() on success
+	  $categories=$this->database->table('categories')->select('*')->fetchPairs('name','name');
+    $form->addSelect('category','Hledat kategorie',$categories)->setAttribute('class','form-control')->setAttribute('onchange',"document.getElementById('frm-searchForm').submit();");
 		$form->onSuccess[] = $this->searchFormSubmitted;
      $renderer = $form->getRenderer();
     $renderer->wrappers['controls']['container'] = NULL;
@@ -107,7 +107,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	{
 		$values = $form->getValues();
 
-		$this->redirect('Category:',$values->search);
+		$this->redirect('Category:',$values->category);
 	}
 /*  
   protected function createComponentOptionForm()
