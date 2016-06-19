@@ -154,7 +154,8 @@ JOIN categories ON categories.category_id = collectibles.category_id
 JOIN users ON users.user_id = collectibles.user_id
 WHERE collectibles.user_id =1
 AND categories.name IS NOT NULL ')->fetchPairs('category_id','name');
-    $form->addSelect('category','',$categories)->setAttribute('class','form-control')->setAttribute('onchange',"document.getElementById('frm-categoryForm').submit();") ->setPrompt('Všechny kategorie');;
+    if($this->getParameter('category')!=NULL) $form->addSelect('category','',$categories)->setAttribute('class','form-control')->setAttribute('onchange',"document.getElementById('frm-categoryForm').submit();") ->setPrompt('Všechny kategorie')->setValue($this->getParameter('category'));
+    else $form->addSelect('category','',$categories)->setAttribute('class','form-control')->setAttribute('onchange',"document.getElementById('frm-categoryForm').submit();") ->setPrompt('Všechny kategorie');
 		$form->onSuccess[] = $this->categoryFormSubmitted;
      $renderer = $form->getRenderer();
     $renderer->wrappers['controls']['container'] = NULL;
