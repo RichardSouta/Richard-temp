@@ -239,7 +239,7 @@ class CollectiblePresenter extends BasePresenter
     $form = new Form;
     $form->addProtection();
 
-    $collectibles=$this->database->table('collectibles')->select('*')->fetchPairs('collectible_id','name');
+    $collectibles=$this->database->table('collectibles')->select('*')->where('user_id',$this->getUser()->id)->fetchPairs('collectible_id','name');
     $form->addSelect('collectible','Sběratelský předmět',$collectibles)->setAttribute('class','form-control');
 
     $form->addSubmit('send', 'Poslat nabídku')->setRequired()->setAttribute('class','form-control')->setAttribute('id','submit_button');

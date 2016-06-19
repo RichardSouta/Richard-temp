@@ -109,6 +109,8 @@ class UserPresenter extends BasePresenter
                     throw $e;
                 }
             }
+  $this->flashMessage('Profil byl upraven.');          
+  $this->redirect('User:',$this->getParameter('id'));
 	}
   
    protected function createComponentMessageForm()

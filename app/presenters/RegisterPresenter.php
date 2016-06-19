@@ -30,12 +30,12 @@ class RegisterPresenter extends BasePresenter
     ->addRule(Form::EMAIL, 'Please fill in your valid adress')
     ->emptyValue = '@';
 
-    $form->addPassword('password', 'heslo')->setAttribute('class','form-control')
+    $form->addPassword('password', 'heslo')->setAttribute('class','form-control')->setAttribute('placeholder','Alespoň 6 znaků a 1 číslici.')
     ->setRequired('Choose a password')
     ->addRule(Form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaky', 6)
     ->addRule(Form::PATTERN, 'Musí obsahovat číslici', '.*[0-9].*');
 
-    $form->addPassword('passwordVerify', 'heslo znovu')->setAttribute('class','form-control')
+    $form->addPassword('passwordVerify', 'heslo znovu')->setAttribute('class','form-control')->setAttribute('placeholder','Zadejte heslo ještě jednou.')
     ->addRule(Form::FILLED, 'Zadejte heslo ještě jednou pro kontrolu')
     ->addRule(Form::EQUAL, 'Zadané hesla se neshodují', $form['password']);
 

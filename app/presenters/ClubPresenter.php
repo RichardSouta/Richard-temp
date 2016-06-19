@@ -20,7 +20,8 @@ class ClubPresenter extends BasePresenter
   }
 	public function renderDefault($page)
 	{
- $this->template->topics=$this->database->query('Select title, cid as user_id, username, picture, cda as datetime, tid as topic_id FROM(SELECT title, comments.user_id as cid, comments.datetime as cda, topics.topic_id as tid FROM topics JOIN comments on topics.topic_id=comments.topic_id LIMIT 1) as t JOIN users ON users.user_id=cid')->fetchAll();
+ $this->template->topics=$this->database->query('Select * FROM clubs')->fetchAll();
+ //relevance SELECT (COUNT(*) / (1 + TIMESTAMPDIFF(DAY, `datetime`, NOW())/30))  FROM comments where `topic_id`=3
 	}
 
   public function renderShow($id)
