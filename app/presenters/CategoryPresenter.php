@@ -11,7 +11,8 @@ class CategoryPresenter extends BasePresenter
   public $category, $page;
 	public function renderDefault($category=NULL,$page=1)
 	{
-		  $collectibles=$this->database->query('SELECT collectible_id,picture,co.name,origin,co.description,ca.name as category FROM collectibles co LEFT OUTER JOIN categories ca on co.category_id=ca.category_id where ca.name=? order by collectible_id desc',$category)->fetchAll();     
+      if(!$category)$this->redirect('Homepage:');
+      else  $collectibles=$this->database->query('SELECT collectible_id,picture,co.name,origin,co.description,ca.name as category FROM collectibles co LEFT OUTER JOIN categories ca on co.category_id=ca.category_id where ca.category_id=? order by collectible_id desc',$category)->fetchAll();     
       $paginator = new Nette\Utils\Paginator;
       $paginator->setItemCount(count($collectibles)); // celkový počet položek (např. článků)
       $paginator->setItemsPerPage(10); // počet položek na stránce

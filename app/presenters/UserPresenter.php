@@ -152,8 +152,8 @@ class UserPresenter extends BasePresenter
 FROM `collectibles`
 JOIN categories ON categories.category_id = collectibles.category_id
 JOIN users ON users.user_id = collectibles.user_id
-WHERE collectibles.user_id =1
-AND categories.name IS NOT NULL ')->fetchPairs('category_id','name');
+WHERE collectibles.user_id =?
+AND categories.name IS NOT NULL ',$this->getParameter('id'))->fetchPairs('category_id','name');
     if($this->getParameter('category')!=NULL) $form->addSelect('category','',$categories)->setAttribute('class','form-control')->setAttribute('onchange',"document.getElementById('frm-categoryForm').submit();") ->setPrompt('Všechny kategorie')->setValue($this->getParameter('category'));
     else $form->addSelect('category','',$categories)->setAttribute('class','form-control')->setAttribute('onchange',"document.getElementById('frm-categoryForm').submit();") ->setPrompt('Všechny kategorie');
 		$form->onSuccess[] = $this->categoryFormSubmitted;

@@ -92,8 +92,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	{
   $form = new Form;
   $form->addProtection();
-	  $categories=$this->database->table('categories')->select('*')->where('category_id !=',1)->fetchPairs('name','name');
-    $form->addSelect('category','Hledat kategorie',$categories)->setAttribute('class','form-control')->setAttribute('onchange',"document.getElementById('frm-searchForm').submit();");
+	  $categories=$this->database->table('categories')->select('*')->where('category_id !=',1)->fetchPairs('category_id','name');
+    if($this->getParameter('category')!=NULL) $form->addSelect('category','Hledat kategorie',$categories)->setAttribute('class','form-control')->setPrompt('Všechny kategorie')->setAttribute('onchange',"document.getElementById('frm-searchForm').submit();")->setValue($this->getParameter('category'));
+    else $form->addSelect('category','Hledat kategorie',$categories)->setAttribute('class','form-control')->setPrompt('Všechny kategorie')->setAttribute('onchange',"document.getElementById('frm-searchForm').submit();");
 		$form->onSuccess[] = $this->searchFormSubmitted;
      $renderer = $form->getRenderer();
     $renderer->wrappers['controls']['container'] = NULL;
