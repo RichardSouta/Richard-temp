@@ -1,49 +1,71 @@
 {block content}
-        
-        <div class="container-fluid">
-          <div class="row">
-           {snippet flashMessages}
-    <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        
-            {$flash->message}
-              
-    </div>
-{/snippet}
-          <div class="col-xs-12" id="galerie_odsazeni">
-          {foreach $collectibles as $collectible}
-            <div class="col-xs-6  col-sm-4 col-md-3 pet" id="galerie">
-              <div class="polozka">
-                <div class="polozka_head">
-                <center><h3>{$collectible->name}</h3></center>
-                  <a href="{link Collectible:,$collectible->collectible_id}"><img class="img-responsive" src="{$collectible->picture}" title="{$collectible->description}"></a>
+
+    <div class="container-fluid">
+        <div class="row">
+            {snippet flashMessages}
+                <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+
+                    {$flash->message}
+
                 </div>
-                <div class="polozka_body">
-                  {ifset $collectible->category}<center>Kategorie: {$collectible->category}</center>{/ifset}
-                </div>                
-              </div>
-            </div>
-            {/foreach}       
-           </div>
-           
-          </div>
-          <div class="row" id="pages">
-                        <div class="col-xs-12">
-                        {for $i = 1; $i <= $paginator->getPageCount();$i++}
-                            <a class="page_link {if $paginator->getPage()==$i} page_link_active {/if}" href="{link Homepage:,'page' => $i}">{$i}</a>
-                        {/for}
+            {/snippet}
+            <div class="col-xs-12" id="galerie_odsazeni">
+                <div n:snippet="collectibles" data-ajax-append="true">
+                    {foreach $collectibles as $collectible}
+                        <div class="col-xs-6  col-sm-4 col-md-3 pet" id="galerie">
+                            <div class="polozka">
+                                <div class="polozka_head">
+                                    <center><h3>{$collectible->name}</h3></center>
+                                    <a href="{link Collectible:,$collectible->collectible_id}"><img
+                                                class="img-responsive" src="{$collectible->picture}"
+                                                title="{$collectible->description}"></a>
+                                </div>
+                                <div class="polozka_body">
+                                    {ifset $collectible->category}
+                                        <center>Kategorie: {$collectible->category}</center>{/ifset}
+                                </div>
+                            </div>
                         </div>
-          </div>
+                    {/foreach}
+                </div>
+            </div>
         </div>
+        <div class="row" id="pages">
+            <a data-load-more n:href="load!">Načíst další</a>
+        </div>
+    </div>
+
+
+    <script>
+        var page = 1;
+        $(window).scroll(function() {
+            if($(window).scrollTop() + $(window).height() == $(document).height()) {
+                $.nette.ajax({link load!}+'&page='+page, {
+                    method: 'get'
+                });
+                page++;
+            }
+        });
+
+        $('a[data-load-more]').on('click', function (e) {
+            e.preventDefault();
+            $.nette.ajax({link load!}+'&page='+page, {
+                method: 'get'
+            });
+            page++;
+        });
+    </script>
 {/block}
 {block intro}
 
-<div class="jumbotron">
-          <div class="container">
+    <div class="jumbotron">
+        <div class="container">
             <h1>Icollector</h1>
             <p>Vítejte na stránkách Icollector.info. <br>Icollector to je aplikace pro všechny sběratele</p>
-          </div>
         </div>
+    </div>
 {/block}
 
 {block title} Úvodní stránka {/block}
