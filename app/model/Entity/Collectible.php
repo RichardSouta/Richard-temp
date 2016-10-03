@@ -1,12 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Model\Entity;
 
+use App\Model\Repository\CollectibleRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CollectibleRepository")
  */
 class Collectible
 {
@@ -42,4 +43,11 @@ class Collectible
      * @var Image[]
      */
     private $images;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="collectibles")
+     * @ORM\JoinColumn(nullable=false)
+     * @var Category
+     */
+    private $category;
 }

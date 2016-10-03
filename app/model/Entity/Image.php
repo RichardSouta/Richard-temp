@@ -1,11 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Model\Entity;
 
+use App\Model\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ImageRepository")
  */
 class Image
 {
