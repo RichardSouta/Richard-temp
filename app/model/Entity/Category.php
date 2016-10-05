@@ -15,6 +15,7 @@ class Category
     public function __construct()
     {
         $this->collectibles = new ArrayCollection;
+        $this->topics = new ArrayCollection;
     }
 
     /**

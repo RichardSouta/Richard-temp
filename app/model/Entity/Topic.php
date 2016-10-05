@@ -10,6 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Topic
 {
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection;
+    }
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
