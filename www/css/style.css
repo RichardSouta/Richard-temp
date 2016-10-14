@@ -6,12 +6,18 @@
           box-sizing: border-box;
 }
 
+.dropdown-menu li
+{
+    position: relative;
+    z-index: 10000;
+}
+
 body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 15px;
-    background: #fefefe;
+    background-color: #f5f580;
     color:#333;
-    padding-top: 50px;
+    padding-top: 100px;
     //height:100%;
 }
 
@@ -23,11 +29,24 @@ body {
     border-bottom: 1px #00eb72;
     padding-left: 10px;
     padding-top: 10px;
+    z-index: 10000;
 }
 .navbar-header a{
     color: white;
     font-size: 25px;
 }
+
+#header2 {
+    top: 50px;
+    margin: 0 auto;
+    background: #7cc67c;
+//border-radius: 10px;
+    border-bottom: 1px #00eb72;
+    padding-left: 10px;
+    padding-top: 10px;
+    z-index: auto;
+}
+
 .jumbotron{
 background-color: #f5f580 !important;
 color: #5cb85c !important;
@@ -51,9 +70,7 @@ color: #5cb85c !important;
 }
 
 #intro{
-position:relative;
-left:16.6666%;
-width:83.3334%;
+width: 100%;
 }
 
 #submit_button{
@@ -100,7 +117,7 @@ border-radius: 10px;
 background:#5cb85c;
 }
 
-#new, new button, new a, new p{
+#new, #new button, #new a, #new p{
     margin: 0 auto;
     position:absolute;
     color:white;
@@ -287,14 +304,13 @@ label > input[name="remember"]{
 
 }
 .polozka{
-    //padding:10px;
-    border: 1px ridge;
-    //border-top: 1px solid #000 !important;    
     font-size: 2.25vh;
     font-weight: bold;
-    margin: 0 !important;
+    margin: 5px;
     height: 30vh;
-    
+    background-color: #1A7E1E;
+    border-radius: 15px;
+    color: #fefefe;
 
 }
 .polozka img{
@@ -334,8 +350,7 @@ padding-left:50px;
 }
 #submenu{
 position:relative;
-left:16.6666%;
-max-width:83.3334%;
+width: 100%;
 color:white;
 padding:10px;
 font-size: 25px;
@@ -343,22 +358,26 @@ font-size: 25px;
 .navbar-right{
   margin-right: 0px !important;
 }
-#main-navigation {
-  margin-left: 0px !important;
-  position:fixed;
-  top:50px;
-  //height:100%;
-  left:0px;
-  width:16.6666%;
-  color:white;
-  height:200px;  
-    padding:10px;
+
+#frm-searchForm label[for="frm-searchForm-category"] {
+
+    position: absolute;
+    text-align: left;
     font-size: 25px;
-  text-align: center;
-  background: #7cc67c;
-  border-bottom-right-radius:30px;
+    width: 20%;
+    top: 10px;
+    color: #fefefe;
+
+
 }
 
+#frm-searchForm-category{
+
+    position: absolute;
+    width: 75%;
+    left: 20%;
+    top: 10px;
+}
 
 
 /*content*/
@@ -368,8 +387,8 @@ font-size: 25px;
 
 #forgot_pass{
  position:absolute;
- right:10px;
- top:40px;
+ right:5%;
+ top:40%;
 }
 #club{
   position:relative;
@@ -531,4 +550,8 @@ margin-top:20px;
 #pages .page_link_active {
     background: #62a5cc !important;
     color: white !important; 
+}
+
+required {
+    color: red;
 }

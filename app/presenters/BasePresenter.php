@@ -10,6 +10,7 @@ use App\Model;
 use Nette\Http\Request;
 use Nette\Context;
 use Nette\Http\FileUpload;
+use Tomaj\Form\Renderer\BootstrapRenderer;
 
 
 /**
@@ -39,27 +40,30 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
       }
   }
  }
- 
- protected function createComponentSignInForm()
-	{
-  $form = new Form;
-  $form->addProtection();
-	$form->addText('username', 'Username:')->setAttribute('class','form-control')
-			->setRequired('Please enter your username.');
 
-		$form->addPassword('password', 'heslo:')->setAttribute('class','form-control')
-			->setRequired('Please enter your password.');
+    protected function createComponentSignInForm()
+    {
+        $form = new Form;
+        $form->elementPrototype->addAttributes(array('class' => 'ajax'));
+        $form->addProtection();
+        $form->addText('username', 'Username:')->setAttribute('class', 'form-control')
+            ->setRequired('Please enter your username.');
 
-		$form->addCheckbox('remember', 'Zůstat přihlášen');
+        $form->addPassword('password', 'heslo:')->setAttribute('class', 'form-control')
+            ->setRequired('Please enter your password.');
 
-		$form->addSubmit('send', 'Přihlásit')->setAttribute('class','form-control')->setAttribute('id','submit_button');
+        $form->addCheckbox('remember', 'Zůstat přihlášen');
 
-		// call method signInFormSubmitted() on success
-		$form->onSuccess[] = $this->signInFormSubmitted;
-    $renderer = $form->getRenderer();
-    
-		return $form;
-	}
+        $form->addSubmit('send', 'Přihlásit')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
+
+        // call method signInFormSubmitted() on success
+        $form->onSuccess[] = $this->signInFormSubmitted;
+        $renderer = $form->getRenderer();
+        $renderer->wrappers['error']['container'] = 'div class="alert alert-danger"';
+        $renderer->wrappers['error']['item'] = 'p';
+
+        return $form;
+    }
 
   public function signInFormSubmitted($form)
 	{
@@ -74,18 +78,37 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		try {
 			$this->getUser()->login($values->username, $values->password);
 		} catch (Nette\Security\AuthenticationException $e) {
-			$this->flashMessage($e->getMessage());
+		    if($this->isAjax()){
+                /** va */
+		    $form->addError('Špatná kombinace jména a hesla');
+
+            $this->redrawControl('sign');}
+		    else {
+			$this->flashMessage($e->getMessage());}
 			return;
 		}
-
-		$this->redirect('Homepage:');
+        if($this->isAjax()){
+            $this->template->hide = 'true';
+            $this->redrawControl('user_controls');
+            $this->redrawControl('flashMessages');
+        }
+        else {
+            $this->redirect('Homepage:');
+        }
 	}
-	public function actionLogout()
+	public function handleLogout()
 	{
 
 		$this->getUser()->logout();
 		$this->flashMessage('Byl jste odhlášen.');
-		$this->redirect('Homepage:');
+        if($this->isAjax()){
+            $this->redrawControl('sign');
+            $this->redrawControl('user_controls');
+            $this->redrawControl('flashMessages');
+        }
+        else {
+            $this->redirect('Homepage:');
+        }
 	}
   
   protected function createComponentSearchForm()

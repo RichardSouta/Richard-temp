@@ -1,0 +1,19 @@
+<script>
+
+    $(window).scroll(function() {
+        if($(window).scrollTop() + $(window).height() == $(document).height()) {
+            $.nette.ajax({link load!}+'&page='+page, {
+                method: 'get'
+            },);
+            page++;
+        }
+    });
+
+    $('a[data-load-more]').on('click', function (e) {
+        e.preventDefault();
+        $.nette.ajax({link load!}+'&page='+page, {
+            method: 'get'
+        });
+        page++;
+    });
+</script>

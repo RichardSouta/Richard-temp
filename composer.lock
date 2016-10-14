@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e9c90c67f37ec057de3f252718826330",
-    "content-hash": "9e4c9bbc65b636eff594c5a2b148fb8d",
+    "hash": "fd599858b8190cf8230760e18bc1e114",
+    "content-hash": "a157c298b1160733bd123afbba7ed9d9",
     "packages": [
         {
             "name": "dg/adminer-custom",
@@ -2143,6 +2143,50 @@
                 "shim"
             ],
             "time": "2016-05-18 14:26:46"
+        },
+        {
+            "name": "tomaj/nette-bootstrap-form",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tomaj/nette-bootstrap-form.git",
+                "reference": "3d9c337757fa1a8ff978cca9b1a7017ea2153df9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tomaj/nette-bootstrap-form/zipball/3d9c337757fa1a8ff978cca9b1a7017ea2153df9",
+                "reference": "3d9c337757fa1a8ff978cca9b1a7017ea2153df9",
+                "shasum": ""
+            },
+            "require": {
+                "nette/forms": "~2.3",
+                "php": ">= 5.3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Tomas Majer",
+                    "email": "tomasmajer@gmail.com",
+                    "homepage": "http://www.tomaj.sk/"
+                }
+            ],
+            "description": "Nette bootstrap form renderer",
+            "keywords": [
+                "bootstrap",
+                "form",
+                "nette",
+                "renderer"
+            ],
+            "time": "2016-02-07 16:39:43"
         },
         {
             "name": "tracy/tracy",
