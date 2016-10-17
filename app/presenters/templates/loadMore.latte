@@ -3,6 +3,7 @@
     var stopLoading = false;
     $(window).scroll(function() {
         if(($(window).scrollTop() + $(window).height() == $(document).height())&&!stopLoading) {
+            stopLoading = true;
             $.nette.ajax({
                 url: {$presenter->link('load!')},
                 type: 'GET',

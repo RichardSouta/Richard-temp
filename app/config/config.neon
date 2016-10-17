@@ -33,9 +33,3 @@ extensions:
     annotations: Kdyby\Annotations\DI\AnnotationsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
 
-doctrine:
-    user: root
-    password: vertrigo
-    dbname: icollector1
-    metadata:
-        App: %appDir%

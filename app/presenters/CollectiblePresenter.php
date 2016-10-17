@@ -127,15 +127,16 @@ class CollectiblePresenter extends BasePresenter
     {
         $form = new Form;
         $form->addProtection();
-        $data = $this->database->table('collectibles')->get($this->getParameter('id'));
-        $form->addText('name', 'název')->setValue($data->name)->setRequired()->setAttribute('class', 'form-control');
+        /** @var Model\Entity\Collectible $collectible */
+        $collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($this->getParameter('id'));
+        $form->addText('name', 'název')->setValue($collectible->getName())->setRequired()->setAttribute('class', 'form-control');
 
-        $form->addTextArea('description', 'popis')->setValue($data->description)->setAttribute('class', 'form-control')->setRequired();
+        $form->addTextArea('description', 'popis')->setValue($collectible->getDescription())->setAttribute('class', 'form-control')->setRequired();
 
-        $form->addTextArea('origin', 'původ')->setValue($data->origin)->setAttribute('class', 'form-control')->setRequired();
+        $form->addTextArea('origin', 'původ')->setValue($collectible->getOrigin())->setAttribute('class', 'form-control')->setRequired();
 
-        $categories = $this->database->table('categories')->select('*')->fetchPairs('category_id', 'name');
-        $form->addSelect('category', 'kategorie', $categories)->setValue($data->category_id)->setAttribute('class', 'form-control');
+        $categories = $this->em->getRepository('App\Model\Entity\Category')->findPairs('name', 'id');
+        $form->addSelect('category', 'kategorie', $categories)->setValue($collectible->getCategory()->getId())->setAttribute('class', 'form-control');
 
         $form->addUpload('img', 'Upload your image')->setAttribute('class', 'form-control')->setRequired(false)->addCondition(Form::FILLED)->addRule(Form::IMAGE, 'Cover must be JPEG, PNG or GIF.');
 

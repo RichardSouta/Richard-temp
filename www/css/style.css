@@ -47,6 +47,10 @@ body {
     z-index: auto;
 }
 
+#select2-frm-searchForm-category-container{
+    z-index: 10000;
+}
+
 .jumbotron{
 background-color: #f5f580 !important;
 color: #5cb85c !important;
@@ -526,4 +530,20 @@ margin-top:20px;
 
 required {
     color: red;
+}
+
+#frm-searchForm .select2 {
+    position: relative;
+    left: 20%;
+    z-index: 1000;
+}
+
+span.select2:nth-child(3) > span:nth-child(1) > span:nth-child(1){
+    height: 36px;
+}
+#ccc a{
+    position: fixed;
+    right: 50%;
+    color: white;
+    font-size: 25px;
 }

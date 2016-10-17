@@ -1,0 +1,12 @@
+<script>
+    var resolution = $(document).width()/5;
+    if(resolution<=120) resolution = 120;
+    else if (resolution<=240) resolution = 240;
+    else if (resolution<=360) resolution = 360;
+    else if (resolution<=480) resolution = 480;
+    else if (resolution<=600) resolution = 600;
+    else resolution = 720;
+    $('.polozka img').each(function () {
+        $( this ).attr('src','images/collectible/'+$( this ).attr('data-src')+-resolution);
+    });
+</script>

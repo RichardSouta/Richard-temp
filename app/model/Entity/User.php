@@ -328,7 +328,13 @@ class User
         $identity = [];
         $identity['confirmedEmail'] = $this->confirmedEmail;
         $identity['username'] = $this->username;
+        $identity['id'] = $this->id;
         return $identity;
+    }
+
+    public function getPicture()
+    {
+        return "../www/images/user/$this->id.jpg";
     }
 
 

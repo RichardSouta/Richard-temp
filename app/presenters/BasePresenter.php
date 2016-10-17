@@ -27,6 +27,25 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
     protected $database;
 
+    protected $collectibles;
+    public function handleLoad($page)
+    {
+        if ($this->isAjax()) {
+            $this->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findBy([],['dateTimeAdded' => 'DESC'],15,$page*15);
+            $this->payload->stopLoading = false;
+            if (count($this->collectibles) != 15) {
+                $this->payload->stopLoading = true;
+            }
+
+            if (count($this->collectibles)!=0){
+                $this->redrawControl('collectibles');
+            }
+            else {
+                $this->sendPayload();
+            }
+
+        }
+    }
     public function __construct(Nette\Database\Context $database)
     {
         $this->database = $database;

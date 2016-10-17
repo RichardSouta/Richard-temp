@@ -42,12 +42,8 @@
   <div class="container-fluid">
     <div class="navbar-header" id="logo"> 
       <a href="{link Homepage:}">Icollector</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-        <a n:href="Club:">Sběratelský klub</a>
     </div>
+      <div id="ccc"><a n:href="Club:">Sběratelský&nbsp;klub</a></div>
       <nav class="navbar navbar-default navbar-fixed-top" id="header2">
           <div class="container-fluid">
               {control searchForm}
@@ -66,8 +62,8 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
         <li><a href="{link User:,$user->identity->id}">Profil</a></li>
-        <li><a href="{link Category:new}">Přidat kategorii</a></li>
-        <li><a href="{link Chat:}">Moje konverzace</a></li>
+        <li><a href="{link Collectible:new}">Přidat předmět</a></li>
+        <li><a href="{link Chat:}">Moje nastavení</a></li>
         <li role="separator" class="divider"></li>
         <li><a href="{link Logout!}" class="ajax">Odhlásit</a></li>
         </ul>
@@ -127,19 +123,7 @@
   </div>
 </div>
 {include 'loadMore.latte'}
-<script>
-    $('.required label').append('<required>*</required>');
-    var resolution = $(document).width()/5;
-    if(resolution<=120) resolution = 120;
-    else if (resolution<=240) resolution = 240;
-    else if (resolution<=360) resolution = 360;
-    else if (resolution<=480) resolution = 480;
-    else if (resolution<=600) resolution = 600;
-    else resolution = 720;
-    $('.polozka img').each(function () {
-        $( this ).attr('src','images/collectible/'+$( this ).attr('data-src')+-resolution);
-    });
-</script>
+{include 'images.latte'}
 
 </body>
 </html>

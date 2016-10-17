@@ -1,60 +1,63 @@
-{block content}         
-{if $user->isLoggedIn()&&$user->identity->id==$presenter->getParameter("id")}
-<nav class="navbar navbar-inverse" id="submenu">
-  <a href="{link User:edit,$presenter->getParameter("id")}">Upravit profil</a>
-  <div class="navbar-right">
-<a n:href="Collectible:new"><span style="color:white;">Přidat nový předmět</span></a>&nbsp;&nbsp;
-</div>
-</nav>
-  
-  {/if}
-  
-
-
-  <div id="profil">
-  <h1>{$uzivatel->username}</h1>
-  <center><img src="{$uzivatel->picture}" class="img-responsive img-rounded"></center>
- {if (($user->isLoggedIn()))}<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal"><span class="glyphicon glyphicon-envelope"></span> Poslat zprávu</button>{/if}
-  <p><div class="col-xs-12">{$uzivatel->description}</div>
-  {control categoryForm}
-  </div>
-         <div class="col-xs-12" id="galerie_odsazeni">
-          {foreach $collectibles as $collectible}
-            <div class="col-xs-6  col-sm-4 col-md-3 pet" id="galerie">
-              <div class="polozka">
-                <div class="polozka_head">
-                <center><h3>{$collectible->name}</h3></center>
-                  <a href="{link Collectible:,$collectible->collectible_id}"><img class="img-responsive" src="{$collectible->picture}" title="{$collectible->description}"></a>
-                </div>
-                <div class="polozka_body">
-                  {ifset $collectible->category}<center>Kategorie: {$collectible->category}</center>{/ifset}
-                </div>                
-              </div>
+{block content}
+    {if $user->isLoggedIn()&&$user->identity->id==$presenter->getParameter("id")}
+        <nav class="navbar navbar-inverse" id="submenu">
+            <a href="{link User:edit,$presenter->getParameter("id")}">Upravit profil</a>
+            <div class="navbar-right">
+                <a n:href="Collectible:new"><span style="color:white;">Přidat nový předmět</span></a>&nbsp;&nbsp;
             </div>
-            {/foreach}       
-           </div>
-           <div class="row" id="pages">
-                        <div class="col-xs-12">
-                        {for $i = 1; $i <= $paginator->getPageCount();$i++}
-                            <a class="page_link {if $paginator->getPage()==$i} page_link_active {/if}" href="{link User:,'id' =>$presenter->getParameter('id'),'page' => $i}">{$i}</a>
-                        {/for}
-                        </div>
-          </div>
-        
-        <!-- Modal -->
-<div class="modal fade" id="zpravaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Poslat zprávu uživateli {$uzivatel->username}</h4>
-      </div>
-      <div class="modal-body">
-        {control messageForm-$uzivatel->user_id}
-      </div>
+        </nav>
+
+    {/if}
+
+
+
+    <div id="profil">
+        <h1>{$uzivatel->getUsername()}</h1>
+        <center><img src="{$uzivatel->getPicture()}" class="img-responsive img-rounded"></center>
+        {if (($user->isLoggedIn()))}
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal"><span
+                        class="glyphicon glyphicon-envelope"></span> Poslat zprávu
+            </button>
+        {/if}
+        <p>
+        <div class="col-xs-12">{$uzivatel->getDescription()}</div>
+        {control categoryForm}
     </div>
-  </div>
-</div> 
+    <div class="col-xs-12" id="galerie_odsazeni">
+        {foreach $collectibles as $collectible}
+            <div class="col-xs-6  col-sm-4 col-md-3 pet" id="galerie">
+                <div class="polozka">
+                    <div class="polozka_head">
+                        <center><h3>{$collectible->getName()}</h3></center>
+                        <a href="{link Collectible:,$collectible->getId()}"><img class="img-responsive"
+                                                                                 src="{$collectible->getImages()[0]}"
+                                                                                 title="{$collectible->getDescription()}"></a>
+                    </div>
+                    <div class="polozka_body">
+                        {if $collectible->getCategory() != null}
+                            <center>Kategorie: {$collectible->getCategory()}</center>{/if}
+                    </div>
+                </div>
+            </div>
+        {/foreach}
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="zpravaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Poslat zprávu uživateli {$uzivatel->getUsername()}</h4>
+                </div>
+                <div class="modal-body">
+                    {var $userId = $uzivatel->getId()}
+                    {control messageForm-$userId}
+                </div>
+            </div>
+        </div>
+    </div>
 {/block}
 
-{block title}{$uzivatel->username} {/block}
+{block title}{$uzivatel->getUsername()} {/block}
