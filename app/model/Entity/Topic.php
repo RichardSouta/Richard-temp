@@ -6,7 +6,7 @@ use App\Model\Repository\TopicRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="TopicRepository")
+ * @ORM\Entity(repositoryClass="App\Model\Repository\TopicRepository")
  */
 class Topic
 {

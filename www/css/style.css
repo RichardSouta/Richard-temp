@@ -524,34 +524,6 @@ margin-top:20px;
     color: white;
 }
 
-/*------------PAGINATION------------*/
-#pages {
-  text-align: center;
-  margin: 2em auto 0; 
-}
-  
-#pages .page_link, #pages .page_link:visited {
-    color: #62a5cc;
-    background: transparent;
-    padding: 0.25em 0.5em;
-    border-radius: 3px;
-    margin: 0 0.15em;
-    border: 2px solid #62a5cc;
-    text-align: center;
-    font-weight: 600; 
-}
-    
-#pages .page_link:hover, #pages .page_link:visited:hover {
-      background: #62a5cc;
-      color: white;
-      text-decoration: none; 
-}
-
-#pages .page_link_active {
-    background: #62a5cc !important;
-    color: white !important; 
-}
-
 required {
     color: red;
 }

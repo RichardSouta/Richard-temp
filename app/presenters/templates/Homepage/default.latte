@@ -17,23 +17,21 @@
                         <div class="col-xs-6  col-sm-4 col-md-3 pet" id="galerie">
                             <div class="polozka">
                                 <div class="polozka_head">
-                                    <center><h3>{$collectible->name}</h3></center>
-                                    <a href="{link Collectible:,$collectible->collectible_id}"><img
-                                                class="img-responsive" src="{$collectible->picture}"
-                                                title="{$collectible->description}"></a>
+                                    <center><h3>{$collectible->getName()}</h3></center>
+                                    <a href="{link Collectible:,$collectible->getId()}"><img
+                                                class="img-responsive" data-src="{$collectible->getImages()[0]}"
+                                                title="{$collectible->getDescription()}" ></a>
                                 </div>
                                 <div class="polozka_body">
-                                    {ifset $collectible->category}
-                                        <center>Kategorie: {$collectible->category}</center>{/ifset}
+                                    {if $collectible->getCategory()}
+                                        <center>Kategorie: {$collectible->getCategory()}</center>
+                                    {/if}
                                 </div>
                             </div>
                         </div>
                     {/foreach}
                 </div>
             </div>
-        </div>
-        <div class="row" id="pages">
-            <a data-load-more n:href="load!">Načíst další</a>
         </div>
     </div>
 
@@ -55,14 +53,6 @@
                 });
                 page++;
             }
-        });
-
-        $('a[data-load-more]').on('click', function (e) {
-            e.preventDefault();
-            $.nette.ajax({link load!}+'&page='+page, {
-                method: 'get'
-            });
-            page++;
         });
     </script>
 {/block}

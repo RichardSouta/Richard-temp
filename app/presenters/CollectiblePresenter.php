@@ -5,6 +5,10 @@ use Nette\Application\UI\Form as Form;
 use Nette;
 use App\Model;
 use Nette\Application\UI\Multiplier;
+use Nette\Utils\Image;
+use Nette\Utils\Finder;
+use Tomaj\Form\Renderer\BootstrapRenderer;
+
 
 
 class CollectiblePresenter extends BasePresenter
@@ -25,6 +29,19 @@ class CollectiblePresenter extends BasePresenter
       }     
      
 	}
+
+	public function actionShow($id){
+	    var_dump($id);
+	    $results = [];
+        foreach (Finder::findFiles($id.'*.*')->in('../www/images/collectible') as $key => $file) {
+            $results[] = $key; // $key je řetězec s názvem souboru včetně cesty
+            echo $file; // $file je objektem SplFileInfo
+
+        }
+        var_dump($results);exit();
+        $image = Image::fromBlank(100, 200, Image::rgb(125, 0, 0));
+        $image->send();
+    }
   
    public function renderTrade($id)
 	{
@@ -70,7 +87,7 @@ class CollectiblePresenter extends BasePresenter
 
     $form->addTextArea('origin', 'Původ předmětu')->setRequired()->setAttribute('class','form-control');
 
-    $categories=$this->database->table('categories')->select('*')->fetchPairs('category_id','name');
+        $categories= $this->em->getRepository('App\Model\Entity\Category')->findPairs('name','id');
     $form->addSelect('category','Kategorie',$categories)->setAttribute('class','form-control');
 
 
@@ -79,42 +96,23 @@ class CollectiblePresenter extends BasePresenter
 
     $form->addSubmit('send', 'nový předmět')->setRequired()->setAttribute('class','form-control')->setAttribute('id','submit_button');
 
+
   	$form->onSuccess[] = $this->collectibleFormSubmitted;
     
 		return $form;
 	}
 
-   public function collectibleFormSubmitted($form,$values)
-	{
-    if ($values['img']->isOk()) {
-    $id = $this->database->query("SHOW TABLE STATUS LIKE 'collectibles' ")->fetch()->Auto_increment; 
-    $filename = $this->getUser()->identity->data['username'].$id;
-    $targetPath = $this->presenter->basePath;
+    public function collectibleFormSubmitted($form, $values)
+    {
+        $collectible = new Model\Entity\Collectible();
+        $category = $this->em->find('App\Model\Entity\Category', $values->category);
+        $collectible->setCategory($category)->setDescription($values->description)->setName($values->name)->setOrigin($values->origin)->setImage();
+        $this->em->persist($collectible);
+        $this->em->flush();
+        $this->flashMessage('Předmět byl vytvořen.');
+        $this->redirect('Homepage:');
 
-    // @TODO vyřešit kolize
-    $pripona = pathinfo($values['img']->getSanitizedName(), PATHINFO_EXTENSION);
-    $cil=WWW_DIR."/images/collectible/$filename.$pripona";
-    $cil2=$targetPath."images/collectible/$filename.$pripona";
-    $image=$values['img']->toImage();
-    $image->resize(1280, 1240);
-    $image->sharpen();
-    $image->save($cil);
     }
-    
-		$this->database->table('collectibles')->insert(array(
-
-        'name' => $values->name,
-        'description' => $values->description,
-        'user_id' =>  $this->getUser()->identity->id,
-        'origin' =>   $values->origin,
-        'picture' =>  $cil2,
-    ));
-    if(!empty($values->category)){	$this->database->table('collectibles')->get($id)->update(array('category_id' =>   $values->category));} 
-    
-    $this->flashMessage('Předmět byl vytvořen.');
-		$this->redirect('Homepage:');
-
-	}
   
   
   protected function createComponentCollectibleEditForm()

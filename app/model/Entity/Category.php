@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
- * @ORM\Entity(repositoryClass="CategoryRepository")
+ * @ORM\Entity(repositoryClass="App\Model\Repository\CategoryRepository")
  */
 class Category
 {
@@ -42,7 +42,7 @@ class Category
     private $collectibles;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $icon;
 
@@ -52,5 +52,117 @@ class Category
      */
     private $topics;
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     * @return Category
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     * @return Category
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     * @return Category
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return Collectible[]
+     */
+    public function getCollectibles()
+    {
+        return $this->collectibles;
+    }
+
+    /**
+     * @param Collectible[] $collectibles
+     * @return Category
+     */
+    public function setCollectibles($collectibles)
+    {
+        $this->collectibles = $collectibles;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @param mixed $icon
+     * @return Category
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+        return $this;
+    }
+
+    /**
+     * @return Topic[]
+     */
+    public function getTopics()
+    {
+        return $this->topics;
+    }
+
+    /**
+     * @param Topic[] $topics
+     * @return Category
+     */
+    public function setTopics($topics)
+    {
+        $this->topics = $topics;
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
 }

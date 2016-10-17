@@ -11,6 +11,8 @@ use Nette\Http\Request;
 use Nette\Context;
 use Nette\Http\FileUpload;
 use Tomaj\Form\Renderer\BootstrapRenderer;
+use Kdyby\Doctrine\EntityManager;
+
 
 
 /**
@@ -18,6 +20,9 @@ use Tomaj\Form\Renderer\BootstrapRenderer;
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
+    /** @var EntityManager @inject */
+    public $em;
+
  protected $database; 
 	public function __construct(Nette\Database\Context $database)
 	{
@@ -115,7 +120,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	{
   $form = new Form;
   $form->addProtection();
-	  $categories=$this->database->table('categories')->select('*')->where('category_id !=',1)->fetchPairs('category_id','name');
+	  $categories= $this->em->getRepository('App\Model\Entity\Category')->findPairs('name','id');
+          $this->database->table('categories')->select('*')->where('category_id !=',1)->fetchPairs('category_id','name');
     if($this->getParameter('category')!=NULL) $form->addSelect('category','Hledat kategorie',$categories)->setAttribute('class','form-control')->setPrompt('Všechny kategorie')->setAttribute('onchange',"document.getElementById('frm-searchForm').submit();")->setValue($this->getParameter('category'));
     else $form->addSelect('category','Hledat kategorie',$categories)->setAttribute('class','form-control')->setPrompt('Všechny kategorie')->setAttribute('onchange',"document.getElementById('frm-searchForm').submit();");
 		$form->onSuccess[] = $this->searchFormSubmitted;

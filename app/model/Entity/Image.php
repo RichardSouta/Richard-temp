@@ -6,7 +6,7 @@ use App\Model\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="ImageRepository")
+ * @ORM\Entity(repositoryClass="App\Model\Repository\ImageRepository")
  */
 class Image
 {
@@ -18,14 +18,31 @@ class Image
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
-     */
-    protected $path;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Collectible", inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      * @var Collectible
      */
     private $collectible;
+
+    /**
+     * @return Collectible
+     */
+    public function getCollectible()
+    {
+        return $this->collectible;
+    }
+
+    /**
+     * @param Collectible $collectible
+     */
+    public function setCollectible($collectible)
+    {
+        $this->collectible = $collectible;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
 }

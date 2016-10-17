@@ -8,17 +8,12 @@ use Nette\Application\UI\Form as Form;
 
 class CategoryPresenter extends BasePresenter
 {
-  public $category, $page;
-	public function renderDefault($category=NULL,$page=1)
+  public $category, $page, $collectibles;
+	public function renderDefault($category=NULL)
 	{
       if(!$category)$this->redirect('Homepage:');
-      else  $collectibles=$this->database->query('SELECT collectible_id,picture,co.name,origin,co.description,ca.name as category FROM collectibles co LEFT OUTER JOIN categories ca on co.category_id=ca.category_id where ca.category_id=? order by collectible_id desc',$category)->fetchAll();     
-      $paginator = new Nette\Utils\Paginator;
-      $paginator->setItemCount(count($collectibles)); // celkový počet položek (např. článků)
-      $paginator->setItemsPerPage(10); // počet položek na stránce
-      $paginator->setPage($page); // číslo aktuální stránky, číslováno od 1
-      $this->template->paginator=$paginator;
-      $this->template->collectibles=array_slice($collectibles, $paginator->getOffset(),$paginator->getLength());
+      else  $this->collectibles=$this->template->collectibles=$this->em->getRepository('App\Model\Entity\Collectible')->findByCategory($category);
+
 	}
      protected function createComponentCategoryForm()
 	{
@@ -37,11 +32,10 @@ class CategoryPresenter extends BasePresenter
 
    public function categoryFormSubmitted($form,$values)
 	{   
-		$this->database->table('categories')->insert(array(
-
-        'name' => $values->name,
-        'description' => $values->description,
-    ));
+	$category = new Model\Entity\Category();
+        $category->setDescription($values->description)->setName($values->name);
+        $this->em->persist($category);
+        $this->em->flush();
     
     $this->flashMessage('Kategorie byla vytvořena.');
 		$this->redirect('Homepage:');

@@ -16,6 +16,9 @@ class RouterFactory
 	public function createRouter()
 	{
 		$router = new RouteList;
+        $router[] = new Route('images/collectible/<id>','Collectible:show');
+        $router[] = new Route('category/new', 'Category:new');
+        $router[] = new Route('category/<category>', 'Category:default');
     $router[] = new Route('collectible/edit/<id>', 'Collectible:edit');
     $router[] = new Route('collectible/trade/<id>', 'Collectible:trade');
     $router[] = new Route('collectible/final/<id>', 'Collectible:final');
