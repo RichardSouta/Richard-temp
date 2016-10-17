@@ -14,6 +14,7 @@ class Collectible
     public function __construct()
     {
         $this->images = new ArrayCollection;
+        $this->dateTimeAdded = new \DateTime();
     }
 
     /**
@@ -50,6 +51,50 @@ class Collectible
      * @var Category
      */
     private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="collectibles")
+     * @ORM\JoinColumn(nullable=false)
+     * @var Category
+     */
+    private $user;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $dateTimeAdded;
+
+    /**
+     * @return mixed
+     */
+    public function getDateTimeAdded()
+    {
+        return $this->dateTimeAdded;
+    }
+
+    /**
+     * @param mixed $dateTimeAdded
+     */
+    public function setDateTimeAdded($dateTimeAdded)
+    {
+        $this->dateTimeAdded = $dateTimeAdded;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param Category $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
 
     /**
      * @return mixed
@@ -132,12 +177,15 @@ class Collectible
     }
 
     /**
-     * @param Image[] $images
+     * @param $count
      * @return Collectible
      */
-    public function setImages($images)
+    public function setImages($count)
     {
-        $this->images = $images;
+        for ($i=0;$i<$count;$i++)
+        {
+            $this->setImage();
+        }
         return $this;
     }
 

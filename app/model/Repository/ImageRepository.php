@@ -2,7 +2,7 @@
 
 namespace App\Model\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Kdyby\Doctrine\EntityRepository;
 
 class ImageRepository extends EntityRepository
 {

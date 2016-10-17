@@ -4,6 +4,7 @@ namespace App\Model\Entity;
 
 use App\Model\Repository\TopicRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Model\Repository\TopicRepository")

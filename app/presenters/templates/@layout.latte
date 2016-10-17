@@ -61,7 +61,7 @@
       {else}
       <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        {$user->getIdentity()->firstName}
+        {$user->getIdentity()->username}
         <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -125,8 +125,8 @@
       </div>
     </div>
   </div>
-</div> 
-
+</div>
+{include 'loadMore.latte'}
 <script>
     $('.required label').append('<required>*</required>');
     var resolution = $(document).width()/5;

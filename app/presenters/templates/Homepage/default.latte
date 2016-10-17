@@ -1,5 +1,4 @@
 {block content}
-
     <div class="container-fluid">
         <div class="row">
             {snippet flashMessages}
@@ -34,27 +33,6 @@
             </div>
         </div>
     </div>
-
-
-    <script>
-        var page = 1;
-        var stopLoading = false;
-        $(window).scroll(function() {
-            if(($(window).scrollTop() + $(window).height() == $(document).height())&&!stopLoading) {
-                $.nette.ajax({
-                    url: {link Load!},
-                    type: 'GET',
-                    data: {
-                        page: page
-                    },
-                    success: function (payload) {
-                        if(payload.stopLoading) stopLoading = payload.stopLoading;
-                    }
-                });
-                page++;
-            }
-        });
-    </script>
 {/block}
 {block intro}
 

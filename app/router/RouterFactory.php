@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Kdyby\Doctrine\EntityManager;
 use Nette;
 use Nette\Application\Routers\RouteList;
 use Nette\Application\Routers\Route;
@@ -16,7 +17,7 @@ class RouterFactory
 	public function createRouter()
 	{
 		$router = new RouteList;
-        $router[] = new Route('images/collectible/<id>','Collectible:show');
+        $router[] = new Route('[<presenter>/]images/collectible/<id>','Collectible:show');
         $router[] = new Route('category/new', 'Category:new');
         $router[] = new Route('category/<category>', 'Category:default');
     $router[] = new Route('collectible/edit/<id>', 'Collectible:edit');
@@ -65,14 +66,14 @@ class RouterFactory
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;
 	}
-  protected $database; 
-	public function __construct(Nette\Database\Context $database)
-	{
-		$this->database = $database;
-	}
+    protected $em;
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
   public function idToUrl($id)
-  {    
-    $urlTile=str_replace(" ","-",$this->database->table('collectibles')->get($id)->name);
+  {
+    $urlTile=str_replace(" ","-",$this->em->getRepository('App\Model\Entity\Collectible')->find($id)->getName());
     $url=$id."-".$urlTile;
     setlocale(LC_CTYPE, 'en_US');
     return urlencode($url);
@@ -85,7 +86,7 @@ class RouterFactory
   
   public function idToUrl2($id)
   {    
-    $url=str_replace(" ","-",$this->database->table('users')->get($id)->username);
+    $url=str_replace(" ","-",$this->em->getRepository('App\Model\Entity\User')->find($id)->getUsername());
     setlocale(LC_CTYPE, 'en_US');
     return urlencode($url);
   }

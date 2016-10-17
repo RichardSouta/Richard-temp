@@ -1,53 +1,67 @@
 {block content}
-{if $user->isLoggedIn()&&$user->identity->id==$collectible->user_id}
-<nav class="navbar navbar-inverse" id="submenu">
-<a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil</a>
-<div class="navbar-right">
-<a n:href="Collectible:trade, $presenter->getParameter('id')">Vyměnit předmět&nbsp;&nbsp;</a>
-</div>
-</nav>
-{/if}
+    {if $user->isLoggedIn()&&$user->identity->id==$collectible->user_id}
+        <nav class="navbar navbar-inverse" id="submenu">
+            <a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil</a>
+            <div class="navbar-right">
+                <a n:href="Collectible:trade, $presenter->getParameter('id')">Vyměnit předmět&nbsp;&nbsp;</a>
+            </div>
+        </nav>
+    {/if}
 
-  <div class="container-fluid"> 
-  
-  <div class="col-md-2"></div>
-  <div class="col-md-6" id="collectible">
-    <img src="{$collectible->picture}" class="img-responsive">
-      <div id="seznam">
-        <table>
-        <tr><td>Název:</td><td>{$collectible->name}</td>
-        {ifset $category}<tr><td>Kategorie:</td><td>{$category}</td>{/ifset}
-        <tr><td>Původ:</td><td>{$collectible->origin}</td>        
-        <tr><td>Popis:</td><td>{$collectible->description}</td>        
-        </table>
-      </div>   
-  </div>
-  
-  
-  
-  <div class="col-md-4">
-  <div id="profil">
-  <h1>{$vlastnik->username}</h1>
-  <center><a n:href="User:,$vlastnik->user_id"><img src="{$vlastnik->picture}" class="img-responsive img-rounded"></a></center>
- {if (($user->isLoggedIn()))}<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal"><span class="glyphicon glyphicon-envelope"></span> Poslat zprávu</button>{/if}
-   <p><div class="col-xs-12">{$vlastnik->description}</div>
-  </div>
-  </div>
-  
-          <!-- Modal -->
-<div class="modal fade" id="zpravaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Poslat zprávu uživateli {$vlastnik->username}</h4>
-      </div>
-      <div class="modal-body">
-        {control messageForm-$vlastnik->user_id}
-      </div>
+<div class="container-fluid">
+
+    <div class="col-md-2"></div>
+    <div class="col-md-6" id="collectible">
+        <img src="{$collectible->getImages()[0]}" class="img-responsive">
+        <div id="seznam">
+            <table>
+                <tr>
+                    <td>Název:</td>
+                    <td>{$collectible->getName()}</td>
+                {ifset $category}
+                <tr>
+                    <td>Kategorie:</td>
+                    <td>{$collectible->getCategory()}</td>{/ifset}
+                <tr>
+                    <td>Původ:</td>
+                    <td>{$collectible->getOrigin()}</td>
+                <tr>
+                    <td>Popis:</td>
+                    <td>{$collectible->getDescription()}</td>
+            </table>
+        </div>
     </div>
-  </div>
-</div> 
-{/block}
 
-{block title}{$collectible->name} {/block}
+
+    <div class="col-md-4">
+        <div id="profil">
+            <h1>{$vlastnik->username}</h1>
+            <center><a n:href="User:,$vlastnik->user_id"><img src="{$vlastnik->picture}"
+                                                              class="img-responsive img-rounded"></a></center>
+            {if (($user->isLoggedIn()))}
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal"><span
+                            class="glyphicon glyphicon-envelope"></span> Poslat zprávu
+                </button>{/if}
+            <p>
+            <div class="col-xs-12">{$vlastnik->description}</div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="zpravaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Poslat zprávu uživateli {$vlastnik->username}</h4>
+                </div>
+                <div class="modal-body">
+                    {control messageForm-$vlastnik->user_id}
+                </div>
+            </div>
+        </div>
+    </div>
+    {/block}
+
+    {block title}{$collectible->getName()} {/block}

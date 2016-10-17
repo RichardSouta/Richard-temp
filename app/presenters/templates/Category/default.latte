@@ -6,28 +6,41 @@
           </div>
         </div>
 {/block}
-{block content}        
-        <div class="container-fluid">
-          <div class="row">
-           <div class="col-xs-12" id="galerie_odsazeni">
-          {foreach $collectibles as $collectible}
-            <div class="col-xs-6  col-sm-4 col-md-3 pet" id="galerie">
-              <div class="polozka">
-                <div class="polozka_head">
-                <center><h3>{$collectible->name}</h3></center>
-                  <a href="{link Collectible:,$collectible->collectible_id}"><img class="img-responsive" src="{$collectible->picture}" title="{$collectible->description}"></a>
-                </div>
-                <div class="polozka_body">
-                  {ifset $collectible->category}<center>Kategorie: {$collectible->category}</center>{/ifset}
-                </div>                
-              </div>
-            </div>
-            {/foreach}       
-           </div>
-          </div>
+{block content}
+    <div class="container-fluid">
+        <div class="row">
+            {snippet flashMessages}
+                <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
 
+                    {$flash->message}
+
+                </div>
+            {/snippet}
+            <div class="col-xs-12" id="galerie_odsazeni">
+                <div n:snippet="collectibles" data-ajax-append="true">
+                    {foreach $collectibles as $collectible}
+                        <div class="col-xs-6  col-sm-4 col-md-3 pet" id="galerie">
+                            <div class="polozka">
+                                <div class="polozka_head">
+                                    <center><h3>{$collectible->getName()}</h3></center>
+                                    <a href="{link Collectible:,$collectible->getId()}"><img
+                                                class="img-responsive" data-src="{$collectible->getImages()[0]}"
+                                                title="{$collectible->getDescription()}" ></a>
+                                </div>
+                                <div class="polozka_body">
+                                    {if $collectible->getCategory()}
+                                        <center>Kategorie: {$collectible->getCategory()}</center>
+                                    {/if}
+                                </div>
+                            </div>
+                        </div>
+                    {/foreach}
+                </div>
+            </div>
         </div>
-        
+    </div>
 {/block}
 
 {block title} Kategorie {$presenter->getParameter('category')} {/block}
