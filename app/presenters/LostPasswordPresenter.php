@@ -50,10 +50,10 @@ public function emailFormSubmitted($form)
     if(!(empty($data))){
     $link = Nette\Utils\Html::el('a')->href($this->link('//LostPassword:new', $token))->setText('Změnit heslo');
     $mail = new Message;
-    $mail->setFrom('info@icollector.info')
+    $mail->setFrom('postmaster@collectorsnest.eu')
     ->addTo($values->email)
     ->setSubject('Obnovit heslo')
-    ->setHTMLBody('<style>.wrapper{width:100%;height:auto;}.container{max-width: 90%;margin:0 auto;}.mail_header{background-color:#5cb85c;padding: 0.5em;}.mail_body{text-align:center;margin-top: 1em;}.mail_body p{max-width: 80%; margin: 1em auto;}.large{font-size: 1.5em;margin-top: 2em;}.bottom{margin-top: 2em;}.confirm_button{background-color:#5cb85c; padding: 0.5em; margin: 150px auto 0;}.confirm_button a {text-decoration: none; color: #000;}.confirm_button:hover{opacity:0.9;}</style><div class="wrapper"><div class="container"><div class="mail_header">Icollector</div><div class="mail_body"><p class="large">Ahoj ' . $data->firstName . ',</p><p>Pro změnu hesla klikni na tlačítko níže.</p><p>V případě, že jsi o ní nezažádal, ignoruj prosím tuto zprávu.</p><p>Tvůj team Icollector</p><p class="bottom"><span class="confirm_button">' . $link . '</span></p></div></div>');
+    ->setHTMLBody('<style>.wrapper{width:100%;height:auto;}.container{max-width: 90%;margin:0 auto;}.mail_header{background-color:#5cb85c;padding: 0.5em;}.mail_body{text-align:center;margin-top: 1em;}.mail_body p{max-width: 80%; margin: 1em auto;}.large{font-size: 1.5em;margin-top: 2em;}.bottom{margin-top: 2em;}.confirm_button{background-color:#5cb85c; padding: 0.5em; margin: 150px auto 0;}.confirm_button a {text-decoration: none; color: #000;}.confirm_button:hover{opacity:0.9;}</style><div class="wrapper"><div class="container"><div class="mail_header">Icollector</div><div class="mail_body"><p class="large">Ahoj ' . $data->firstName . ',</p><p>Pro změnu hesla klikni na tlačítko níže.</p><p>V případě, že jsi o ní nezažádal, ignoruj prosím tuto zprávu.</p><p>Tvůj team collectors\' nest</p><p class="bottom"><span class="confirm_button">' . $link . '</span></p></div></div>');
     $mailer = new SendmailMailer;
     $mailer->send($mail);
 

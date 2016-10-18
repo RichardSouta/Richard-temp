@@ -76,10 +76,10 @@ $values = $form->getValues();
     ));
     $link = Nette\Utils\Html::el('a')->href($this->link('//Check:verify', $token))->setText('Potvrdit registraci');
     $mail = new Message;
-    $mail->setFrom('info@icollector.info')
+    $mail->setFrom('postmaster@collectorsnest.eu')
     ->addTo($values->email)
-    ->setSubject('Vítej mezi sběrateli na Icollector')
-    ->setHTMLBody('<style>.wrapper{width:100%;height:auto;}.container{max-width: 90%;margin:0 auto;}.mail_header{background-color:#5cb85c;padding: 0.5em;}.mail_body{text-align:center;margin-top: 1em;}.mail_body p{max-width: 80%; margin: 1em auto;}.large{font-size: 1.5em;margin-top: 2em;}.bottom{margin-top: 2em;}.confirm_button{background-color:#5cb85c; padding: 0.5em; margin: 150px auto 0;}.confirm_button a {text-decoration: none; color: #000;}.confirm_button:hover{opacity:0.9;}</style><div class="wrapper"><div class="container"><div class="mail_header">Icollector</div><div class="mail_body"><p class="large">Ahoj ' . $values->firstName . ', Vítej na Icollector </p><p> Tvoje registrace byla úspěšná, prosím potvrď svůj e-mail kliknutím na odkaz níže. Team Icollector</p><p class="bottom"><span class="confirm_button">' . $link . '</span></p></div></div>');
+    ->setSubject('Vítej mezi sběrateli na collectors\' nest')
+    ->setHTMLBody('<style>.wrapper{width:100%;height:auto;}.container{max-width: 90%;margin:0 auto;}.mail_header{background-color:#5cb85c;padding: 0.5em;}.mail_body{text-align:center;margin-top: 1em;}.mail_body p{max-width: 80%; margin: 1em auto;}.large{font-size: 1.5em;margin-top: 2em;}.bottom{margin-top: 2em;}.confirm_button{background-color:#5cb85c; padding: 0.5em; margin: 150px auto 0;}.confirm_button a {text-decoration: none; color: #000;}.confirm_button:hover{opacity:0.9;}</style><div class="wrapper"><div class="container"><div class="mail_header">collectors\' nest</div><div class="mail_body"><p class="large">Ahoj ' . $values->firstName . ', Vítej na collectors\' nest </p><p> Tvoje registrace byla úspěšná, prosím potvrď svůj e-mail kliknutím na odkaz níže. Team collectors\' nest</p><p class="bottom"><span class="confirm_button">' . $link . '</span></p></div></div>');
     $mailer = new SendmailMailer;
     $mailer->send($mail);
 
