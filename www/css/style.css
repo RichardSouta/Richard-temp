@@ -45,6 +45,12 @@ body {
     padding-left: 10px;
     padding-top: 10px;
     z-index: auto;
+    height: 50px !important;
+}
+
+#paypal{
+    position: relative;
+    bottom: 30px;
 }
 
 #select2-frm-searchForm-category-container{
@@ -303,10 +309,10 @@ label > input[name="remember"]{
     width:490px;
     right:0px;
 }
-#collectible img{
+/*#collectible img{
     max-height: 70vh;
 
-}
+}*/
 .polozka{
     font-size: 2.25vh;
     font-weight: bold;
@@ -536,6 +542,7 @@ required {
     position: relative;
     left: 20%;
     z-index: 1000;
+    width: 70% !important;
 }
 
 span.select2:nth-child(3) > span:nth-child(1) > span:nth-child(1){
@@ -547,3 +554,56 @@ span.select2:nth-child(3) > span:nth-child(1) > span:nth-child(1){
     color: white;
     font-size: 25px;
 }
+
+.collectible-image-main{
+    position: relative;
+    left: 0%;
+    height: 50vh;
+    width: 70%;
+}
+.collectible-image-main img {
+    float: right;
+}
+
+.collectible-image-2{
+    position: absolute;
+    left: 70%;
+    height: 12.5vh;
+    top: 0%;
+    width: 30%;
+}
+
+.collectible-image-3{
+    position: absolute;
+    left: 70%;
+    height: 12.5vh;
+    top: 12.5vh;
+    width: 30%;
+}
+.collectible-image-4{
+    position: absolute;
+    left: 70%;
+    height: 12.5vh;
+    top: 25vh;
+    width: 30%;
+}
+
+.collectible-image-5{
+    position: absolute;
+    left: 70%;
+    height: 12.5vh;
+    top: 37.5vh;
+    width: 30%;
+}
+
+.collectible-images{
+    height: 50vh;
+
+}
+
+.collectible-images img{
+    max-width:100%;
+    max-height: 100%;
+}
+
+

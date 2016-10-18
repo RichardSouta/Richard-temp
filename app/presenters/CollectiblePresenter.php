@@ -100,7 +100,8 @@ class CollectiblePresenter extends BasePresenter
         $count=count($values['imgs']);
         $collectible = new Model\Entity\Collectible();
         $category = $this->em->find('App\Model\Entity\Category', $values->category);
-        $collectible->setCategory($category)->setDescription($values->description)->setName($values->name)->setOrigin($values->origin)->setImages($count);
+        $user = $this->em->find('App\Model\Entity\User', $this->getUser()->id);
+        $collectible->setCategory($category)->setDescription($values->description)->setName($values->name)->setOrigin($values->origin)->setImages($count)->setUser($user);
         $this->em->persist($collectible);
         $this->em->flush();
         foreach ($values['imgs'] as $key => $image) {

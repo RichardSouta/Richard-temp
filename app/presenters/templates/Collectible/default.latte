@@ -1,18 +1,45 @@
 {block content}
-    {if $user->isLoggedIn()&&$user->identity->id==$collectible->getUser()->getId()}
-        <nav class="navbar navbar-inverse" id="submenu">
-            <a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil</a>
-            <div class="navbar-right">
-                <a n:href="Collectible:trade, $presenter->getParameter('id')">Vyměnit předmět&nbsp;&nbsp;</a>
-            </div>
-        </nav>
-    {/if}
+{if $user->isLoggedIn()&&$user->identity->id==$collectible->getUser()->getId()}
+    <nav class="navbar navbar-inverse" id="submenu">
+        <a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil</a>
+        <div class="navbar-right">
+            <a n:href="Collectible:trade, $presenter->getParameter('id')">Vyměnit předmět&nbsp;&nbsp;</a>
+        </div>
+    </nav>
+{/if}
 
 <div class="container-fluid">
 
-    <div class="col-md-2"></div>
+    <div class="col-md-2">  <div id="profil">
+            <h1>{$collectible->getUser()->getUsername()}</h1>
+            <center><a n:href="User:,$collectible->getUser()->getId()"><img
+                            src="{$collectible->getUser()->getPicture()}"
+                            class="img-responsive img-rounded"></a></center>
+            {if (($user->isLoggedIn()))}
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal"><span
+                            class="glyphicon glyphicon-envelope"></span> Poslat zprávu
+                </button>{/if}
+            <p>
+            <div class="col-xs-12">{$collectible->getUser()->getDescription()}</div>
+        </div></div>
     <div class="col-md-6" id="collectible">
-        <img data-src="{$collectible->getImages()[0]}" class="img-responsive">
+        <div class="collectible-images">
+            <div class="collectible-image-main"><img data-src="{$collectible->getImages()[0]}">
+            </div>
+            <div class="collectible-image-2"><img data-src="{$collectible->getImages()[1]}">
+            </div>
+            <div class="collectible-image-3"><img data-src="{$collectible->getImages()[2]}">
+            </div>
+            <div class="collectible-image-4"><img data-src="{$collectible->getImages()[3]}">
+            </div>
+            <div class="collectible-image-5"><img data-src="{$collectible->getImages()[4]}">
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-md-4">
         <div id="seznam">
             <table>
                 <tr>
@@ -32,22 +59,6 @@
         </div>
     </div>
 
-
-    <div class="col-md-4">
-        <div id="profil">
-            <h1>{$collectible->getUser()->getUsername()}</h1>
-            <center><a n:href="User:,$collectible->getUser()->getId()"><img
-                            src="{$collectible->getUser()->getPicture()}"
-                            class="img-responsive img-rounded"></a></center>
-            {if (($user->isLoggedIn()))}
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal"><span
-                            class="glyphicon glyphicon-envelope"></span> Poslat zprávu
-                </button>{/if}
-            <p>
-            <div class="col-xs-12">{$collectible->getUser()->getDescription()}</div>
-        </div>
-    </div>
-
     <!-- Modal -->
     <div class="modal fade" id="zpravaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -55,7 +66,8 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Poslat zprávu uživateli {$collectible->getUser()->getUserName()}</h4>
+                    <h4 class="modal-title" id="myModalLabel">Poslat zprávu
+                        uživateli {$collectible->getUser()->getUserName()}</h4>
                 </div>
                 <div class="modal-body">
                     {var $userId = $collectible->getUser()->getId()}
@@ -68,15 +80,42 @@
 
     <script>
         var resolution = $(document).width();
-        if(resolution<=600) resolution = 120*3;
-        else if (resolution<=1240) resolution = 240*3;
-        else if (resolution<=2480) resolution = 360*3;
-        else resolution = 480*3;
+        if (resolution <= 600) resolution = 120 * 2;
+        else if (resolution <= 1240) resolution = 240 * 2;
+        else if (resolution <= 2480) resolution = 360 * 2;
+        else resolution = 480 * 2;
 
         $('#collectible img').each(function () {
-            $( this ).attr('src','images/collectible/'+$( this ).attr('data-src')+-resolution);
+            $(this).attr('src', 'images/collectible/' + $(this).attr('data-src') + -resolution);
         });
     </script>
+
+    <script>
+        $mainImg = $('.collectible-image-main img');
+        $('.collectible-image-2 img').on('click',function () {
+            $newMainSrc = $(this).attr('src');
+            $(this).attr('src',$mainImg.attr('src')) ;
+            $mainImg.attr('src',$newMainSrc);
+        });
+
+        $('.collectible-image-3 img').on('click',function () {
+            $newMainSrc = $(this).attr('src');
+            $(this).attr('src',$mainImg.attr('src')) ;
+            $mainImg.attr('src',$newMainSrc);
+        });
+
+        $('.collectible-image-4 img').on('click',function () {
+            $newMainSrc = $(this).attr('src');
+            $(this).attr('src',$mainImg.attr('src')) ;
+            $mainImg.attr('src',$newMainSrc);
+        });
+
+        $('.collectible-image-5 img').on('click',function () {
+            $newMainSrc = $(this).attr('src');
+            $(this).attr('src',$mainImg.attr('src')) ;
+            $mainImg.attr('src',$newMainSrc);
+        });
+        </script>
     {/block}
 
     {block title}{$collectible->getName()} {/block}

@@ -2,23 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0054633f-0d46-4d21-93ad-9d7bf1f9f810" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/icollector.iml" afterPath="$PROJECT_DIR$/.idea/icollector.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/LostPasswordPresenter.php" afterPath="$PROJECT_DIR$/app/presenters/LostPasswordPresenter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/RegisterPresenter.php" afterPath="$PROJECT_DIR$/app/presenters/RegisterPresenter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/@layout - kopie.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/@layout - kopie.latte" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/CollectiblePresenter.php" afterPath="$PROJECT_DIR$/app/presenters/CollectiblePresenter.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/@layout.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/@layout.latte" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/Category/default.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/Category/default.latte" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/Category/new.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/Category/new.latte" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/Collectible/confirm.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/Collectible/confirm.latte" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/Collectible/edit.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/Collectible/edit.latte" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/Collectible/final.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/Collectible/final.latte" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/Collectible/default.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/Collectible/default.latte" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/Collectible/new.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/Collectible/new.latte" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/Collectible/trade.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/Collectible/trade.latte" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/Homepage/default.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/Homepage/default.latte" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/LostPassword/default.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/LostPassword/default.latte" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/Terms/default.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/Terms/default.latte" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/User/edit.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/User/edit.latte" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/css/style.css" afterPath="$PROJECT_DIR$/www/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/main.js" afterPath="$PROJECT_DIR$/www/js/main.js" />
     </list>
     <ignored path="icollector.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,11 +38,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="default.latte" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/presenters/templates/LostPassword/default.latte">
+      <file leaf-file-name="default.latte" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/presenters/templates/Collectible/default.latte">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+            <state relative-caret-position="480">
+              <caret line="112" column="31" selection-start-line="112" selection-start-column="31" selection-end-line="112" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="653">
+              <caret line="51" column="23" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new.latte" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/presenters/templates/Collectible/new.latte">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" column="42" selection-start-line="1" selection-start-column="42" selection-end-line="1" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -72,18 +81,20 @@
       <file leaf-file-name="@layout.latte" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/presenters/templates/@layout.latte">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="5" column="74" selection-start-line="5" selection-start-column="74" selection-end-line="5" selection-end-column="74" />
-              <folding />
+            <state relative-caret-position="704">
+              <caret line="140" column="9" selection-start-line="140" selection-start-column="9" selection-end-line="140" selection-end-column="9" />
+              <folding>
+                <marker date="1476804111928" expanded="false" signature="8148:8155" ph="×" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.local.neon" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config.local.neon">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+            <state relative-caret-position="44">
+              <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -113,10 +124,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RegisterPresenter.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RegisterPresenter.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/presenters/RegisterPresenter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
+            <state relative-caret-position="842">
               <caret line="92" column="13" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
               <folding>
                 <marker date="1476791876474" expanded="true" signature="2236:4432" ph="{...}" />
@@ -129,21 +140,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="icollector.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/icollector.sql">
+      <file leaf-file-name="CollectiblePresenter.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/presenters/CollectiblePresenter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="@layout - kopie.latte" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/presenters/templates/@layout - kopie.latte">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+            <state relative-caret-position="1898">
+              <caret line="103" column="168" selection-start-line="103" selection-start-column="168" selection-end-line="103" selection-end-column="168" />
               <folding />
             </state>
           </provider>
@@ -183,17 +184,13 @@
         <option value="$PROJECT_DIR$/app/model/Entity/Collectible.php" />
         <option value="$PROJECT_DIR$/app/model/Repository/CollectibleRepository.php" />
         <option value="$PROJECT_DIR$/app/presenters/HomepagePresenter.php" />
-        <option value="$PROJECT_DIR$/www/css/style.css" />
         <option value="$PROJECT_DIR$/app/router/RouterFactory.php" />
         <option value="$PROJECT_DIR$/app/presenters/UserPresenter.php" />
-        <option value="$PROJECT_DIR$/www/js/main.js" />
-        <option value="$PROJECT_DIR$/app/presenters/CollectiblePresenter.php" />
         <option value="$PROJECT_DIR$/app/presenters/templates/User/default.latte" />
         <option value="$PROJECT_DIR$/app/model/Entity/User.php" />
         <option value="$PROJECT_DIR$/app/config/config.neon" />
         <option value="$PROJECT_DIR$/app/config/config.local.neon" />
         <option value="$PROJECT_DIR$/app/presenters/templates/Images.latte" />
-        <option value="$PROJECT_DIR$/app/presenters/templates/Collectible/default.latte" />
         <option value="$PROJECT_DIR$/app/presenters/templates/loadMore.latte" />
         <option value="$PROJECT_DIR$/app/presenters/BasePresenter.php" />
         <option value="$PROJECT_DIR$/app/presenters/templates/Category/default.latte" />
@@ -201,16 +198,20 @@
         <option value="$PROJECT_DIR$/app/presenters/templates/Collectible/confirm.latte" />
         <option value="$PROJECT_DIR$/app/presenters/templates/Collectible/edit.latte" />
         <option value="$PROJECT_DIR$/app/presenters/templates/Collectible/final.latte" />
-        <option value="$PROJECT_DIR$/app/presenters/templates/Collectible/new.latte" />
         <option value="$PROJECT_DIR$/app/presenters/templates/Collectible/trade.latte" />
         <option value="$PROJECT_DIR$/app/presenters/templates/LostPassword/default.latte" />
         <option value="$PROJECT_DIR$/app/presenters/templates/User/edit.latte" />
         <option value="$PROJECT_DIR$/app/presenters/templates/@layout - kopie.latte" />
         <option value="$PROJECT_DIR$/app/presenters/templates/Homepage/default.latte" />
         <option value="$PROJECT_DIR$/app/presenters/templates/Terms/default.latte" />
-        <option value="$PROJECT_DIR$/app/presenters/templates/@layout.latte" />
         <option value="$PROJECT_DIR$/app/presenters/RegisterPresenter.php" />
         <option value="$PROJECT_DIR$/app/presenters/LostPasswordPresenter.php" />
+        <option value="$PROJECT_DIR$/app/presenters/CollectiblePresenter.php" />
+        <option value="$PROJECT_DIR$/www/js/main.js" />
+        <option value="$PROJECT_DIR$/www/css/style.css" />
+        <option value="$PROJECT_DIR$/app/presenters/templates/Collectible/new.latte" />
+        <option value="$PROJECT_DIR$/app/presenters/templates/@layout.latte" />
+        <option value="$PROJECT_DIR$/app/presenters/templates/Collectible/default.latte" />
       </list>
     </option>
   </component>
@@ -678,12 +679,12 @@
       <workItem from="1476311304530" duration="11454000" />
       <workItem from="1476354130317" duration="3633000" />
       <workItem from="1476452415042" duration="50964000" />
-      <workItem from="1476785606418" duration="2360000" />
+      <workItem from="1476785606418" duration="12336000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114500000" />
+    <option name="totallyTimeSpent" value="124476000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2391" y="-9" width="2418" height="1468" extended-state="6" />
@@ -789,6 +790,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="500">
           <caret line="84" column="50" selection-start-line="84" selection-start-column="50" selection-end-line="84" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -810,6 +812,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="423">
           <caret line="565" column="9" selection-start-line="565" selection-start-column="9" selection-end-line="565" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -826,7 +829,7 @@
         <state relative-caret-position="600">
           <caret line="56" column="83" selection-start-line="56" selection-start-column="83" selection-end-line="56" selection-end-column="83" />
           <folding>
-            <element signature="e#29#55#0#PHP" expanded="true" />
+            <element signature="e#29#55#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -835,13 +838,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="412">
           <caret line="151" column="20" selection-start-line="151" selection-start-column="20" selection-end-line="151" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="958">
-          <caret line="543" column="6" selection-start-line="543" selection-start-column="6" selection-end-line="543" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -850,7 +847,7 @@
         <state relative-caret-position="896">
           <caret line="92" column="112" selection-start-line="92" selection-start-column="37" selection-end-line="92" selection-end-column="112" />
           <folding>
-            <element signature="e#23#56#0#PHP" expanded="true" />
+            <element signature="e#23#56#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -859,6 +856,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="412">
           <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -867,7 +865,7 @@
         <state relative-caret-position="198">
           <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
           <folding>
-            <element signature="e#33#43#0#PHP" expanded="true" />
+            <element signature="e#33#43#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -879,13 +877,6 @@
           <folding>
             <marker date="1476737436741" expanded="true" signature="6820:7076" ph="SELECT DISTI... collectibles" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -901,14 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/presenters/CollectiblePresenter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2926">
-          <caret line="137" column="101" selection-start-line="137" selection-start-column="101" selection-end-line="137" selection-end-column="101" />
           <folding />
         </state>
       </provider>
@@ -937,14 +920,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/presenters/templates/Collectible/default.latte">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1716">
-          <caret line="78" column="13" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/presenters/templates/loadMore.latte">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -958,7 +933,7 @@
         <state relative-caret-position="946">
           <caret line="43" column="37" selection-start-line="43" selection-start-column="37" selection-end-line="43" selection-end-column="37" />
           <folding>
-            <element signature="e#33#71#0#PHP" expanded="true" />
+            <element signature="e#33#71#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -999,14 +974,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/presenters/templates/Collectible/new.latte">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -1099,30 +1066,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/presenters/templates/Homepage/default.latte">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="42" column="53" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/presenters/templates/Terms/default.latte">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/presenters/templates/@layout.latte">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="74" selection-start-line="5" selection-start-column="74" selection-end-line="5" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/presenters/LostPasswordPresenter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -1147,7 +1090,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/presenters/RegisterPresenter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
+        <state relative-caret-position="842">
           <caret line="92" column="13" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
           <folding>
             <marker date="1476791876474" expanded="true" signature="2236:4432" ph="{...}" />
@@ -1156,6 +1099,72 @@
             <marker date="1476791876474" expanded="true" signature="2948:3813" ph="..." />
             <marker date="1476791876474" expanded="true" signature="4148:4429" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/presenters/templates/Terms/default.latte">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/presenters/templates/Homepage/default.latte">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="42" column="53" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/presenters/CollectiblePresenter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1898">
+          <caret line="103" column="168" selection-start-line="103" selection-start-column="168" selection-end-line="103" selection-end-column="168" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="653">
+          <caret line="51" column="23" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/presenters/templates/Collectible/new.latte">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="42" selection-start-line="1" selection-start-column="42" selection-end-line="1" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/presenters/templates/@layout.latte">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="704">
+          <caret line="140" column="9" selection-start-line="140" selection-start-column="9" selection-end-line="140" selection-end-column="9" />
+          <folding>
+            <marker date="1476804111928" expanded="false" signature="8148:8155" ph="×" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/presenters/templates/Collectible/default.latte">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="112" column="31" selection-start-line="112" selection-start-column="31" selection-end-line="112" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
