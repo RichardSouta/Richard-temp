@@ -48,7 +48,7 @@ class Topic
     protected $createdDateTime;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="collectibles")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="topics")
      * @ORM\JoinColumn(nullable=false)
      * @var User
      */

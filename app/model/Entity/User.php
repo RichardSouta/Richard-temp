@@ -4,6 +4,7 @@ namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Nette\Utils\Strings as Strings;
 
 /**
  * @ORM\Entity(repositoryClass="App\Model\Repository\UserRepository")
@@ -15,6 +16,7 @@ class User
         $this->collectibles = new ArrayCollection;
         $this->regDateTime = new \DateTime();
         $this->topics = new ArrayCollection;
+        $this->confirmedEmail = Strings::random(15, '0-9a-zA-Z');
     }
 
     /**
@@ -98,10 +100,32 @@ class User
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="sender", cascade={"persist", "remove"})
      * @var Message[]
      */
     private $messages;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Chat", mappedBy="users", cascade={"persist", "remove"})
+     * @var Chat[]
+     */
+    private $chats;
+
+    /**
+     * @return Chat[]
+     */
+    public function getChats()
+    {
+        return $this->chats;
+    }
+
+    /**
+     * @param Chat[] $chats
+     */
+    public function setChats($chats)
+    {
+        $this->chats = $chats;
+    }
 
     /**
      * @return Message[]

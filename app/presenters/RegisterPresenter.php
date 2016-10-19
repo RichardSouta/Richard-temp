@@ -1,14 +1,11 @@
 <?php
 namespace App\Presenters;
 
-use App\Model\Entity\Collectible;
 use App\Model\Entity\User;
 use Nette\Application\UI\Form as Form;
 use Nette;
 use Nette\Utils\Html;
-use Nette\Utils\Strings;
 use Nette\Mail\Message;
-use Nette\Mail\SendmailMailer;
 
 
 class RegisterPresenter extends BasePresenter
@@ -62,13 +59,12 @@ class RegisterPresenter extends BasePresenter
     {
         $values = $form->getValues();
         try {
-            $token = Nette\Utils\Strings::random(15, '0-9a-zA-Z');
             $user = new User();
             $user->setName($values->firstName)->setSurname($values->surname)->setUsername($values->username)
-            ->setPassword(Nette\Security\Passwords::hash($values->password))->setConfirmedEmail($token)->setEmail($values->email);
+            ->setPassword(Nette\Security\Passwords::hash($values->password))->setEmail($values->email);
             $this->em->persist($user);
             $this->em->flush();
-            $link = Nette\Utils\Html::el('a')->href($this->link('//Check:verify', $token))->setText('Potvrdit registraci');
+            $link = Nette\Utils\Html::el('a')->href($this->link('//Check:verify', $user->getConfirmedEmail()))->setText('Potvrdit registraci');
             $mail = new Message;
             $mail->setFrom('postmaster@collectorsnest.eu')
                 ->addTo($values->email)

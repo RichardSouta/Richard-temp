@@ -40,11 +40,27 @@ class Message
     private $sender;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity="Chat", inversedBy="messages")
      * @ORM\JoinColumn(nullable=false)
-     * @var User
+     * @var Chat
      */
-    private $receiver;
+    private $chat;
+
+    /**
+     * @return Chat
+     */
+    public function getChat()
+    {
+        return $this->chat;
+    }
+
+    /**
+     * @param Chat $chat
+     */
+    public function setChat($chat)
+    {
+        $this->chat = $chat;
+    }
 
     /**
      * @return mixed
