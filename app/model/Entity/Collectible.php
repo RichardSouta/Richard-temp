@@ -55,7 +55,7 @@ class Collectible
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="collectibles")
      * @ORM\JoinColumn(nullable=false)
-     * @var Category
+     * @var User
      */
     private $user;
 

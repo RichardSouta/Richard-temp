@@ -33,3 +33,10 @@ extensions:
     annotations: Kdyby\Annotations\DI\AnnotationsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
 
+mail:
+    smtp: true
+    host: smtp.forpsi.com
+    port: 465
+    username: postmaster@collectorsnest.eu
+    password: 349.fNFeJ8
+    secure: ssl

@@ -28,6 +28,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     protected $database;
 
     protected $collectibles;
+
+    /** @var Nette\Mail\IMailer @inject */
+    public $mailer;
+
     public function handleLoad($page)
     {
         if ($this->isAjax()) {

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Presenters\ClubPresenter;
 use Kdyby\Doctrine\EntityManager;
 use Nette;
 use Nette\Application\Routers\RouteList;
@@ -17,6 +18,7 @@ class RouterFactory
     public function createRouter()
     {
         $router = new RouteList;
+        $router[] = new Route('club/<id>', 'Club:display');
         $router[] = new Route('[<presenter>/]images/collectible/<id>', 'Collectible:show');
         $router[] = new Route('category/new', 'Category:new');
         $router[] = new Route('category/<category>', 'Category:default');

@@ -1,14 +1,19 @@
 {block content}
-<div id="club-seznam">
-{foreach $topics as $topic}
-<div class="komentar-hlavicka">
-<a n:href="User:, $topic->user_id"><img src="{$topic->picture}" class="img-responsive img-circle komentar-foto"></a><a n:href="Club:show, $topic->topic_id"><h2>{$topic->title}</h2><span> <a n:href="User:,$topic->user_id">{$topic->username}</a> {$topic->datetime|date:'d.m.Y H:i'}</span>
-</div>
-{/foreach}
-{if $user->isLoggedIn()}
-<a href="{link Club:new}"><button class="btn btn-info btn-lg" id="new-club">Založit nový sběratelský klub</button></a>
-{/if}
-</div>
+    <div id="club-seznam">
+        {foreach $topics as $topic}
+            <div class="komentar-hlavicka">
+                <a n:href="User:, $topic->getUser()->getId()"><img src="{$topic->getUser()->getPicture()}"
+                                                                   class="img-responsive img-circle komentar-foto"></a><a n:href="Club:display, $topic->getId()">
+                    <h2>{$topic->getTitle()}</h2>
+                    <span> <a n:href="User:,$topic->getUser()->getId()">{$topic->getUser()->getUsername()}</a> {$topic->getCreatedDateTime()|date:'d.m.Y H:i'}</span>
+            </div>
+        {/foreach}
+        {if $user->isLoggedIn()}
+            <a href="{link Club:new}">
+                <button class="btn btn-info btn-lg" id="new-club">Založit nový sběratelský klub</button>
+            </a>
+        {/if}
+    </div>
 {/block}
 
 {block title}Sběratelské kluby {/block}

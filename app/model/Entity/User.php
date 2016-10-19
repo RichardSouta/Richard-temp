@@ -14,6 +14,7 @@ class User
     {
         $this->collectibles = new ArrayCollection;
         $this->regDateTime = new \DateTime();
+        $this->topics = new ArrayCollection;
     }
 
     /**
@@ -60,12 +61,12 @@ class User
     protected $confirmedEmail;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",nullable=true)
      */
-    protected $security;
+    protected $facebook;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",nullable=true)
      */
     protected $notification;
 
@@ -75,14 +76,96 @@ class User
     protected $regDateTime;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",nullable=true)
      */
     protected $description;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",nullable=true)
      */
     protected $phone;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Topic", mappedBy="user", cascade={"persist", "remove"})
+     * @var Topic[]
+     */
+    private $topics;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user", cascade={"persist", "remove"})
+     * @var Comment[]
+     */
+    private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="user", cascade={"persist", "remove"})
+     * @var Message[]
+     */
+    private $messages;
+
+    /**
+     * @return Message[]
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    /**
+     * @param Message[] $messages
+     */
+    public function setMessages($messages)
+    {
+        $this->messages = $messages;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFacebook()
+    {
+        return $this->facebook;
+    }
+
+    /**
+     * @param mixed $facebook
+     */
+    public function setFacebook($facebook)
+    {
+        $this->facebook = $facebook;
+    }
+
+    /**
+     * @return Topic[]
+     */
+    public function getTopics()
+    {
+        return $this->topics;
+    }
+
+    /**
+     * @param Topic[] $topics
+     */
+    public function setTopics($topics)
+    {
+        $this->topics = $topics;
+    }
+
+    /**
+     * @return Comment[]
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Comment[] $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
 
     /**
      * @return mixed
@@ -225,24 +308,6 @@ class User
     public function setConfirmedEmail($confirmedEmail)
     {
         $this->confirmedEmail = $confirmedEmail;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSecurity()
-    {
-        return $this->security;
-    }
-
-    /**
-     * @param mixed $security
-     * @return User
-     */
-    public function setSecurity($security)
-    {
-        $this->security = $security;
         return $this;
     }
 

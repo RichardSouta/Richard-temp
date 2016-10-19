@@ -17,8 +17,6 @@ class CollectiblePresenter extends BasePresenter
     public $page;
 
 
-
-
     public function renderDefault($id)
     {
         $collectible = $this->template->collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($id);
@@ -97,7 +95,7 @@ class CollectiblePresenter extends BasePresenter
 
     public function collectibleFormSubmitted($form, $values)
     {
-        $count=count($values['imgs']);
+        $count = count($values['imgs']);
         $collectible = new Model\Entity\Collectible();
         $category = $this->em->find('App\Model\Entity\Category', $values->category);
         $user = $this->em->find('App\Model\Entity\User', $this->getUser()->id);
@@ -109,13 +107,12 @@ class CollectiblePresenter extends BasePresenter
             if ($image->isOk()) {
                 $image = $image->toImage();
                 /** @var Nette\Utils\Image $image */
-                $image->resize(2560,null,Image::SHRINK_ONLY);
+                $image->resize(2560, null, Image::SHRINK_ONLY);
                 $image->sharpen();
                 $name = $collectible->getImages()[$key];
                 $image->save("../www/images/collectible/$name.jpg", 100, Image::JPEG);
             }
         }
-
 
 
         $this->flashMessage('Předmět byl vytvořen.');
