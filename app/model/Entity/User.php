@@ -111,6 +111,11 @@ class User
      */
     private $chats;
 
+    public function addChat(Chat $chat)
+    {
+        $this->chats[] = $chat;
+    }
+
     /**
      * @return Chat[]
      */
@@ -423,7 +428,7 @@ class User
 
     public function getPicture()
     {
-        return "../www/images/user/$this->id.jpg";
+        return "images/user/$this->id";
     }
 
 

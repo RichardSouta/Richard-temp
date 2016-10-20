@@ -14,7 +14,7 @@
     <div id="profil">
         <h1>{$uzivatel->getUsername()}</h1>
         <center><img src="{$uzivatel->getPicture()}" class="img-responsive img-rounded"></center>
-        {if (($user->isLoggedIn()))}
+        {if ($user->isLoggedIn()&&$uzivatel->getId()!=$user->id)}
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal"><span
                         class="glyphicon glyphicon-envelope"></span> Poslat zprávu
             </button>

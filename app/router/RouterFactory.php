@@ -19,7 +19,9 @@ class RouterFactory
     {
         $router = new RouteList;
         $router[] = new Route('club/<id>', 'Club:display');
+        $router[] = new Route('chat/<id>','Chat:default');
         $router[] = new Route('[<presenter>/]images/collectible/<id>', 'Collectible:show');
+        $router[] = new Route('[<presenter>/]images/user/<id>', 'User:showPicture');
         $router[] = new Route('category/new', 'Category:new');
         $router[] = new Route('category/<category>', 'Category:default');
         $router[] = new Route('collectible/edit/<id>', 'Collectible:edit');

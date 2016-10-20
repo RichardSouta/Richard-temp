@@ -1,34 +1,35 @@
 {block content}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-2"></div>
-        <div class="col-xs-8">
-        <div id="chat">
-          <div id="chat-window-wrapper">
-            {foreach $chats as $chat}
-            <a href="{link Chat:#active,$chat->user_id}">
-            <div class="chat-window" {if $chat->user_id==$presenter->getParameter("id")} id="active" {/if}>
-            <center><img src="{$chat->picture}" class="img-responsive img-rounded"></center>
-            {$chat->username}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-2"></div>
+            <div class="col-xs-8">
+                <div id="chat">
+                    <div id="chat-window-wrapper">
+                        {foreach $chats as $chat}
+                            <a href="{link Chat:#active,$chat->getUsers()[0]}">
+                                <div class="chat-window" {if $chat->getId()==$presenter->getParameter("id")} id="active" {/if}>
+                                    <center><img src="{$chat->getUsers()[0]->getPicture()}" class="img-responsive img-rounded"></center>
+                                    {$chat->getUsers()[0]->getUsername()}
+                                </div>
+                            </a>
+                        {/foreach}
+                    </div>
+                    <div class="chat-detail">
+                        {foreach $messages as $message}
+                        <div class={if $message->getSender()->getId()==$user->identity->id}"bg-primary message-outcoming"{else}"bg-warning message-incoming"{/if}>
+                        {!html_entity_decode($message->getText())}<span
+                                style="float:right">{$message->getCreatedDateTime()|date:'d.m.Y H:i'}</span>
+                    </div>
+                    {/foreach}
+
+                </div>
+                <div id="chat-message">{control messageForm}</div>
+
             </div>
-            </a>
-            {/foreach}
-           </div> 
-            <div class="chat-detail">
-            {foreach $messages as $message}
-            <div class={if $message->reciever_id==$user->identity->id}"bg-primary message-outcoming"{else}"bg-warning message-incoming"{/if}>
-            {!html_entity_decode($message->text)}<span style="float:right">{$message->timestamp|date:'d.m.Y H:i'}</span>
-            </div>
-            {/foreach}
-            
-            </div>    
-            <div id="chat-message">{control messageForm}</div>
-            
-        </div>
         </div>
         <div class="col-xs-2"></div>
     </div>
-</div>
+    </div>
 
 {/block}
 

@@ -13,7 +13,6 @@ class Chat
 {
     public function __construct()
     {
-        $this->collectibles = new ArrayCollection;
         $this->messages = new ArrayCollection;
         $this->users = new ArrayCollection;
         $this->createdDateTime = new \DateTime();
@@ -41,6 +40,18 @@ class Chat
         $this->messages = $messages;
     }
 
+    public function addMessage(Message $message)
+    {
+        $message->setChat($this);
+        $this->messages[] = $message;
+    }
+
+    public function addUser(User $user)
+    {
+        $user->addChat($this);
+        $this->users[] = $user;
+    }
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -60,6 +71,55 @@ class Chat
      * @ORM\Column(type="datetime")
      */
     protected $createdDateTime;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return User[]
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param User[] $users
+     */
+    public function setUsers($users)
+    {
+        $this->users = $users;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedDateTime()
+    {
+        return $this->createdDateTime;
+    }
+
+    /**
+     * @param mixed $createdDateTime
+     */
+    public function setCreatedDateTime($createdDateTime)
+    {
+        $this->createdDateTime = $createdDateTime;
+    }
+
 
 
 }

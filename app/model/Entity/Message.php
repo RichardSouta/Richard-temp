@@ -60,6 +60,7 @@ class Message
     public function setChat($chat)
     {
         $this->chat = $chat;
+        return $this;
     }
 
     /**
@@ -133,24 +134,5 @@ class Message
         $this->sender = $sender;
         return $this;
     }
-
-    /**
-     * @return User
-     */
-    public function getReceiver()
-    {
-        return $this->receiver;
-    }
-
-    /**
-     * @param User $receiver
-     * @return Message
-     */
-    public function setReceiver($receiver)
-    {
-        $this->receiver = $receiver;
-        return $this;
-    }
-
 
 }

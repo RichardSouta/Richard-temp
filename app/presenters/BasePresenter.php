@@ -15,6 +15,7 @@ use Tomaj\Form\Renderer\BootstrapRenderer;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Utils\Image;
 use Nette\Utils\Finder;
+use Nette\Application\UI\Multiplier;
 
 
 /**
@@ -83,6 +84,33 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             }
             $nameAndWidth = explode('-', $id);
             return $this->actionShow($nameAndWidth[0], $nameAndWidth[1]);
+
+        }
+    }
+
+    public function actionShowPicture($id, $width = 360)
+    {
+
+        foreach (Finder::findFiles($id . ".*")->in('../www/images/user') as $key => $file) {
+            $path = $key; // $key je řetězec s názvem souboru včetně cesty
+            //echo $file; // $file je objektem SplFileInfo
+
+        }
+        if (isset($path)) {
+            $image = Image::fromFile($path);
+            if (isset($width)) {
+                $image->resize($width, NULL, Image::SHRINK_ONLY);
+                $image->sharpen();
+                $image->save("../www/images/user/$id-$width.jpg", 100, Image::JPEG);
+            }
+            $image->send();
+        } else {
+            if (isset($width)) {
+                $image = Image::fromFile("../www/images/collectible/placeholder-$width.jpg");
+                $image->send();
+            }
+            $nameAndWidth = explode('-', $id);
+            return $this->actionShowPicture($nameAndWidth[0], $nameAndWidth[1]);
 
         }
     }
@@ -192,6 +220,47 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
         $this->redirect('Category:', $values->category);
     }
+
+    protected function createComponentMessageForm()
+    {
+        return new Multiplier(function ($receiver_id) {
+            $form = new Form;
+            $form->addProtection();
+            $form->addText('text')->setAttribute('placeholder', 'Napište zprávu')->setAttribute('class', 'form-control');
+            $form->addSubmit('send', 'Send')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
+            $form->addHidden('reciever_id', $receiver_id);
+            $form->onSuccess[] = $this->messageFormSubmitted;
+            $renderer = $form->getRenderer();
+            $renderer->wrappers['controls']['container'] = NULL;
+            $renderer->wrappers['pair']['container'] = NULL;
+            $renderer->wrappers['label']['container'] = NULL;
+            $renderer->wrappers['control']['container'] = NULL;
+            return $form;
+
+        });
+    }
+
+    public function messageFormSubmitted($form, $values)
+    {
+        $chat = $this->em->getRepository('App\Model\Entity\Chat')->findBy(['users.id' => $values->reciever_id]);
+        if (empty($chat)) {
+            $chat = new Model\Entity\Chat();
+        }
+
+        if (!empty($values->text)) {
+            $message = new Model\Entity\Message();
+            $sender = $this->em->find('App\Model\Entity\User', $this->user->id);
+            $receiver = $this->em->find('App\Model\Entity\User', $values->reciever_id);
+            $message->setText($values->text)->setSender($sender);
+            $chat->addMessage($message);
+            $chat->addUser($sender);
+            $chat->addUser($receiver);
+            $this->em->persist($chat);
+            $this->em->flush();
+        }
+        $this->redirect('Chat:', $chat->getId());
+    }
+
     /*
       protected function createComponentOptionForm()
         {

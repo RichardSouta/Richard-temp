@@ -7,7 +7,7 @@ use Nette;
 use App\Model;
 use Nette\Utils\Strings;
 use Nette\Application\UI\Multiplier;
-use Model\Entity\Message;
+use App\Model\Entity\Message;
 
 
 class ChatPresenter extends BasePresenter
@@ -22,13 +22,13 @@ class ChatPresenter extends BasePresenter
             $this->redirect('Homepage:');
 
         }
-        $chats = $this->template->chats = $this->em->getRepository('App\Model\Repository\User')->findBy(['user.id' => $this->user->getId()]);
+        $chats = $this->template->chats = $this->em->getRepository('App\Model\Entity\User')->find($this->user->id)->getChats();
         if (empty($chats)) {
             $this->flashMessage('Žádné konverzace k zobrazení. Zahajte nějakou přes symbol zprávy na profilu předmětu nebo uživatele.');
             $this->redirect('Homepage:');
         }
         if (!(isset($id))) $this->redirect('Chat:', $chats[0]->getId());
-        $this->template->messages = $this->em->getRepository('App\Model\Repository\Chat')->find($chats[0]->getId());
+        $this->template->messages = $this->em->getRepository('App\Model\Entity\Chat')->find($id)->getMessages();
     }
 
     public function ShowChatAction(Model\Entity\Chat $chat){
@@ -52,11 +52,10 @@ class ChatPresenter extends BasePresenter
     public function messageFormSubmitted($form, $values)
     {
         if (!empty($values->text)) {
-            $message = new Model\Entity\Message();
-            $chat = $this->em->getRepository('App\Model\Repository\Chat')
-
-            $message->
-
+            $message = new Message();
+            $chat = $this->em->find('App\Model\Entity\Chat',$this->getParameter('id'));
+            $user = $this->em->find('App\Model\Entity\User',$this->getUser()->getId());
+            $message->setChat($chat)->setSender($user)->setText($values->text);
         }
         $this->redirect('Chat:', $this->getParameter('id'));
     }
