@@ -25,7 +25,6 @@ body {
 #header {
     margin: 0 auto;
     background: #5cb85c;
-    //border-radius: 10px;
     border-bottom: 1px #00eb72;
     padding-left: 10px;
     padding-top: 10px;
@@ -688,5 +687,26 @@ span.select2:nth-child(3) > span:nth-child(1) > span:nth-child(1){
     80% {color: #0000ff;}
     90% {color: #8000ff;}
     100% {color: #ff0080;}
+}
+
+.eu-cookies {
+    padding: 5px;
+    position: fixed;
+    font-size: 22px;
+    bottom:0;
+    height: 50px;
+    width: 100%;
+    color: white;
+    background-color: #5cb85c;
+    z-index: 1000;
+}
+
+.eu-cookies button {
+    position: absolute;
+    bottom: 0px;
+    right:0;
+    width: 50vw;
+    background: green;
+    color: white;
 }
 
