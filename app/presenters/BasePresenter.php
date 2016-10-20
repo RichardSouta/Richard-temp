@@ -88,7 +88,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         }
     }
 
-    public function actionShowPicture($id, $width = 360)
+    public function actionShowPicture($id, $width)
     {
 
         foreach (Finder::findFiles($id . ".*")->in('../www/images/user') as $key => $file) {

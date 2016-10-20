@@ -1,5 +1,5 @@
 {block content}
-    {if $user->isLoggedIn()&&$user->identity->id==$presenter->getParameter("id")}
+    {*{if $user->isLoggedIn()&&$user->identity->id==$presenter->getParameter("id")}
         <nav class="navbar navbar-inverse" id="submenu">
             <a href="{link User:edit,$presenter->getParameter("id")}">Upravit profil</a>
             <div class="navbar-right">
@@ -7,11 +7,13 @@
             </div>
         </nav>
 
-    {/if}
+    {/if}*}
 
 
 
     <div id="profil">
+        <div class="col-xs-5"></div>
+        <div class="col-xs-2">
         <h1>{$uzivatel->getUsername()}</h1>
         <center><img src="{$uzivatel->getPicture()}" class="img-responsive img-rounded"></center>
         {if ($user->isLoggedIn()&&$uzivatel->getId()!=$user->id)}
@@ -21,7 +23,31 @@
         {/if}
         <p>
         <div class="col-xs-12">{$uzivatel->getDescription()}</div>
+        </div>
+        <div class="col-xs-5">
+            Předměty k výměně
+            <table id="#forTrade" border="1" cellpadding="5" cellspacing="5">
+                <tr>
+                    <th>Název</th>
+                    <th>Kategorie</th>
+                    <th>Obrázek</th>
+                </tr>
+
+
+
+{foreach $forTrade as $collectible}
+    <tr>
+        <td>{$collectible->getName()}</td>
+        <td>{$collectible->getCategory()->getName()}</td>
+        <td><img class="img-responsive"
+                 data-src="{$collectible->getImages()[0]}"
+                 title="{$collectible->getDescription()}"></td>
+    </tr>
+{/foreach}
+            </table>
+        </div>
         {control categoryForm}
+
     </div>
     <div class="col-xs-12" id="galerie_odsazeni">
         {foreach $collectibles as $collectible}
@@ -30,7 +56,7 @@
                     <div class="polozka_head">
                         <center><h3>{$collectible->getName()}</h3></center>
                         <a href="{link Collectible:,$collectible->getId()}"><img class="img-responsive"
-                                                                                 src="{$collectible->getImages()[0]}"
+                                                                                 data-src="{$collectible->getImages()[0]}"
                                                                                  title="{$collectible->getDescription()}"></a>
                     </div>
                     <div class="polozka_body">
@@ -58,6 +84,14 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $('table img').each(function () {
+            $(this).attr('src', 'images/collectible/' + $(this).attr('data-src') + '-240');
+        });
+    </script>
 {/block}
 
 {block title}{$uzivatel->getUsername()} {/block}
+
+

@@ -428,7 +428,7 @@ class User
 
     public function getPicture()
     {
-        return "images/user/$this->id";
+        return "images/user/$this->id-360";
     }
 
 

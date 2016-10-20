@@ -1,15 +1,6 @@
 {block content}
     <div class="container-fluid">
         <div class="row">
-            {snippet flashMessages}
-                <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-
-                    {$flash->message}
-
-                </div>
-            {/snippet}
             <div class="col-xs-12" id="galerie_odsazeni">
                 <div n:snippet="collectibles" data-ajax-append="true">
                     {foreach $collectibles as $collectible}
@@ -29,7 +20,7 @@
                             </div>
                         </div>
                     {/foreach}
-                    {include '../images.latte'}
+                    {include '../Images.latte'}
                 </div>
             </div>
         </div>
@@ -45,4 +36,4 @@
     </div>
 {/block}
 
-{block title} Úvodní stránka {/block}
+{var $title = 'Úvodní stránka'}

@@ -37,6 +37,13 @@ class CollectiblePresenter extends BasePresenter
             $this->redirect('Homepage:');
 
         }
+        $collectible = $this->template->collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($id);
+        $collectible->setTradeable(true);
+        $this->em->persist($collectible);
+        $this->em->flush();
+        $this->flashMessage('Váš předmět byl vystaven k výměně.');
+        $this->redirect('User:',$this->user->id);
+
 
     }
 

@@ -15,8 +15,13 @@ class UserPresenter extends BasePresenter
     public function renderDefault($id, $category)
     {
         $user = $this->template->uzivatel = $this->em->getRepository('App\Model\Entity\User')->find($id);
-        if (isset($category)) $collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findBy(['user' => $user, 'category' => $category]);
-        else $this->template->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findByUser($user);
+        if (isset($category)) {
+            $this->template->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findBy(['user' => $user, 'category' => $category]);
+            $this->template->forTrade = $this->em->getRepository('App\Model\Entity\Collectible')->findBy(['tradeable' => true, 'category' => $category]);
+        } else {
+            $this->template->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findByUser($user);
+            $this->template->forTrade = $this->em->getRepository('App\Model\Entity\Collectible')->findBy(['tradeable' => true]);
+        }
 
     }
 

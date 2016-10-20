@@ -40,6 +40,27 @@ class Collectible
     protected $description;
 
     /**
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    protected $tradeable;
+
+    /**
+     * @return mixed
+     */
+    public function getTradeable()
+    {
+        return $this->tradeable;
+    }
+
+    /**
+     * @param mixed $tradeable
+     */
+    public function setTradeable($tradeable)
+    {
+        $this->tradeable = $tradeable;
+    }
+
+    /**
      * @ORM\OneToMany(targetEntity="Image", mappedBy="collectible", cascade={"persist", "remove"})
      * @var Image[]
      */

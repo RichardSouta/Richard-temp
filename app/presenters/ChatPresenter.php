@@ -23,7 +23,8 @@ class ChatPresenter extends BasePresenter
 
         }
         $chats = $this->template->chats = $this->em->getRepository('App\Model\Entity\User')->find($this->user->id)->getChats();
-        if (empty($chats)) {
+        //var_dump($chats[0]);exit();
+        if (empty($chats[0])) {
             $this->flashMessage('Žádné konverzace k zobrazení. Zahajte nějakou přes symbol zprávy na profilu předmětu nebo uživatele.');
             $this->redirect('Homepage:');
         }
@@ -56,6 +57,8 @@ class ChatPresenter extends BasePresenter
             $chat = $this->em->find('App\Model\Entity\Chat',$this->getParameter('id'));
             $user = $this->em->find('App\Model\Entity\User',$this->getUser()->getId());
             $message->setChat($chat)->setSender($user)->setText($values->text);
+            $this->em->persist($message);
+            $this->em->flush();
         }
         $this->redirect('Chat:', $this->getParameter('id'));
     }

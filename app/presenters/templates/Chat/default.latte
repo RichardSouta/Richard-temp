@@ -6,7 +6,7 @@
                 <div id="chat">
                     <div id="chat-window-wrapper">
                         {foreach $chats as $chat}
-                            <a href="{link Chat:#active,$chat->getUsers()[0]}">
+                            <a href="{link Chat:#active,$chat->getId()}">
                                 <div class="chat-window" {if $chat->getId()==$presenter->getParameter("id")} id="active" {/if}>
                                     <center><img src="{$chat->getUsers()[0]->getPicture()}" class="img-responsive img-rounded"></center>
                                     {$chat->getUsers()[0]->getUsername()}

@@ -5,7 +5,7 @@ $configurator = new Nette\Configurator();
 
 //$configurator->setDebugMode('23.75.345.200'); // enable for your remote IP
 
-$configurator->setDebugMode(true);
+$configurator->setDebugMode('62.245.75.44');
 $configurator->enableDebugger(__DIR__.'/../log', 'riky@souta.cz');
 $configurator->setTempDirectory(__DIR__.'/../temp');
 define('WWW_DIR', realpath(__DIR__.'/../www'));

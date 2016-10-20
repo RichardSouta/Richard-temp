@@ -1,7 +1,7 @@
 {block content}
 {if $user->isLoggedIn()&&$user->identity->id==$collectible->getUser()->getId()}
     <nav class="navbar navbar-inverse" id="submenu">
-        <a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil</a>
+        {*<a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil</a>*}
         <div class="navbar-right">
             <a n:href="Collectible:trade, $presenter->getParameter('id')">Vyměnit předmět&nbsp;&nbsp;</a>
         </div>
@@ -89,6 +89,7 @@
             $(this).attr('src', 'images/collectible/' + $(this).attr('data-src') + -resolution);
         });
     </script>
+
 
     <script>
         $mainImg = $('.collectible-image-main img');
