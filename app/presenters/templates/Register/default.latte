@@ -2,7 +2,8 @@
 <div class="jumbotron">
           <div class="container">
             <h1 n:block="title">Registrace</h1>
-            <p>Těší nás váš zájem o registraci.</p>
+            <p>Těší nás váš zájem o registraci.
+            Nyní vyplňte následující formulář nebo se zaregistrujte pomocí facebooku. Stačí kliknout na modré tlačítko :-)</p>
           </div>
         </div>
 {/block}
@@ -13,7 +14,7 @@
           <div class="col-xs-12 col-sm-10 col-md-9 col-lg-8">
           <div style="text-align: center;">
           {control registerForm}
-              <a n:href="fbLogin-open!">Registrujte se přes facebook</a>
+              <a n:href="fbLogin-open!"><img class='fb-reg' src="{$basePath}/images/facebook.jpg"></a>
           </div>
           </div>
           </div>

@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0054633f-0d46-4d21-93ad-9d7bf1f9f810" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/BasePresenter.php" afterPath="$PROJECT_DIR$/app/presenters/BasePresenter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/@layout.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/@layout.latte" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/Register/default.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/Register/default.latte" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/css/style.css" afterPath="$PROJECT_DIR$/www/css/style.css" />
     </list>
     <ignored path="icollector.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,21 +26,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="BasePresenter.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/presenters/BasePresenter.php">
+      <file leaf-file-name="@layout.latte" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/presenters/templates/@layout.latte">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
-              <caret line="315" column="81" selection-start-line="315" selection-start-column="81" selection-end-line="315" selection-end-column="81" />
+            <state relative-caret-position="257">
+              <caret line="146" column="61" selection-start-line="146" selection-start-column="61" selection-end-line="146" selection-end-column="61" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RouterFactory.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/router/RouterFactory.php">
+      <file leaf-file-name="BasePresenter.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/presenters/BasePresenter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="103" column="42" selection-start-line="103" selection-start-column="42" selection-end-line="103" selection-end-column="42" />
+            <state relative-caret-position="323">
+              <caret line="335" column="45" selection-start-line="335" selection-start-column="45" selection-end-line="335" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default.latte" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/presenters/templates/Register/default.latte">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="5" column="122" selection-start-line="5" selection-start-column="122" selection-end-line="5" selection-end-column="122" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="455">
+              <caret line="405" column="8" selection-start-line="405" selection-start-column="8" selection-end-line="405" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -51,16 +74,6 @@
               <folding>
                 <element signature="e#34#72#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Presenter.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/nette/application/src/Application/UI/Presenter.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="292" column="25" selection-start-line="292" selection-start-column="22" selection-end-line="292" selection-end-column="25" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -100,16 +113,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="280">
               <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimpleAuthenticator.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/nette/security/src/Security/SimpleAuthenticator.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="820">
-              <caret line="41" column="20" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -174,8 +177,6 @@
         <option value="$PROJECT_DIR$/app/config/config.local.neon" />
         <option value="$PROJECT_DIR$/app/presenters/templates/Terms/default.latte" />
         <option value="$PROJECT_DIR$/app/presenters/templates/Notification/default.latte" />
-        <option value="$PROJECT_DIR$/www/css/style.css" />
-        <option value="$PROJECT_DIR$/app/presenters/templates/@layout.latte" />
         <option value="$PROJECT_DIR$/app/model/Entity/User.php" />
         <option value="$PROJECT_DIR$/app/presenters/galerie.latte" />
         <option value="$PROJECT_DIR$/app/presenters/templates/Homepage/default.latte" />
@@ -184,13 +185,15 @@
         <option value="$PROJECT_DIR$/app/presenters/templates/User/default.latte" />
         <option value="$PROJECT_DIR$/app/model/Repository/ChatRepository.php" />
         <option value="$PROJECT_DIR$/app/presenters/templates/Chat/default.latte" />
-        <option value="$PROJECT_DIR$/app/presenters/templates/Register/default.latte" />
         <option value="$PROJECT_DIR$/app/router/RouterFactory.php" />
         <option value="$PROJECT_DIR$/app/presenters/UserPresenter.php" />
         <option value="$PROJECT_DIR$/vendor/nette/security/src/Security/User.php" />
         <option value="$PROJECT_DIR$/app/model/UserManager.php" />
         <option value="$PROJECT_DIR$/app/config/config.neon" />
         <option value="$PROJECT_DIR$/app/presenters/BasePresenter.php" />
+        <option value="$PROJECT_DIR$/app/presenters/templates/@layout.latte" />
+        <option value="$PROJECT_DIR$/www/css/style.css" />
+        <option value="$PROJECT_DIR$/app/presenters/templates/Register/default.latte" />
       </list>
     </option>
   </component>
@@ -606,12 +609,12 @@
       <workItem from="1476919598098" duration="18902000" />
       <workItem from="1476965394549" duration="3209000" />
       <workItem from="1476979943619" duration="4775000" />
-      <workItem from="1477032472734" duration="9023000" />
+      <workItem from="1477032472734" duration="10651000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172896000" />
+    <option name="totallyTimeSpent" value="174524000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2391" y="-9" width="2418" height="1468" extended-state="6" />
@@ -832,13 +835,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="974">
-          <caret line="705" column="16" selection-start-line="705" selection-start-column="16" selection-end-line="705" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/presenters/templates/galerie.latte">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -953,22 +949,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/presenters/templates/@layout.latte">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="178" column="7" selection-start-line="178" selection-start-column="7" selection-end-line="178" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/presenters/templates/Register/default.latte">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="68" selection-start-line="15" selection-start-column="68" selection-end-line="15" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_1.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="610">
@@ -1061,8 +1041,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/presenters/BasePresenter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="315" column="81" selection-start-line="315" selection-start-column="81" selection-end-line="315" selection-end-column="81" />
+        <state relative-caret-position="323">
+          <caret line="335" column="45" selection-start-line="335" selection-start-column="45" selection-end-line="335" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="405" column="8" selection-start-line="405" selection-start-column="8" selection-end-line="405" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/presenters/templates/@layout.latte">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="146" column="61" selection-start-line="146" selection-start-column="61" selection-end-line="146" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/presenters/templates/Register/default.latte">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="122" selection-start-line="5" selection-start-column="122" selection-end-line="5" selection-end-column="122" />
           <folding />
         </state>
       </provider>

@@ -336,7 +336,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                 $this->flashMessage('Z neznámého důvodu se proces neprovedl, zkuste to prosím znovu nebo použijte jiný způsob.');
             } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
                 \Tracy\Debugger::log($e, 'facebook');
-                if (Strings::contains($e, 'UNIQ_8D93D649E7927C74')) {
+                if (Strings::contains($e, 'UNIQ_8D93D649E7927C74')||Strings::contains($e,'email')) {
                     $this->flashMessage('Email je již použit, použijte prosím klasické přihlašování.');
                 }
                 else {

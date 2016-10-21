@@ -399,6 +399,12 @@ font-size: 25px;
  right:5%;
  top:40%;
 }
+
+.fb-sign{
+    position:absolute;
+    right:20%;
+    top:10px;
+}
 #club{
   position:relative;
   display: block;
@@ -710,3 +716,8 @@ span.select2:nth-child(3) > span:nth-child(1) > span:nth-child(1){
     color: white;
 }
 
+.fb-reg {
+    position: absolute;
+    top: 0px;
+    left: -50px;
+}
