@@ -8,15 +8,20 @@
                         {foreach $chats as $chat}
                             <a href="{link Chat:#active,$chat->getId()}">
                                 <div class="chat-window" {if $chat->getId()==$presenter->getParameter("id")} id="active" {/if}>
-                                    <center><img src="{$chat->getUsers()[0]->getPicture()}" class="img-responsive img-rounded"></center>
-                                    {$chat->getUsers()[0]->getUsername()}
+                                    {foreach $chat->getUsers() as $chatter }
+                                        {if $chatter->getId()!=$user->id}
+                                            <center><img src="{$chatter->getPicture()}"
+                                                         class="img-responsive img-rounded"></center>
+                                            {$chatter->getUsername()}{/if}
+                                    {/foreach}
                                 </div>
                             </a>
                         {/foreach}
                     </div>
                     <div class="chat-detail">
                         {foreach $messages as $message}
-                        <div class={if $message->getSender()->getId()==$user->identity->id}"bg-primary message-outcoming"{else}"bg-warning message-incoming"{/if}>
+                        <div class={if $message->getSender()->getId()==$user->identity->id}"bg-primary message-outcoming"{else}"bg-warning message-incoming"{/if}
+                        >
                         {!html_entity_decode($message->getText())}<span
                                 style="float:right">{$message->getCreatedDateTime()|date:'d.m.Y H:i'}</span>
                     </div>

@@ -242,9 +242,17 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
     public function messageFormSubmitted($form, $values)
     {
-        $chat = $this->em->getRepository('App\Model\Entity\Chat')->findByUsers($values->reciever_id, $this->user->id);
+        $chats = $this->em->getRepository('App\Model\Entity\Chat')->findBy(['users.id' => $values->reciever_id]);
+        foreach ($chats as $chat_i) {
+            foreach ($chat_i->getUsers() as $user) {
+                if ($user->getId() === $this->user->id) {
+                    $chat = $chat_i;
+                }
+            }
+        }
         if (empty($chat)) {
             $chat = new Model\Entity\Chat();
+            $newChat = true;
         }
 
         if (!empty($values->text)) {
@@ -253,8 +261,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $receiver = $this->em->find('App\Model\Entity\User', $values->reciever_id);
             $message->setText($values->text)->setSender($sender);
             $chat->addMessage($message);
-            $chat->addUser($sender);
-            $chat->addUser($receiver);
+            if (isset($newChat)) {
+                $chat->addUser($sender);
+                $chat->addUser($receiver);
+            }
             $this->em->persist($chat);
             $this->em->flush();
         }
