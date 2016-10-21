@@ -37,7 +37,7 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
 	 */
 	public function authenticate(array $credentials)
 	{
-		list($username, $password) = $credentials;
+		list($username, $password, $type) = $credentials;
 
         /** @var User $user */
 		$user = $this->em->getRepository('App\Model\Entity\User')->findOneByUsername($username);
@@ -46,8 +46,11 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
 		if (!$user) {
 			throw new Nette\Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
 
-		} elseif (!Passwords::verify($password, $user->getPassword())) {
+		} elseif ($type==='app' && !Passwords::verify($password, $user->getPassword())) {
 			throw new Nette\Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
+
+        } elseif ($type==='social' && $password != $user->getPassword()) {
+            throw new Nette\Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
 
 		} elseif (Passwords::needsRehash($user->getPassword())) {
 			$user->setPassword(Passwords::hash($password));

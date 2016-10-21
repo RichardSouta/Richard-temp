@@ -101,6 +101,7 @@ class RouterFactory
 
     public function urlToId2($url)
     {
+        $url = str_replace("-", " ",$url);
         $id = $this->em->getRepository('App\Model\Entity\User')->findOneByUsername($url)->getId();
         return $id;
     }

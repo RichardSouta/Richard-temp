@@ -34,7 +34,8 @@
 		"dg/adminer-custom": "~1.6",
 		"kdyby/doctrine": "^3.1",
 		"kdyby/events": "^3.0",
-		"tomaj/nette-bootstrap-form": "^1.2"
+		"tomaj/nette-bootstrap-form": "^1.2",
+		"kdyby/facebook": "^2.0"
 	},
 	"require-dev": {
 		"nette/tester": "~1.3"

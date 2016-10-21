@@ -17,10 +17,10 @@ class UserPresenter extends BasePresenter
         $user = $this->template->uzivatel = $this->em->getRepository('App\Model\Entity\User')->find($id);
         if (isset($category)) {
             $this->template->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findBy(['user' => $user, 'category' => $category]);
-            $this->template->forTrade = $this->em->getRepository('App\Model\Entity\Collectible')->findBy(['tradeable' => true, 'category' => $category]);
+            $this->template->forTrade = $this->em->getRepository('App\Model\Entity\Collectible')->findBy(['user' => $user, 'tradeable' => true, 'category' => $category]);
         } else {
             $this->template->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findByUser($user);
-            $this->template->forTrade = $this->em->getRepository('App\Model\Entity\Collectible')->findBy(['tradeable' => true]);
+            $this->template->forTrade = $this->em->getRepository('App\Model\Entity\Collectible')->findBy(['user' => $user, 'tradeable' => true]);
         }
 
     }
@@ -132,12 +132,7 @@ class UserPresenter extends BasePresenter
     {
         $form = new Form;
         $form->addProtection();
-        $categories = $this->database->query('SELECT DISTINCT categories.category_id,categories.name
-FROM `collectibles`
-JOIN categories ON categories.category_id = collectibles.category_id
-JOIN users ON users.user_id = collectibles.user_id
-WHERE collectibles.user_id =?
-AND categories.name IS NOT NULL ', $this->getParameter('id'))->fetchPairs('category_id', 'name');
+        $categories = $this->em->getRepository('App\Model\Entity\Category')->findPairs('name', 'id');
         if ($this->getParameter('category') != NULL) $form->addSelect('category', '', $categories)->setAttribute('class', 'form-control')->setAttribute('onchange', "document.getElementById('frm-categoryForm').submit();")->setPrompt('Všechny kategorie')->setValue($this->getParameter('category'));
         else $form->addSelect('category', '', $categories)->setAttribute('class', 'form-control')->setAttribute('onchange', "document.getElementById('frm-categoryForm').submit();")->setPrompt('Všechny kategorie');
         $form->onSuccess[] = $this->categoryFormSubmitted;

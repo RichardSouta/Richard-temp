@@ -29,6 +29,7 @@ nette:
 
 extensions:
     console: Kdyby\Console\DI\ConsoleExtension
+    facebook: Kdyby\Facebook\DI\FacebookExtension
     events: Kdyby\Events\DI\EventsExtension
     annotations: Kdyby\Annotations\DI\AnnotationsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
@@ -40,3 +41,7 @@ mail:
     username: postmaster@collectorsnest.eu
     password: 349.fNFeJ8
     secure: ssl
+
+facebook:
+    permissions: [email, public_profile] # theese are the default read permissions, you might need to
+    graphVersion: v2.6

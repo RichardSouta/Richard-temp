@@ -30,30 +30,33 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
     protected $collectibles;
 
+    protected $facebook;
+
     /** @var Nette\Mail\IMailer @inject */
     public $mailer;
 
     public function handleLoad($page)
     {
         if ($this->isAjax()) {
-            $this->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findBy([],['dateTimeAdded' => 'DESC'],15,$page*15);
+            $this->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findBy([], ['dateTimeAdded' => 'DESC'], 15, $page * 15);
             $this->payload->stopLoading = false;
             if (count($this->collectibles) != 15) {
                 $this->payload->stopLoading = true;
             }
 
-            if (count($this->collectibles)!=0){
+            if (count($this->collectibles) != 0) {
                 $this->redrawControl('collectibles');
-            }
-            else {
+            } else {
                 $this->sendPayload();
             }
 
         }
     }
-    public function __construct(Nette\Database\Context $database)
+
+    public function __construct(Nette\Database\Context $database, \Kdyby\Facebook\Facebook $facebook)
     {
         $this->database = $database;
+        $this->facebook = $facebook;
     }
 
     public function getBasePath()
@@ -163,7 +166,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         }
 
         try {
-            $this->getUser()->login($values->username, $values->password);
+            $this->getUser()->login($values->username, $values->password,'app');
         } catch (Nette\Security\AuthenticationException $e) {
             if ($this->isAjax()) {
                 /** va */
@@ -269,6 +272,81 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $this->em->flush();
         }
         $this->redirect('Chat:', $chat->getId());
+    }
+
+    protected function createComponentFbLogin()
+    {
+        $dialog = $this->facebook->createDialog('login');
+        /* @var \Kdyby\Facebook\Dialog\LoginDialog $dialog */
+
+        $dialog->onResponse[] = function (\Kdyby\Facebook\Dialog\LoginDialog $dialog) {
+            $fb = $dialog->getFacebook();
+
+            if (!$fb->getUser()) {
+                $this->flashMessage('Facebook nerozeznal Váš profil.');
+
+                return;
+            }
+
+            /*
+             * If we get here, it means that the user was recognized
+             * and we can call the Facebook API
+             */
+
+            try {
+                $me = $fb->api('/me/?fields=name,email,id,link,picture.type(large)');
+                $id = $me->offsetGet('id');
+                if (array_key_exists('email', $me)) {
+                    if ((!$existing = $this->em->getRepository('App\Model\Entity\User')->findOneByFacebook($id))) {
+                        $token = Nette\Utils\Strings::random();
+                        $mee = $me->offsetGet('picture');
+                        $meee = $mee->offsetGet('data');
+                        $picture = $meee->offsetGet('url');
+                        $id = $me->offsetGet('id');
+                        $name = $me->offsetGet('name');
+                        $email = $me->offsetGet('email');
+                        $targetPath = $this->presenter->basePath;
+                        $cil2 = $targetPath . 'images/user/' . $id . '.jpg';
+                        $name2 = explode(' ', $name);
+                        $user = new Model\Entity\User();
+                        $user->setPassword(password_hash($token, PASSWORD_DEFAULT))->setName(reset($name2))->setEmail($email)->setSurname(end($name2))->setUsername($name)->setConfirmedEmail(1)->setFacebook($id);
+
+                        $this->em->persist($user);
+                        $this->em->flush();
+                        copy($picture, WWW_DIR . '/images/user/' . $id . '.jpg');
+                        $this->getUser()->login($name, $token,'app');
+                        $this->redirect('Homepage:', array('welcome' => 1));
+                    } //dump($me);
+                    else {
+                        $this->getUser()->login($existing->getUsername(), $existing->getPassword(),'social');
+                    }
+                } else {
+                    $this->flashMessage('Z Facebooku jsme nedostali všechny potřebné informace, registrujte se pomocí registračního formuláře.');
+                }
+
+
+            } catch (\Kdyby\Facebook\FacebookApiException $e) {
+                /*
+                 * You might wanna know what happened, so let's log the exception.
+                 *
+                 * Rendering entire bluescreen is kind of slow task,
+                 * so might wanna log only $e->getMessage(), it's up to you
+                 */
+                \Tracy\Debugger::log($e, 'facebook');
+                $this->flashMessage('Z neznámého důvodu se proces neprovedl, zkuste to prosím znovu nebo použijte jiný způsob.');
+            } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+                \Tracy\Debugger::log($e, 'facebook');
+                if (Strings::contains($e, 'UNIQ_8D93D649E7927C74')) {
+                    $this->flashMessage('Email je již použit, použijte prosím klasické přihlašování.');
+                }
+                else {
+                    $this->flashMessage('Přihlašovací jméno je již použito, použijte prosím klasické přihlašování.');
+                }
+            }
+            $this->redirect('this');
+        };
+
+        return $dialog;
     }
 
     /*
