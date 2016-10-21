@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0054633f-0d46-4d21-93ad-9d7bf1f9f810" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.neon" afterPath="$PROJECT_DIR$/app/config/config.neon" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/model/UserManager.php" afterPath="$PROJECT_DIR$/app/model/UserManager.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/BasePresenter.php" afterPath="$PROJECT_DIR$/app/presenters/BasePresenter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/UserPresenter.php" afterPath="$PROJECT_DIR$/app/presenters/UserPresenter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/presenters/templates/Register/default.latte" afterPath="$PROJECT_DIR$/app/presenters/templates/Register/default.latte" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/router/RouterFactory.php" afterPath="$PROJECT_DIR$/app/router/RouterFactory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
     </list>
     <ignored path="icollector.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="BasePresenter.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BasePresenter.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/presenters/BasePresenter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="320" column="47" selection-start-line="320" selection-start-column="42" selection-end-line="320" selection-end-column="47" />
+            <state relative-caret-position="543">
+              <caret line="315" column="81" selection-start-line="315" selection-start-column="81" selection-end-line="315" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -122,7 +115,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.neon" pinned="false" current-in-tab="true">
+      <file leaf-file-name="config.neon" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/config/config.neon">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="502">
@@ -196,8 +189,8 @@
         <option value="$PROJECT_DIR$/app/presenters/UserPresenter.php" />
         <option value="$PROJECT_DIR$/vendor/nette/security/src/Security/User.php" />
         <option value="$PROJECT_DIR$/app/model/UserManager.php" />
-        <option value="$PROJECT_DIR$/app/presenters/BasePresenter.php" />
         <option value="$PROJECT_DIR$/app/config/config.neon" />
+        <option value="$PROJECT_DIR$/app/presenters/BasePresenter.php" />
       </list>
     </option>
   </component>
@@ -613,12 +606,12 @@
       <workItem from="1476919598098" duration="18902000" />
       <workItem from="1476965394549" duration="3209000" />
       <workItem from="1476979943619" duration="4775000" />
-      <workItem from="1477032472734" duration="8890000" />
+      <workItem from="1477032472734" duration="9023000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172763000" />
+    <option name="totallyTimeSpent" value="172896000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2391" y="-9" width="2418" height="1468" extended-state="6" />
@@ -1058,18 +1051,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/presenters/BasePresenter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="320" column="47" selection-start-line="320" selection-start-column="42" selection-end-line="320" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config.neon">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="502">
           <caret line="37" column="14" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/presenters/BasePresenter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="315" column="81" selection-start-line="315" selection-start-column="81" selection-end-line="315" selection-end-column="81" />
           <folding />
         </state>
       </provider>

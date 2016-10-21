@@ -313,7 +313,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
                         $this->em->persist($user);
                         $this->em->flush();
-                        copy($picture, WWW_DIR . '/images/user/' . $id . '.jpg');
+                        copy($picture, WWW_DIR . '/images/user/' . $user->getId() . '.jpg');
                         $this->getUser()->login($name, $token,'app');
                         $this->redirect('Homepage:', array('welcome' => 1));
                     } //dump($me);
