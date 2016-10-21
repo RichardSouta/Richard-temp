@@ -43,5 +43,7 @@ mail:
     secure: ssl
 
 facebook:
+    appId: "117760905316435"
+    appSecret: "92b5b06292db088ef2cf62ccc7902b3f"
     permissions: [email, public_profile] # theese are the default read permissions, you might need to
     graphVersion: v2.6
