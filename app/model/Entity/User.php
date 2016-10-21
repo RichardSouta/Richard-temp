@@ -43,7 +43,7 @@ class User
     protected $surname;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      */
     protected $username;
 
@@ -53,7 +53,7 @@ class User
     protected $password;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      */
     protected $email;
 

@@ -242,7 +242,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
     public function messageFormSubmitted($form, $values)
     {
-        $chat = $this->em->getRepository('App\Model\Entity\Chat')->findBy(['users.id' => $values->reciever_id]);
+        $chat = $this->em->getRepository('App\Model\Entity\Chat')->findByUsers($values->reciever_id, $this->user->id);
         if (empty($chat)) {
             $chat = new Model\Entity\Chat();
         }

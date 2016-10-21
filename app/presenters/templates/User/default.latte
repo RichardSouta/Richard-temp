@@ -37,11 +37,11 @@
 
 {foreach $forTrade as $collectible}
     <tr>
-        <td>{$collectible->getName()}</td>
+        <td><a n:href="Collectible:, $collectible->getId()">{$collectible->getName()}</a></td>
         <td>{$collectible->getCategory()->getName()}</td>
-        <td><img class="img-responsive"
+        <td><a n:href="Collectible:, $collectible->getId()"><img class="img-responsive"
                  data-src="{$collectible->getImages()[0]}"
-                 title="{$collectible->getDescription()}"></td>
+                 title="{$collectible->getDescription()}"></a></td>
     </tr>
 {/foreach}
             </table>
@@ -49,24 +49,7 @@
         {control categoryForm}
 
     </div>
-    <div class="col-xs-12" id="galerie_odsazeni">
-        {foreach $collectibles as $collectible}
-            <div class="col-xs-6  col-sm-4 col-md-3 pet" id="galerie">
-                <div class="polozka">
-                    <div class="polozka_head">
-                        <center><h3>{$collectible->getName()}</h3></center>
-                        <a href="{link Collectible:,$collectible->getId()}"><img class="img-responsive"
-                                                                                 data-src="{$collectible->getImages()[0]}"
-                                                                                 title="{$collectible->getDescription()}"></a>
-                    </div>
-                    <div class="polozka_body">
-                        {if $collectible->getCategory() != null}
-                            <center>Kategorie: {$collectible->getCategory()}</center>{/if}
-                    </div>
-                </div>
-            </div>
-        {/foreach}
-    </div>
+    {include '../galerie.latte'}
 
     <!-- Modal -->
     <div class="modal fade" id="zpravaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

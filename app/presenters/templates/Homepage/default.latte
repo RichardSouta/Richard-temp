@@ -1,30 +1,5 @@
 {block content}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12" id="galerie_odsazeni">
-                <div n:snippet="collectibles" data-ajax-append="true">
-                    {foreach $collectibles as $collectible}
-                        <div class="col-xs-6  col-sm-4 col-md-3 pet" id="galerie">
-                            <div class="polozka">
-                                <div class="polozka_head">
-                                    <center><h3>{$collectible->getName()}</h3></center>
-                                    <a href="{link Collectible:,$collectible->getId()}"><img
-                                                class="img-responsive" data-src="{$collectible->getImages()[0]}"
-                                                title="{$collectible->getDescription()}" ></a>
-                                </div>
-                                <div class="polozka_body">
-                                    {if $collectible->getCategory()}
-                                        <center>Kategorie: {$collectible->getCategory()}</center>
-                                    {/if}
-                                </div>
-                            </div>
-                        </div>
-                    {/foreach}
-                    {include '../Images.latte'}
-                </div>
-            </div>
-        </div>
-    </div>
+{include '../galerie.latte'}
 {/block}
 {block intro}
 
