@@ -1,8 +1,9 @@
+{var $title = $category->getName() . '- Kategorie'}
 {block intro}
 <div class="jumbotron">
           <div class="container">
-            <h1>collectors' nest</h1>
-            <p>Aplikace pro všechny sběratele</p>
+            <h1>{$category->getName()}</h1>
+            <p>{$category->getDescription()}</p>
           </div>
         </div>
 {/block}
@@ -22,5 +23,3 @@
         </div>
     </div>
 {/block}
-
-{var $title = 'Kategorie' . $presenter->getParameter('category')}

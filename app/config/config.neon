@@ -26,6 +26,7 @@ services:
 nette:
 	session:
 		autoStart: true
+		expiration: 14 days
 
 extensions:
     console: Kdyby\Console\DI\ConsoleExtension

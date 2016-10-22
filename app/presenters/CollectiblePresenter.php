@@ -136,16 +136,16 @@ class CollectiblePresenter extends BasePresenter
         $collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($this->getParameter('id'));
         $form->addText('name', 'název')->setValue($collectible->getName())->setRequired()->setAttribute('class', 'form-control');
 
-        $form->addTextArea('description', 'popis')->setValue($collectible->getDescription())->setAttribute('class', 'form-control')->setRequired();
+        $form->addTextArea('description', 'popis')->setValue($collectible->getDescription())->setAttribute('class', 'form-control')->setRequired('Toto pole je povinné');
 
-        $form->addTextArea('origin', 'původ')->setValue($collectible->getOrigin())->setAttribute('class', 'form-control')->setRequired();
+        $form->addTextArea('origin', 'původ')->setValue($collectible->getOrigin())->setAttribute('class', 'form-control')->setRequired('Toto pole je povinné');
 
         $categories = $this->em->getRepository('App\Model\Entity\Category')->findPairs('name', 'id');
         $form->addSelect('category', 'kategorie', $categories)->setValue($collectible->getCategory()->getId())->setAttribute('class', 'form-control');
 
         $form->addUpload('img', 'Upload your image')->setAttribute('class', 'form-control')->setRequired(false)->addCondition(Form::FILLED)->addRule(Form::IMAGE, 'Cover must be JPEG, PNG or GIF.');
 
-        $form->addSubmit('send', 'Upravit předmět')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button')->setRequired();
+        $form->addSubmit('send', 'Upravit předmět')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button')->setRequired('Toto pole je povinné');
 
         $form->onSuccess[] = $this->collectibleEditFormSubmitted;
 

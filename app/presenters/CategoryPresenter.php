@@ -12,8 +12,14 @@ class CategoryPresenter extends BasePresenter
 
     public function renderDefault($category = NULL)
     {
-        if (!$category) $this->redirect('Homepage:');
-        else  $this->collectibles = $this->template->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findByCategory($category);
+        if (!$category)
+        {
+            $this->redirect('Homepage:');
+        }
+        else  {
+            $this->category = $this->template->category = $this->em->getRepository('App\Model\Entity\Category')->find($category);
+            $this->template->collectibles = $this->category->getCollectibles();
+        }
 
     }
 

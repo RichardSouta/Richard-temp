@@ -16,21 +16,21 @@ class RegisterPresenter extends BasePresenter
         $form = new Form;
         $form->addProtection();
         $form->addText('firstName', 'Vaše křestní jméno')->setAttribute('class', 'form-control')
-            ->setRequired();
+            ->setRequired('Toto pole je povinné');
 
         $form->addText('surname', 'Příjmení')->setAttribute('class', 'form-control')
-            ->setRequired();
+            ->setRequired('Toto pole je povinné');
 
         $form->addText('username', 'username')->setAttribute('class', 'form-control')
-            ->setRequired();
+            ->setRequired('Toto pole je povinné');
 
         $form->addText('email', 'Váš e-mail')->setAttribute('class', 'form-control')
-            ->setRequired('Choose an e-mail')
-            ->addRule(Form::EMAIL, 'Please fill in your valid adress')
+            ->setRequired('Vyberte si e-mail')
+            ->addRule(Form::EMAIL, 'Prosím zadejte vaši skutečnou adresu')
             ->emptyValue = '@';
 
         $form->addPassword('password', 'heslo')->setAttribute('class', 'form-control')->setAttribute('placeholder', 'Alespoň 6 znaků a 1 číslici.')
-            ->setRequired('Choose a password')
+            ->setRequired('Vyberte si heslo')
             ->addRule(Form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaky', 6)
             ->addRule(Form::PATTERN, 'Musí obsahovat číslici', '.*[0-9].*');
 

@@ -23,7 +23,18 @@ class RouterFactory
         $router[] = new Route('[<presenter>/]images/collectible/<id>', 'Collectible:show');
         $router[] = new Route('[<presenter>/]images/user/<id>', 'User:showPicture');
         $router[] = new Route('category/new', 'Category:new');
-        $router[] = new Route('category/<category>', 'Category:default');
+        $router[] = new Route('category/<category>', [
+            'presenter' => 'Category',
+            'action' => 'default',
+            'category' => [
+                Route::FILTER_IN => function ($url) {
+                    return self::urlToIdCategory($url);
+                },
+                Route::FILTER_OUT => function ($id) {
+                    return self::idToUrlCategory($id);
+                }
+            ]
+        ]);
         $router[] = new Route('collectible/edit/<id>', 'Collectible:edit');
         $router[] = new Route('collectible/trade/<id>', 'Collectible:trade');
         $router[] = new Route('collectible/final/<id>', 'Collectible:final');
@@ -106,4 +117,16 @@ class RouterFactory
         return $id;
     }
 
+    public function urlToIdCategory($url)
+    {
+        $url = str_replace("-", " ",$url);
+        $id = $this->em->getRepository('App\Model\Entity\Category')->findOneByName($url)->getId();
+        return $id;
+    }
+
+    public function idToUrlCategory($id){
+        $url = str_replace(" ", "-", $this->em->getRepository('App\Model\Entity\Category')->find($id)->getName());
+        setlocale(LC_CTYPE, 'en_US');
+        return urlencode($url);
+    }
 }

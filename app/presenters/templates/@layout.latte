@@ -18,7 +18,7 @@
     <meta name="twitter:description" content="collectors' nest je aplikace pro všechny sběratele."/>
     <link rel="shortcut icon" href="{$basePath}/favicon.ico">
     <link rel="icon" href="{$basePath}/favicon.ico">
-    <title>{ifset title}{include title|striptags} | {/ifset} collectors' nest</title>
+    <title>{ifset $title}{$title} | {/ifset} collectors' nest</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -31,7 +31,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{$basePath}/js/nette.ajax.js"></script>
     <script src="{$basePath}/js/main.js"></script>
-    <script src="{$basePath}/js/netteForms.js"></script>
+    <script src="{$basePath}/js/live-form-validation.js"></script>
 
 
     <!-- Latest compiled and minified JavaScript -->
@@ -141,13 +141,17 @@
                 <h4 class="modal-title" id="myModalLabel">Přihlášení</h4>
             </div>
             <div class="modal-body">
+                <div class="col-xs-9">
                 <div n:snippet="sign">
                     {control signInForm}
                 </div>
+                </div>
+                <div class="col-xs-3">
                 <a n:href="fbLogin-open!"><img class='fb-sign' src="{$basePath}/images/facebook.jpg"></a>
                 <a href="{link LostPassword:}" id="forgot_pass">
                     <button class="btn btn-info btn-xs">Zapomenuté heslo?</button>
                 </a>
+                    </div>
             </div>
         </div>
     </div>

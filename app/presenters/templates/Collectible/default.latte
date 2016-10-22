@@ -1,3 +1,4 @@
+{var $title = $collectible->getName()}
 {block content}
 {if $user->isLoggedIn()&&$user->identity->id==$collectible->getUser()->getId()}
     <nav class="navbar navbar-inverse" id="submenu">
@@ -10,7 +11,8 @@
 
 <div class="container-fluid">
 
-    <div class="col-md-2">  <div id="profil">
+    <div class="col-md-2">
+        <div id="profil">
             <h1>{$collectible->getUser()->getUsername()}</h1>
             <center><a n:href="User:,$collectible->getUser()->getId()"><img
                             src="{$collectible->getUser()->getPicture()}"
@@ -21,7 +23,8 @@
                 </button>{/if}
             <p>
             <div class="col-xs-12">{$collectible->getUser()->getDescription()}</div>
-        </div></div>
+        </div>
+    </div>
     <div class="col-md-6" id="collectible">
         <div class="collectible-images">
             <div class="collectible-image-main"><img data-src="{$collectible->getImages()[0]}">
@@ -93,30 +96,28 @@
 
     <script>
         $mainImg = $('.collectible-image-main img');
-        $('.collectible-image-2 img').on('click',function () {
+        $('.collectible-image-2 img').on('click', function () {
             $newMainSrc = $(this).attr('src');
-            $(this).attr('src',$mainImg.attr('src')) ;
-            $mainImg.attr('src',$newMainSrc);
+            $(this).attr('src', $mainImg.attr('src'));
+            $mainImg.attr('src', $newMainSrc);
         });
 
-        $('.collectible-image-3 img').on('click',function () {
+        $('.collectible-image-3 img').on('click', function () {
             $newMainSrc = $(this).attr('src');
-            $(this).attr('src',$mainImg.attr('src')) ;
-            $mainImg.attr('src',$newMainSrc);
+            $(this).attr('src', $mainImg.attr('src'));
+            $mainImg.attr('src', $newMainSrc);
         });
 
-        $('.collectible-image-4 img').on('click',function () {
+        $('.collectible-image-4 img').on('click', function () {
             $newMainSrc = $(this).attr('src');
-            $(this).attr('src',$mainImg.attr('src')) ;
-            $mainImg.attr('src',$newMainSrc);
+            $(this).attr('src', $mainImg.attr('src'));
+            $mainImg.attr('src', $newMainSrc);
         });
 
-        $('.collectible-image-5 img').on('click',function () {
+        $('.collectible-image-5 img').on('click', function () {
             $newMainSrc = $(this).attr('src');
-            $(this).attr('src',$mainImg.attr('src')) ;
-            $mainImg.attr('src',$newMainSrc);
+            $(this).attr('src', $mainImg.attr('src'));
+            $mainImg.attr('src', $newMainSrc);
         });
-        </script>
+    </script>
     {/block}
-
-    {var $title = $collectible->getName()}

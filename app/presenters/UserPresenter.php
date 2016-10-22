@@ -43,7 +43,7 @@ class UserPresenter extends BasePresenter
             ->addCondition(Form::FILLED)
             ->addRule(Form::IMAGE, 'Avatar musí být JPEG, PNG nebo GIF.');
         $form->addText('username', 'Your username')->setValue($this->getUser()->getIdentity()->username)->setAttribute('class', 'form-control')
-            ->setRequired();
+            ->setRequired('Toto pole je povinné');
 
         $form->addText('email', 'Your e-mail')->setValue($this->getUser()->getIdentity()->email)->setAttribute('class', 'form-control')
             ->setRequired()
