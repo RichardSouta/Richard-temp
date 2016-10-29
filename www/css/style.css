@@ -606,7 +606,7 @@ span.select2:nth-child(3) > span:nth-child(1) > span:nth-child(1){
     max-height: 100%;
 }
 
-#frm-registerForm label{
+#frm-registerForm label, #frm-profileForm label, #frm-collectibleForm label, #frm-categoryForm label{
     color:#5cb85c;
     font-size: large;
     bottom: 10px;

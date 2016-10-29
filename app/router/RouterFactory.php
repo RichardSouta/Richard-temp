@@ -18,6 +18,7 @@ class RouterFactory
     public function createRouter()
     {
         $router = new RouteList;
+        $router[] = new Route('club/new', 'Club:new');
         $router[] = new Route('club/<id>', 'Club:display');
         $router[] = new Route('chat/<id>','Chat:default');
         $router[] = new Route('[<presenter>/]images/collectible/<id>', 'Collectible:show');

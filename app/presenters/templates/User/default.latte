@@ -1,13 +1,13 @@
 {block content}
-    {*{if $user->isLoggedIn()&&$user->identity->id==$presenter->getParameter("id")}
+    {if $user->isLoggedIn()&&$user->identity->id==$presenter->getParameter("id")}
         <nav class="navbar navbar-inverse" id="submenu">
             <a href="{link User:edit,$presenter->getParameter("id")}">Upravit profil</a>
             <div class="navbar-right">
-                <a n:href="Collectible:new"><span style="color:white;">Přidat nový předmět</span></a>&nbsp;&nbsp;
+                <a n:href="Category:new"><span style="color:white;">Přidat novou kategorii</span></a>&nbsp;&nbsp;
             </div>
         </nav>
 
-    {/if}*}
+    {/if}
 
 
 

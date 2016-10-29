@@ -7,6 +7,8 @@ use Nette;
 use App\Model;
 use Nette\Utils\Strings;
 use Nette\Application\UI\Multiplier;
+use Nette\Utils\Finder;
+use Nette\Utils\Image;
 
 class UserPresenter extends BasePresenter
 {
@@ -36,36 +38,38 @@ class UserPresenter extends BasePresenter
 
     protected function createComponentProfileForm()
     {
+        /** @var Model\Entity\User $user */
+        $user = $this->em->find('App\Model\Entity\User',$this->user->getId());
         $form = new Form;
         $form->addProtection();
-        $form->addUpload('avatar', 'Avatar:')->setAttribute('class', 'form-control')
+        $form->addUpload('avatar', 'Obrázek')->setAttribute('class', 'form-control')
             ->setRequired(false)
             ->addCondition(Form::FILLED)
-            ->addRule(Form::IMAGE, 'Avatar musí být JPEG, PNG nebo GIF.');
-        $form->addText('username', 'Your username')->setValue($this->getUser()->getIdentity()->username)->setAttribute('class', 'form-control')
+            ->addRule(Form::IMAGE, 'Musí být obrázek!');
+        $form->addText('username', 'Uživatelské jméno')->setValue($user->getUsername())->setAttribute('class', 'form-control')
             ->setRequired('Toto pole je povinné');
 
-        $form->addText('email', 'Your e-mail')->setValue($this->getUser()->getIdentity()->email)->setAttribute('class', 'form-control')
+        $form->addText('email', 'E-mail')->setValue($user->getEmail())->setAttribute('class', 'form-control')
             ->setRequired()
             ->addRule(Form::EMAIL, 'Please fill in your valid adress')
             ->emptyValue = '@';
 
-        $form->addText('description', 'Change description')->setValue($this->getUser()->getIdentity()->description)->setAttribute('class', 'form-control');
+        $form->addTextArea('description', 'Zde napište něco o sobě')->setValue($user->getDescription())->setAttribute('class', 'form-control');
 
-        $form->addPassword('password', 'Your password')->setAttribute('class', 'form-control')
+        $form->addPassword('password', 'heslo')->setAttribute('class', 'form-control')
             ->setRequired(false)
             ->addCondition(Form::FILLED)
             ->addRule(Form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaky', 6)
             ->addRule(Form::PATTERN, 'Musí obsahovat číslici', '.*[0-9].*');
 
-        $form->addPassword('passwordVerify', 'Your password second time')->setAttribute('class', 'form-control')
+        $form->addPassword('passwordVerify', 'heslo znovu')->setAttribute('class', 'form-control')
             ->setRequired(false)
             ->addCondition(Form::FILLED)
             ->addRule(Form::EQUAL, 'Zadané hesla se neshodují', $form['password']);
 
-        $form->addText('phone', 'Add your phone number')->setValue($this->getUser()->getIdentity()->phone)->setAttribute('class', 'form-control');
+        $form->addText('phone', 'Telefoní číslo')->setValue($user->getPhone())->setAttribute('class', 'form-control');
 
-        $form->addSubmit('send', 'Edit your profile')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
+        $form->addSubmit('send', 'Upravit profil')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
 
         $form->onSuccess[] = $this->profileFormSubmitted;
         return $form;
@@ -75,53 +79,53 @@ class UserPresenter extends BasePresenter
     {
         $values = $form->getValues();
         if ($values['avatar']->isOk()) {
-            $filename = $this->getUser()->identity->data['username'];//$values['img']->getSanitizedName();
-            $targetPath = $this->presenter->basePath;
-
-            // @TODO vyřešit kolize
-            $pripona = pathinfo($values['avatar']->getSanitizedName(), PATHINFO_EXTENSION);
-            $cil = WWW_DIR . "/images/user/$filename.$pripona";
-            $cil2 = $targetPath . "images/user/$filename.$pripona";
+            $name = $this->user->getId();
+            foreach (Finder::findFiles($name . "-*.*")->in('../www/images/user') as $key => $file) {
+                unlink($key);
+            }
             $image = $values['avatar']->toImage();
             $image->resize(200, 200);
             $image->sharpen();
-            $image->save($cil);
+            $name = $this->user->getId();
+            $image->save("../www/images/user/$name.jpg", 100, Image::JPEG);
         }
 
 
         try {
-            $this->database->table('users')->get($this->getUser()->id)->update(array(
-                'email' => $values->email,
-                'username' => $values->username,
 
-            ));
-            $this->getUser()->getIdentity()->email = $values->email;
+            $user = $this->em->find('App\Model\Entity\User',$this->user->getId());
+            $user->setEmail($values->email)->setUsername($values->username);
+
+            //$this->getUser()->getIdentity()->email = $values->email;
             $this->getUser()->getIdentity()->username = $values->username;
 
-            if (isset($cil2)) {
-                $this->database->table('users')->get($this->getUser()->id)->update(array('picture' => $cil2,));
-                $this->getUser()->getIdentity()->picture = $cil2;
-            }
             if (!empty($values->password)) {
-                $this->database->table('users')->get($this->getUser()->id)->update(array('password' => password_hash($values->password, PASSWORD_DEFAULT)));
+                $user->setPassword(password_hash($values->password, PASSWORD_DEFAULT));
             }
             if (!empty($values->phone)) {
-                $this->database->table('users')->get($this->getUser()->id)->update(array('phone' => $values->phone));
-                $this->getUser()->getIdentity()->phone = $values->phone;
+                $user->setPhone($values->phone);
+                //$this->getUser()->getIdentity()->phone = $values->phone;
             }
             if (!empty($values->description)) {
-                $this->database->table('users')->get($this->getUser()->id)->update(array('description' => $values->description));
-                $this->getUser()->getIdentity()->description = $values->description;
+                $user->setDescription($values->description);
+                //$this->getUser()->getIdentity()->description = $values->description;
             }
-        } //	$this->redirect('Homepage:');}
-        catch (\PDOException $e) {
+
+            if ($this->em->safePersist($user)===false) {
+                $form->addError('Uživatelské jméno nebo email jsou již obsazeny.');
+                return ;
+            }
+            $this->em->flush();
+
+        } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
             if (Strings::contains($e, 'username')) {
                 $form['username']->addError('Username is already taken');
             }
             if (Strings::contains($e, 'email')) {
                 $form['email']->addError('Email is already used');
             } else {
-                throw $e;
+                $this->flashMessage('Profil nebyl upraven.');
+                $this->redirect('User:', $this->getParameter('id'));
             }
         }
         $this->flashMessage('Profil byl upraven.');

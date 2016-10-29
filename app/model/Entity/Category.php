@@ -26,7 +26,7 @@ class Category
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      */
     protected $name;
 
@@ -42,7 +42,7 @@ class Category
     private $collectibles;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $icon;
 
