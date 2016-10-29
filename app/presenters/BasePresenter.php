@@ -72,16 +72,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             //echo $file; // $file je objektem SplFileInfo
 
         }
-        if (isset($path)) {
+        if (!empty($path)) {
             $image = Image::fromFile($path);
-            if (isset($width)) {
+            if (!empty($width)) {
                 $image->resize($width, NULL, Image::SHRINK_ONLY);
                 $image->sharpen();
                 $image->save("../www/images/collectible/$id-$width.jpg", 100, Image::JPEG);
             }
             $image->send();
         } else {
-            if (isset($width)) {
+            if (!empty($width)) {
                 $image = Image::fromFile("../www/images/collectible/placeholder-$width.jpg");
                 $image->send();
             }
@@ -99,16 +99,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             //echo $file; // $file je objektem SplFileInfo
 
         }
-        if (isset($path)) {
+        if (!empty($path)) {
             $image = Image::fromFile($path);
-            if (isset($width)) {
+            if (!empty($width)) {
                 $image->resize($width, NULL, Image::SHRINK_ONLY);
                 $image->sharpen();
                 $image->save("../www/images/user/$id-$width.jpg", 100, Image::JPEG);
             }
             $image->send();
         } else {
-            if (isset($width)) {
+            if (!empty($width)) {
                 $image = Image::fromFile("../www/images/collectible/placeholder-$width.jpg");
                 $image->send();
             }

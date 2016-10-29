@@ -29,13 +29,13 @@
         <div class="collectible-images">
             <div class="collectible-image-main"><img data-src="{$collectible->getImages()[0]}">
             </div>
-            <div class="collectible-image-2"><img data-src="{$collectible->getImages()[1]}">
+            <div class="collectible-image-2"><img data-src="{if $collectible->getImages()[1]}{$collectible->getImages()[1]}{else}placeholder{/if}">
             </div>
-            <div class="collectible-image-3"><img data-src="{$collectible->getImages()[2]}">
+            <div class="collectible-image-3"><img data-src="{if $collectible->getImages()[2]}{$collectible->getImages()[2]}{else}placeholder{/if}">
             </div>
-            <div class="collectible-image-4"><img data-src="{$collectible->getImages()[3]}">
+            <div class="collectible-image-4"><img data-src="{if $collectible->getImages()[3]}{$collectible->getImages()[3]}{else}placeholder{/if}">
             </div>
-            <div class="collectible-image-5"><img data-src="{$collectible->getImages()[4]}">
+            <div class="collectible-image-5"><img data-src="{if $collectible->getImages()[4]}{$collectible->getImages()[4]}{else}placeholder{/if}">
             </div>
         </div>
 

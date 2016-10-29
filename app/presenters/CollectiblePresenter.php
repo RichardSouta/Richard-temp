@@ -17,7 +17,7 @@ class CollectiblePresenter extends BasePresenter
     public $page;
 
 
-    public function renderDefault($id)
+    public function renderDefault($id = null)
     {
         $collectible = $this->template->collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($id);
     }

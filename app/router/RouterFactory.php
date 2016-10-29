@@ -91,42 +91,67 @@ class RouterFactory
 
     public function idToUrl($id)
     {
-        $urlTile = str_replace(" ", "-", $this->em->getRepository('App\Model\Entity\Collectible')->find($id)->getName());
-        $url = $id . "-" . $urlTile;
-        setlocale(LC_CTYPE, 'en_US');
-        return urlencode($url);
+        $collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($id);
+        if (!empty($collectible)) {
+            $urlTile = str_replace(" ", "-", $collectible->getName());
+            $url = $id . "-" . $urlTile;
+            setlocale(LC_CTYPE, 'en_US');
+            return urlencode($url);
+        }
+        return null;
     }
 
     public function urlToId($url)
     {
         $pole = explode("-", $url);
-        return $pole[0];
+        if (!empty($pole[0]))
+        {
+            return $pole[0];
+        }
+        return null;
+
     }
 
     public function idToUrl2($id)
     {
-        $url = str_replace(" ", "-", $this->em->getRepository('App\Model\Entity\User')->find($id)->getUsername());
-        setlocale(LC_CTYPE, 'en_US');
-        return urlencode($url);
+        $user = $this->em->getRepository('App\Model\Entity\User')->find($id);
+        if (!empty($user)) {
+            $url = str_replace(" ", "-", $user->getUsername());
+            setlocale(LC_CTYPE, 'en_US');
+            return urlencode($url);
+        }
+        return null;
     }
 
     public function urlToId2($url)
     {
-        $url = str_replace("-", " ",$url);
-        $id = $this->em->getRepository('App\Model\Entity\User')->findOneByUsername($url)->getId();
-        return $id;
+        $url = str_replace("-", " ", $url);
+        $user = $this->em->getRepository('App\Model\Entity\User')->findOneByUsername($url);
+        if (!empty($user)) {
+            $id = $user->getId();
+            return $id;
+        }
+        return null;
     }
 
     public function urlToIdCategory($url)
     {
-        $url = str_replace("-", " ",$url);
-        $id = $this->em->getRepository('App\Model\Entity\Category')->findOneByName($url)->getId();
-        return $id;
+        $url = str_replace("-", " ", $url);
+        $category = $this->em->getRepository('App\Model\Entity\Category')->findOneByName($url);
+        if (!empty($category)) {
+            $id = $category->getId();
+            return $id;
+        }
+        return null;
     }
 
     public function idToUrlCategory($id){
-        $url = str_replace(" ", "-", $this->em->getRepository('App\Model\Entity\Category')->find($id)->getName());
-        setlocale(LC_CTYPE, 'en_US');
-        return urlencode($url);
+        $category = $this->em->getRepository('App\Model\Entity\Category')->find($id);
+        if (!empty($category)) {
+            $url = str_replace(" ", "-", $category->getName());
+            setlocale(LC_CTYPE, 'en_US');
+            return urlencode($url);
+        }
+        return null;
     }
 }
