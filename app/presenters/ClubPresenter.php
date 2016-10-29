@@ -62,7 +62,7 @@ class ClubPresenter extends BasePresenter
         $topic->setUser($user)->setDescription($values->description)->setCategories($categories)->setTitle($values->title);
         $this->em->persist($topic);
         $this->em->flush();
-        $this->redirect('Club:show', $topic->getId());
+        $this->redirect('Club:display', $topic->getId());
     }
 
     protected function createComponentClubForm()

@@ -15,6 +15,7 @@ class Collectible
     {
         $this->images = new ArrayCollection;
         $this->dateTimeAdded = new \DateTime();
+        $this->tradeable = 0;
     }
 
     /**

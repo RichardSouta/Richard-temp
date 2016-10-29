@@ -13,7 +13,11 @@
                             </div>
                             <div class="polozka_body">
                                 {if $collectible->getCategory()}
-                                    <center>Kategorie: {$collectible->getCategory()}</center>
+                                    {if $collectible->getCategory()->getIcon()} <img
+                                    src="{$basePath}/images/category/{$collectible->getCategory()->getId()}.png" class="img-responsive">
+                                    {else}
+                                        <center>Kategorie: {$collectible->getCategory()}</center>
+                                    {/if}
                                 {/if}
                             </div>
                         </div>

@@ -6,7 +6,7 @@
     else if (resolution <= 480) resolution = 480;
     else if (resolution <= 600) resolution = 600;
     else resolution = 720;
-    $('.polozka img').each(function () {
+    $('.polozka_head img').each(function () {
         $(this).attr('src', 'images/collectible/' + $(this).attr('data-src') + '-' + resolution);
     });
 </script>

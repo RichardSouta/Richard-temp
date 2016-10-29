@@ -317,10 +317,21 @@ label > input[name="remember"]{
     color: #fefefe;
 
 }
-.polozka img{
+.polozka_head{
     max-height: 25vh;
+}
+
+.polozka_head img{
+    max-height: 22vh;
     margin: 0 auto;
 }
+
+.polozka_body img{
+    max-height: 5vh;
+    margin: 0 auto;
+    margin-top: 1%;
+}
+
 #submenu a{
     color:white;
 
