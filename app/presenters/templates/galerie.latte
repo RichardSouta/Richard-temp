@@ -7,14 +7,16 @@
                         <div class="polozka">
                             <div class="polozka_head">
                                 <center><h3>{$collectible->getName()}</h3></center>
-                                <a href="{link Collectible:,$collectible->getId()}"><img
+                                <a href="{link Collectible:,$collectible->getId()}"><img alt="titulní foto pro {$collectible->getName()}"
                                             class="img-responsive" data-src="{$collectible->getImages()[0]}"
                                             title="{$collectible->getDescription()}"></a>
                             </div>
                             <div class="polozka_body">
                                 {if $collectible->getCategory()}
-                                    {if $collectible->getCategory()->getIcon()} <img
-                                    src="{$basePath}/images/category/{$collectible->getCategory()->getId()}.png" class="img-responsive">
+                                    {if $collectible->getCategory()->getIcon()}
+                                        <img alt="Ikona kategorie" title="Kategorie {$collectible->getCategory()->getName()}"
+                                             src="{$basePath}/images/category/{$collectible->getCategory()->getId()}.png"
+                                             class="img-responsive">
                                     {else}
                                         <center>Kategorie: {$collectible->getCategory()}</center>
                                     {/if}

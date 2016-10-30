@@ -10,7 +10,7 @@
                                 <div class="chat-window" {if $chat->getId()==$presenter->getParameter("id")} id="active" {/if}>
                                     {foreach $chat->getUsers() as $chatter }
                                         {if $chatter->getId()!=$user->id}
-                                            <center><img src="{$chatter->getPicture()}"
+                                            <center><img alt="uživatel {$chatter->getUsername()}" src="{$chatter->getPicture()}"
                                                          class="img-responsive img-rounded"></center>
                                             {$chatter->getUsername()}{/if}
                                     {/foreach}

@@ -2,7 +2,8 @@
 {block intro}
     <div class="jumbotron">
         <div class="container">
-            <h1>{$category->getName()}{if $category->getIcon()} <img
+            <h1>{$category->getName()}{if $category->getIcon()}
+                    <img alt="Ikona kategorie"
                     src="{$basePath}/images/category/{$category->getId()}.png">{/if}</h1>
             <p>{$category->getDescription()}</p>
             <p>

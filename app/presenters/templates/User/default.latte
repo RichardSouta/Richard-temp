@@ -15,7 +15,7 @@
         <div class="col-xs-5"></div>
         <div class="col-xs-2">
         <h1>{$uzivatel->getUsername()}</h1>
-        <center><img src="{$uzivatel->getPicture()}" class="img-responsive img-rounded"></center>
+        <center><img alt="uživatel {$uzivatel->getUsername()}" src="{$uzivatel->getPicture()}" class="img-responsive img-rounded"></center>
         {if ($user->isLoggedIn()&&$uzivatel->getId()!=$user->id)}
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal"><span
                         class="glyphicon glyphicon-envelope"></span> Poslat zprávu
@@ -39,7 +39,7 @@
     <tr>
         <td><a n:href="Collectible:, $collectible->getId()">{$collectible->getName()}</a></td>
         <td>{$collectible->getCategory()->getName()}</td>
-        <td><a n:href="Collectible:, $collectible->getId()"><img class="img-responsive"
+        <td><a n:href="Collectible:, $collectible->getId()"><img alt="titulní foto pro {$collectible->getName()}" class="img-responsive"
                  data-src="{$collectible->getImages()[0]}"
                  title="{$collectible->getDescription()}"></a></td>
     </tr>

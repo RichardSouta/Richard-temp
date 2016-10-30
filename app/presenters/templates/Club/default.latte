@@ -2,7 +2,7 @@
     <div id="club-seznam">
         {foreach $topics as $topic}
             <div class="komentar-hlavicka">
-                <a n:href="User:, $topic->getUser()->getId()"><img src="{$topic->getUser()->getPicture()}"
+                <a n:href="User:, $topic->getUser()->getId()"><img alt="uživatel {$chatter->getUsername()}" src="{$topic->getUser()->getPicture()}"
                                                                    class="img-responsive img-circle komentar-foto"></a><a n:href="Club:display, $topic->getId()">
                     <h2>{$topic->getTitle()}</h2>
                     <span> <a n:href="User:,$topic->getUser()->getId()">{$topic->getUser()->getUsername()}</a> {$topic->getCreatedDateTime()|date:'d.m.Y H:i'}</span>

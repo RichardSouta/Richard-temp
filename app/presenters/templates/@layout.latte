@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="description" content="collectors' nest je aplikace pro všechny sběratele."/>
-    <meta name="keywords" content="collectors' nest, collectorsnest.eu, collecting, sběratelství, collectible, club">
+    <meta name="keywords" content="collectors' nest, collectorsnest.eu, collecting, sběratelství, collectorsnest, collectible">
     <meta name="author" content="collectors' nest"/>
     <meta name="copyright" content="collectors' nest"/>
     <meta name="application-name" content="collectors' nest"/>
@@ -20,21 +20,16 @@
     <link rel="icon" href="{$basePath}/favicon.ico">
     <title>{ifset $title}{$title} | {/ifset} collectors' nest</title>
 
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-    <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
           integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    <!-- Latest jQuerry-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{$basePath}/js/nette.ajax.js"></script>
     <script src="{$basePath}/js/main.js"></script>
     <script src="{$basePath}/js/live-form-validation.js"></script>
 
 
-    <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
@@ -147,7 +142,7 @@
                 </div>
                 </div>
                 <div class="col-xs-3">
-                <a n:href="fbLogin-open!"><img class='fb-sign' src="{$basePath}/images/facebook.jpg"></a>
+                <a n:href="fbLogin-open!"><img alt='facebook login' title='Přihlásit pomocí facebooku' class='fb-sign' src="{$basePath}/images/facebook.jpg"></a>
                 <a href="{link LostPassword:}" id="forgot_pass">
                     <button class="btn btn-info btn-xs">Zapomenuté heslo?</button>
                 </a>

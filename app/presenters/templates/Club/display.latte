@@ -2,8 +2,10 @@
     <div id="club-show">
         <h1>{$topic->getTitle()}</h1>
         <div class="komentar-hlavicka">
-            <a n:href="User:,$topic->getUser()->getId()"><img src="{$topic->getUser()->getPicture()}"
-                                                                class="img-responsive img-circle komentar-foto"></a><span><a n:href="User:,$topic->getUser()->getId()">{$topic->getUser()->getUsername()}</a> {$topic->getCreatedDateTime()|date:'d.m.Y H:i'}</span>
+            <a n:href="User:,$topic->getUser()->getId()">
+                <img alt="uživatel {$topic->getUser()->getUsername()}"
+                     src="{$topic->getUser()->getPicture()}"
+                     class="img-responsive img-circle komentar-foto"></a><span><a n:href="User:,$topic->getUser()->getId()">{$topic->getUser()->getUsername()}</a> {$topic->getCreatedDateTime()|date:'d.m.Y H:i'}</span>
 
         </div>
         <div class="komentar">
@@ -11,8 +13,10 @@
         </div>
         {foreach $topic->getComments() as $comment}
             <div class="komentar-hlavicka">
-                <a n:href="User:,$comment->getUser()->getId()"><img src="{$comment->getUser()->getPicture()}"
-                                                                    class="img-responsive img-circle komentar-foto"></a><span><a n:href="User:,$comment->getUser()->getId()">{$comment->getUser()->getUsername()}</a> {$comment->getCreatedDateTime()|date:'d.m.Y H:i'}</span>
+                <a n:href="User:,$comment->getUser()->getId()">
+                    <img alt="uživatel {$comment->getUser()->getUsername()}"
+                         src="{$comment->getUser()->getPicture()}"
+                         class="img-responsive img-circle komentar-foto"></a><span><a n:href="User:,$comment->getUser()->getId()">{$comment->getUser()->getUsername()}</a> {$comment->getCreatedDateTime()|date:'d.m.Y H:i'}</span>
             </div>
             <div class="komentar">
                 <h2>{$comment->getText()}</h2>

@@ -14,7 +14,7 @@
     <div class="col-md-2">
         <div id="profil">
             <h1>{$collectible->getUser()->getUsername()}</h1>
-            <center><a n:href="User:,$collectible->getUser()->getId()"><img
+            <center><a n:href="User:,$collectible->getUser()->getId()"><img alt="uživatel {$collectible->getUser()->getUsername()}"
                             src="{$collectible->getUser()->getPicture()}"
                             class="img-responsive img-rounded"></a></center>
             {if ($user->isLoggedIn()&&$user->id!=$collectible->getUser()->getId())}
@@ -27,15 +27,15 @@
     </div>
     <div class="col-md-6" id="collectible">
         <div class="collectible-images">
-            <div class="collectible-image-main"><img data-src="{$collectible->getImages()[0]}">
+            <div class="collectible-image-main"><img alt="foto pro {$collectible->getName()}" data-src="{$collectible->getImages()[0]}">
             </div>
-            <div class="collectible-image-2"><img data-src="{if $collectible->getImages()[1]}{$collectible->getImages()[1]}{else}placeholder{/if}">
+            <div class="collectible-image-2"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení" data-src="{if $collectible->getImages()[1]}{$collectible->getImages()[1]}{else}placeholder{/if}">
             </div>
-            <div class="collectible-image-3"><img data-src="{if $collectible->getImages()[2]}{$collectible->getImages()[2]}{else}placeholder{/if}">
+            <div class="collectible-image-3"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení" data-src="{if $collectible->getImages()[2]}{$collectible->getImages()[2]}{else}placeholder{/if}">
             </div>
-            <div class="collectible-image-4"><img data-src="{if $collectible->getImages()[3]}{$collectible->getImages()[3]}{else}placeholder{/if}">
+            <div class="collectible-image-4"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení" data-src="{if $collectible->getImages()[3]}{$collectible->getImages()[3]}{else}placeholder{/if}">
             </div>
-            <div class="collectible-image-5"><img data-src="{if $collectible->getImages()[4]}{$collectible->getImages()[4]}{else}placeholder{/if}">
+            <div class="collectible-image-5"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení" data-src="{if $collectible->getImages()[4]}{$collectible->getImages()[4]}{else}placeholder{/if}">
             </div>
         </div>
 
