@@ -3,7 +3,8 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="description" content="collectors' nest je aplikace pro všechny sběratele."/>
-    <meta name="keywords" content="collectors' nest, collectorsnest.eu, collecting, sběratelství, collectorsnest, collectible">
+    <meta name="keywords"
+          content="collectors' nest, collectorsnest.eu, collecting, sběratelství, collectorsnest, collectible">
     <meta name="author" content="collectors' nest"/>
     <meta name="copyright" content="collectors' nest"/>
     <meta name="application-name" content="collectors' nest"/>
@@ -25,11 +26,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
           integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="{$basePath}/js/nette.ajax.js"></script>
-    <script src="{$basePath}/js/main.js"></script>
-    <script src="{$basePath}/js/live-form-validation.js"></script>
-
-
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
@@ -66,8 +62,10 @@
                 </button>
                 <a href="{link Register:}" class="btn btn-primary">Registrovat</a>
             {else}
-                <a href="{link Chat:}"><span id="messageIcon" class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
-            <a href="{link Notification:}"><span id="notificationIcon" class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
+                <a href="{link Chat:}"><span id="messageIcon" class="glyphicon glyphicon-envelope"
+                                             aria-hidden="true"></span></a>
+                <a href="{link Notification:}"><span id="notificationIcon" class="glyphicon glyphicon-list-alt"
+                                                     aria-hidden="true"></span></a>
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -89,7 +87,7 @@
 
 
 <!--tělo-->
-<div class="container-fluid" id="homepage">
+<div class="container-fluid" id="page">
 
     <div id="intro">
 
@@ -125,6 +123,12 @@
       </div>-->
 </div>
 
+<div class="eu-cookies" n:if="empty($_COOKIE[eu-cookies])">
+    Tento web používá k poskytování služeb, personalizaci a analýze
+    návštěvnosti soubory cookie. Používáním tohoto webu s tím souhlasíte.
+    <button>V pořádku</button>
+    <a href="https://www.google.com/policies/technologies/cookies/">Další informace</a>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -137,20 +141,24 @@
             </div>
             <div class="modal-body">
                 <div class="col-xs-9">
-                <div n:snippet="sign">
-                    {control signInForm}
-                </div>
+                    <div n:snippet="sign">
+                        {control signInForm}
+                    </div>
                 </div>
                 <div class="col-xs-3">
-                <a n:href="fbLogin-open!"><img alt='facebook login' title='Přihlásit pomocí facebooku' class='fb-sign' src="{$basePath}/images/facebook.jpg"></a>
-                <a href="{link LostPassword:}" id="forgot_pass">
-                    <button class="btn btn-info btn-xs">Zapomenuté heslo?</button>
-                </a>
-                    </div>
+                    <a n:href="fbLogin-open!"><img alt='facebook login' title='Přihlásit pomocí facebooku'
+                                                   class='fb-sign' src="{$basePath}/images/facebook.jpg"></a>
+                    <a href="{link LostPassword:}" id="forgot_pass">
+                        <button class="btn btn-info btn-xs">Zapomenuté heslo?</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<script src="{$basePath}/js/nette.ajax.js"></script>
+<script src="{$basePath}/js/main.js"></script>
+<script src="{$basePath}/js/live-form-validation.js"></script>
 {include 'loadMore.latte'}
 {include 'Images.latte'}
 <script>$('.required label').append('<required>*</required>');</script>
@@ -159,21 +167,21 @@
 <script type="text/javascript">
     $('select').select2();
 </script>
-<div class="eu-cookies" n:if="empty($_COOKIE[eu-cookies])">
-    Tento web používá k poskytování služeb, personalizaci a analýze
-    návštěvnosti soubory cookie. Používáním tohoto webu s tím souhlasíte.
-    <button>V pořádku</button>
-    <a href="https://www.google.com/policies/technologies/cookies/">Další informace</a>
-</div>
-<noscript><style>.eu-cookies { display:none }</style></noscript>
+
+<noscript>
+    <style>.eu-cookies {
+            display: none
+        }</style>
+</noscript>
 
 <script>
-    $('.eu-cookies button').click(function() {
+    $('.eu-cookies button').click(function () {
         var date = new Date();
         date.setFullYear(date.getFullYear() + 10);
         document.cookie = 'eu-cookies=1; path=/; expires=' + date.toGMTString();
         $('.eu-cookies').hide();
     });
 </script>
+{block scripts}{/block}
 </body>
 </html>

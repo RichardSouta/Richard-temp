@@ -14,7 +14,8 @@
     <div class="col-md-2">
         <div id="profil">
             <h1>{$collectible->getUser()->getUsername()}</h1>
-            <center><a n:href="User:,$collectible->getUser()->getId()"><img alt="uživatel {$collectible->getUser()->getUsername()}"
+            <center><a n:href="User:,$collectible->getUser()->getId()"><img
+                            alt="uživatel {$collectible->getUser()->getUsername()}"
                             src="{$collectible->getUser()->getPicture()}"
                             class="img-responsive img-rounded"></a></center>
             {if ($user->isLoggedIn()&&$user->id!=$collectible->getUser()->getId())}
@@ -27,15 +28,20 @@
     </div>
     <div class="col-md-6" id="collectible">
         <div class="collectible-images">
-            <div class="collectible-image-main"><img alt="foto pro {$collectible->getName()}" data-src="{$collectible->getImages()[0]}">
+            <div class="collectible-image-main"><img alt="foto pro {$collectible->getName()}"
+                                                     data-src="{$collectible->getImages()[0]}">
             </div>
-            <div class="collectible-image-2"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení" data-src="{if $collectible->getImages()[1]}{$collectible->getImages()[1]}{else}placeholder{/if}">
+            <div class="collectible-image-2"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení"
+                                                  data-src="{if $collectible->getImages()[1]}{$collectible->getImages()[1]}{else}placeholder{/if}">
             </div>
-            <div class="collectible-image-3"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení" data-src="{if $collectible->getImages()[2]}{$collectible->getImages()[2]}{else}placeholder{/if}">
+            <div class="collectible-image-3"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení"
+                                                  data-src="{if $collectible->getImages()[2]}{$collectible->getImages()[2]}{else}placeholder{/if}">
             </div>
-            <div class="collectible-image-4"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení" data-src="{if $collectible->getImages()[3]}{$collectible->getImages()[3]}{else}placeholder{/if}">
+            <div class="collectible-image-4"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení"
+                                                  data-src="{if $collectible->getImages()[3]}{$collectible->getImages()[3]}{else}placeholder{/if}">
             </div>
-            <div class="collectible-image-5"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení" data-src="{if $collectible->getImages()[4]}{$collectible->getImages()[4]}{else}placeholder{/if}">
+            <div class="collectible-image-5"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení"
+                                                  data-src="{if $collectible->getImages()[4]}{$collectible->getImages()[4]}{else}placeholder{/if}">
             </div>
         </div>
 
@@ -79,45 +85,46 @@
             </div>
         </div>
     </div>
+    {/block}
+
+    {block scripts}
+        <script>
+            var resolution = $(document).width();
+            if (resolution <= 600) resolution = 120 * 2;
+            else if (resolution <= 1240) resolution = 240 * 2;
+            else if (resolution <= 2480) resolution = 360 * 2;
+            else resolution = 480 * 2;
+
+            $('#collectible img').each(function () {
+                $(this).attr('src', 'images/collectible/' + $(this).attr('data-src') + -resolution);
+            });
+        </script>
 
 
-    <script>
-        var resolution = $(document).width();
-        if (resolution <= 600) resolution = 120 * 2;
-        else if (resolution <= 1240) resolution = 240 * 2;
-        else if (resolution <= 2480) resolution = 360 * 2;
-        else resolution = 480 * 2;
+        <script>
+            $mainImg = $('.collectible-image-main img');
+            $('.collectible-image-2 img').on('click', function () {
+                $newMainSrc = $(this).attr('src');
+                $(this).attr('src', $mainImg.attr('src'));
+                $mainImg.attr('src', $newMainSrc);
+            });
 
-        $('#collectible img').each(function () {
-            $(this).attr('src', 'images/collectible/' + $(this).attr('data-src') + -resolution);
-        });
-    </script>
+            $('.collectible-image-3 img').on('click', function () {
+                $newMainSrc = $(this).attr('src');
+                $(this).attr('src', $mainImg.attr('src'));
+                $mainImg.attr('src', $newMainSrc);
+            });
 
+            $('.collectible-image-4 img').on('click', function () {
+                $newMainSrc = $(this).attr('src');
+                $(this).attr('src', $mainImg.attr('src'));
+                $mainImg.attr('src', $newMainSrc);
+            });
 
-    <script>
-        $mainImg = $('.collectible-image-main img');
-        $('.collectible-image-2 img').on('click', function () {
-            $newMainSrc = $(this).attr('src');
-            $(this).attr('src', $mainImg.attr('src'));
-            $mainImg.attr('src', $newMainSrc);
-        });
-
-        $('.collectible-image-3 img').on('click', function () {
-            $newMainSrc = $(this).attr('src');
-            $(this).attr('src', $mainImg.attr('src'));
-            $mainImg.attr('src', $newMainSrc);
-        });
-
-        $('.collectible-image-4 img').on('click', function () {
-            $newMainSrc = $(this).attr('src');
-            $(this).attr('src', $mainImg.attr('src'));
-            $mainImg.attr('src', $newMainSrc);
-        });
-
-        $('.collectible-image-5 img').on('click', function () {
-            $newMainSrc = $(this).attr('src');
-            $(this).attr('src', $mainImg.attr('src'));
-            $mainImg.attr('src', $newMainSrc);
-        });
-    </script>
+            $('.collectible-image-5 img').on('click', function () {
+                $newMainSrc = $(this).attr('src');
+                $(this).attr('src', $mainImg.attr('src'));
+                $mainImg.attr('src', $newMainSrc);
+            });
+        </script>
     {/block}

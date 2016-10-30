@@ -41,7 +41,7 @@
         <td><a n:href="Collectible:, $collectible->getId()">{$collectible->getName()}</a></td>
         <td>{$collectible->getCategory()->getName()}</td>
         <td><a n:href="Collectible:, $collectible->getId()"><img alt="titulní foto pro {$collectible->getName()}" class="img-responsive"
-                 data-src="{$collectible->getImages()[0]}"
+                 data-src="{if $collectible->getImages()[0]}{$collectible->getImages()[0]}{else}placeholder{/if}"
                  title="{$collectible->getDescription()}"></a></td>
     </tr>
 {/foreach}
@@ -68,7 +68,9 @@
             </div>
         </div>
     </div>
+{/block}
 
+{block scripts}
     <script>
         $('table img').each(function () {
             $(this).attr('src', 'images/collectible/' + $(this).attr('data-src') + '-240');
