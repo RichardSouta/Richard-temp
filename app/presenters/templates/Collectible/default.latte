@@ -2,7 +2,7 @@
 {block content}
 {if $user->isLoggedIn()&&$user->identity->id==$collectible->getUser()->getId()}
     <nav class="navbar navbar-inverse" id="submenu">
-        {*<a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil</a>*}
+        <a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil předmětu</a>
         <div class="navbar-right">
             <a n:href="Collectible:trade, $presenter->getParameter('id')">Vyměnit předmět&nbsp;&nbsp;</a>
         </div>

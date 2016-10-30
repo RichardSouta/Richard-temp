@@ -241,4 +241,17 @@ class Collectible
         return $this;
     }
 
+    public function emptyImages()
+    {
+        foreach ($this->getImages() as $image)
+        {
+            $name = $image;
+            unlink("../www/images/collectible/$name.jpg");
+            //mazat i náhledy
+        }
+
+        $this->images = new ArrayCollection;
+        return $this;
+    }
+
 }

@@ -111,6 +111,28 @@ class User
      */
     private $chats;
 
+    /**
+     * @ORM\Column(type="string",nullable=true)
+     */
+    protected $security;
+
+    /**
+     * @return mixed
+     */
+    public function getSecurity()
+    {
+        return $this->security;
+    }
+
+    /**
+     * @param mixed $security
+     */
+    public function setSecurity($security)
+    {
+        $this->security = $security;
+        return $this;
+    }
+
     public function addChat(Chat $chat)
     {
         $this->chats[] = $chat;

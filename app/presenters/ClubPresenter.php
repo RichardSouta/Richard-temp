@@ -83,12 +83,12 @@ class ClubPresenter extends BasePresenter
     public function clubFormSubmitted($form, $values)
     {
         if ((!empty($values->text))) {
-
-            $this->database->table('comments')->insert(array(
-                'text' => $values->text,
-                'topic_id' => $this->getParameter('id'),
-                'user_id' => $this->user->identity->id,
-            ));
+            $comment = new Model\Entity\Comment();
+            $user = $this->em->getRepository('App\Model\Entity\User')->find($this->getUser()->id);
+            $topic = $this->em->getRepository('App\Model\Entity\Topic')->findById($this->getParameter('id'));
+            $comment->setText($values->text)->setUser($user)->setTopic($topic);
+            $this->em->persist($comment);
+            $this->em->flush();
             $this->redirect('Club:show', $this->getParameter('id'));
         }
     }

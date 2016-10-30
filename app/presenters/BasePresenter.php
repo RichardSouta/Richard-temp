@@ -26,8 +26,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     /** @var EntityManager @inject */
     public $em;
 
-    protected $database;
-
     protected $collectibles;
 
     protected $facebook;
@@ -53,9 +51,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         }
     }
 
-    public function __construct(Nette\Database\Context $database, \Kdyby\Facebook\Facebook $facebook)
+    public function __construct(\Kdyby\Facebook\Facebook $facebook)
     {
-        $this->database = $database;
         $this->facebook = $facebook;
     }
 
