@@ -1,3 +1,4 @@
+{var $title = $uzivatel->getUsername()}
 {block content}
     {if $user->isLoggedIn()&&$user->identity->id==$presenter->getParameter("id")}
         <nav class="navbar navbar-inverse" id="submenu">
@@ -17,8 +18,8 @@
         <h1>{$uzivatel->getUsername()}</h1>
         <center><img alt="uživatel {$uzivatel->getUsername()}" src="{$uzivatel->getPicture()}" class="img-responsive img-rounded"></center>
         {if ($user->isLoggedIn()&&$uzivatel->getId()!=$user->id)}
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal"><span
-                        class="glyphicon glyphicon-envelope"></span> Poslat zprávu
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal">
+                <span class="glyphicon glyphicon-envelope"></span> Poslat zprávu
             </button>
         {/if}
         <p>
@@ -74,7 +75,5 @@
         });
     </script>
 {/block}
-
-{var $title = $uzivatel->getUsername()}
 
 

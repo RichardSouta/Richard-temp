@@ -1,24 +1,25 @@
+{var $title = 'Registrace'}
 {block intro}
-<div class="jumbotron">
-          <div class="container">
+    <div class="jumbotron">
+        <div class="container">
             <h1 n:block="title">Registrace</h1>
             <p>Těší nás váš zájem o registraci.
-            Nyní vyplňte následující formulář nebo se zaregistrujte pomocí facebooku. Stačí kliknout na modré tlačítko :-)</p>
-          </div>
+                Nyní vyplňte následující formulář nebo se zaregistrujte pomocí facebooku. Stačí kliknout na modré
+                tlačítko :-)</p>
         </div>
+    </div>
 {/block}
 {block content}
-<div class="container-fluid">
-          <div class="row">
-          <div class="col-xs-0 col-sm-2 col-md-3 col-lg-4"></div> 
-          <div class="col-xs-12 col-sm-10 col-md-9 col-lg-8">
-          <div style="text-align: center;">
-          {control registerForm}
-              <a n:href="fbLogin-open!"><img title='Registrovat se pomocí facebooku' class='fb-reg' src="{$basePath}/images/facebook.jpg"></a>
-          </div>
-          </div>
-          </div>
-          </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-0 col-sm-2 col-md-3 col-lg-4"></div>
+            <div class="col-xs-12 col-sm-10 col-md-9 col-lg-8">
+                <div style="text-align: center;">
+                    {control registerForm}
+                    <a n:href="fbLogin-open!"><img title='Registrovat se pomocí facebooku' class='fb-reg'
+                                                   src="{$basePath}/images/facebook.jpg"></a>
+                </div>
+            </div>
+        </div>
+    </div>
 {/block}
-
-{var $title = 'Registrace'}
