@@ -29,14 +29,26 @@ class ChatPresenter extends BasePresenter
             $this->redirect('Homepage:');
         }
         if (!(isset($id))) $this->redirect('Chat:', $chats[0]->getId());
-        $this->template->messages = $this->em->getRepository('App\Model\Entity\Chat')->find($id)->getMessages();
+        $messages = $this->em->getRepository('App\Model\Entity\Chat')->find($id)->getMessages();
+        $this->template->messages = $messages;
+
+        /** @var Message $message */
+        foreach ($messages as  $message)
+        {
+            if ($message->getSender()->getId()!=$this->user->id) {
+                $message->setSeen(1);
+                $this->em->persist($message);
+            }
+        }
+        $this->em->flush();
     }
 
-    public function ShowChatAction(Model\Entity\Chat $chat){
-
+    public function ShowChatAction(Model\Entity\Chat $chat)
+    {
 
 
     }
+
     protected function createComponentMessageForm()
     {
 
@@ -54,8 +66,8 @@ class ChatPresenter extends BasePresenter
     {
         if (!empty($values->text)) {
             $message = new Message();
-            $chat = $this->em->find('App\Model\Entity\Chat',$this->getParameter('id'));
-            $user = $this->em->find('App\Model\Entity\User',$this->getUser()->getId());
+            $chat = $this->em->find('App\Model\Entity\Chat', $this->getParameter('id'));
+            $user = $this->em->find('App\Model\Entity\User', $this->getUser()->getId());
             $message->setChat($chat)->setSender($user)->setText($values->text);
             $this->em->persist($message);
             $this->em->flush();

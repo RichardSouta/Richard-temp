@@ -13,6 +13,7 @@ class Message
     public function __construct()
     {
         $this->createdDateTime = new \DateTime();
+        $this->seen = 0;
     }
 
     /**
@@ -45,6 +46,29 @@ class Message
      * @var Chat
      */
     private $chat;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $seen;
+
+    /**
+     * @return mixed
+     */
+    public function getSeen()
+    {
+        return $this->seen;
+    }
+
+    /**
+     * @param mixed $seen
+     * @return Message
+     */
+    public function setSeen($seen)
+    {
+        $this->seen = $seen;
+        return $this;
+    }
 
     /**
      * @return Chat

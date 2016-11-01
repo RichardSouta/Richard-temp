@@ -25,7 +25,7 @@ class Chat
     private $messages;
 
     /**
-     * @return ArrayCollection
+     * @return Message[]
      */
     public function getMessages()
     {

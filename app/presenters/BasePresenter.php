@@ -125,6 +125,23 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                 $this->flashMessage('aktivujte prosím svůj e-mail', 'danger');
                 $this->redirect('Homepage:');
             }
+            /** @var Model\Entity\User $user */
+            $user = $this->em->find('App\Model\Entity\User', $this->user->getId());
+            $chats = $user->getChats();
+            foreach ($chats as $chat)
+            {
+                foreach ($chat->getMessages() as $message)
+                {
+                    if ($message->getSender()->getId()!=$this->user->id)
+                    {
+                        if ($message->getSeen()===false)
+                        {
+                            $this->template->notify = true;
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -163,7 +180,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         }
 
         try {
-            $this->getUser()->login($values->username, $values->password,'app');
+            $this->getUser()->login($values->username, $values->password, 'app');
         } catch (Nette\Security\AuthenticationException $e) {
             if ($this->isAjax()) {
                 /** va */
@@ -247,6 +264,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             foreach ($chat_i->getUsers() as $user) {
                 if ($user->getId() === $this->user->id) {
                     $chat = $chat_i;
+                    break;
                 }
             }
         }
@@ -311,11 +329,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                         $this->em->persist($user);
                         $this->em->flush();
                         copy($picture, WWW_DIR . '/images/user/' . $user->getId() . '.jpg');
-                        $this->getUser()->login($name, $token,'app');
+                        $this->getUser()->login($name, $token, 'app');
                         $this->redirect('Homepage:', array('welcome' => 1));
                     } //dump($me);
                     else {
-                        $this->getUser()->login($existing->getUsername(), $existing->getPassword(),'social');
+                        $this->getUser()->login($existing->getUsername(), $existing->getPassword(), 'social');
                     }
                 } else {
                     $this->flashMessage('Z Facebooku jsme nedostali všechny potřebné informace, registrujte se pomocí registračního formuláře.');
@@ -333,10 +351,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                 $this->flashMessage('Z neznámého důvodu se proces neprovedl, zkuste to prosím znovu nebo použijte jiný způsob.');
             } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
                 \Tracy\Debugger::log($e, 'facebook');
-                if (Strings::contains($e, 'UNIQ_8D93D649E7927C74')||Strings::contains($e,'email')) {
+                if (Strings::contains($e, 'UNIQ_8D93D649E7927C74') || Strings::contains($e, 'email')) {
                     $this->flashMessage('Email je již použit, použijte prosím klasické přihlašování.');
-                }
-                else {
+                } else {
                     $this->flashMessage('Přihlašovací jméno je již použito, použijte prosím klasické přihlašování.');
                 }
             }

@@ -1,4 +1,5 @@
 {var $title = $collectible->getName()}
+{var $share = true}
 {block content}
 {if $user->isLoggedIn()&&$user->identity->id==$collectible->getUser()->getId()}
     <nav class="navbar navbar-inverse" id="submenu">
@@ -49,6 +50,7 @@
 
 
     <div class="col-md-4">
+        <div class="fb-like" data-href="{link Collectible:, $collectible->getId()}" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
         <div id="seznam">
             <table>
                 <tr>

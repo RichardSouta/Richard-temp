@@ -1,4 +1,5 @@
 {var $title = $category->getName() . '- Kategorie'}
+{var $share = true}
 {block intro}
     <div class="jumbotron">
         <div class="container">
@@ -13,6 +14,7 @@
                 {/foreach}
 
             </p>
+            <div class="fb-like" data-href="{link Category:, $category->getId()}" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
         </div>
     </div>
 {/block}

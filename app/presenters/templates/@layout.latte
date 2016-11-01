@@ -2,24 +2,24 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <meta name="description" content="collectors' nest je aplikace pro všechny sběratele."/>
+    <meta name="description" content="The collectors' nest je aplikace pro sběratele."/>
     <meta name="keywords"
           content="collectors' nest, collectorsnest.eu, collecting, sběratelství, collectorsnest, collectible">
-    <meta name="author" content="collectors' nest"/>
-    <meta name="copyright" content="collectors' nest"/>
-    <meta name="application-name" content="collectors' nest"/>
+    <meta name="author" content="The collectors' nest"/>
+    <meta name="copyright" content="The collectors' nest"/>
+    <meta name="application-name" content="The collectors' nest"/>
     <!-- for Facebook -->
-    <meta property="og:title" content="collectors' nest"/>
+    <meta property="og:title" content="The collectors' nest"/>
     <meta property="og:type" content="article"/>
     <meta property="og:url" content="http://www.collectorsnest.eu/"/>
-    <meta property="og:description" content="collectors' nest je aplikace pro všechny sběratele."/>
+    <meta property="og:description" content="The collectors' nest je aplikace pro sběratele."/>
     <!-- for Twitter -->
     <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:title" content="collectors' nest"/>
-    <meta name="twitter:description" content="collectors' nest je aplikace pro všechny sběratele."/>
+    <meta name="twitter:title" content="The collectors' nest"/>
+    <meta name="twitter:description" content="The collectors' nest je aplikace pro sběratele."/>
     <link rel="shortcut icon" href="{$basePath}/favicon.ico">
     <link rel="icon" href="{$basePath}/favicon.ico">
-    <title>{ifset $title}{$title} | {/ifset} collectors' nest</title>
+    <title>{ifset $title}{$title} | {/ifset} The collectors' nest</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -28,29 +28,23 @@
     <link rel="stylesheet" type="text/css" href="{$basePath}/css/style.css">
 </head>
 <body>
+{ifset $share}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/cs_CZ/sdk.js#xfbml=1&version=v2.8";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+{/ifset}
 <!-- Hlavička -->
 <nav class="navbar navbar-default navbar-fixed-top" id="header">
     <div class="container-fluid">
         <div class="navbar-header" id="logo">
-            <a href="{link Homepage:}">collectors' nest</a>
+            <a href="{link Homepage:}"><img alt="logo" title="The collectors' nest" src="{$basePath}/mainLogo.png"></a>
         </div>
         <div id="ccc"><a n:href="Club:">Sběratelský&nbsp;klub</a></div>
-        <nav class="navbar navbar-default navbar-fixed-top" id="header2">
-            <div class="container-fluid">
-                {control searchForm}
-                <div class="navbar-right">
-                    <form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                        <input type="hidden" name="cmd" value="_s-xclick">
-                        <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
-">
-                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0"
-                               name="submit" alt="PayPal - The safer, easier way to pay online!">
-                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1"
-                             height="1">
-                    </form>
-                </div>
-            </div>
-        </nav>
         <div class="navbar-right" n:snippet="user_controls">
             {ifset $hide} {include 'hideModal.latte'} {/ifset}
             {if (!($user->isLoggedIn()))}
@@ -58,10 +52,10 @@
                 </button>
                 <a href="{link Register:}" class="btn btn-primary">Registrovat</a>
             {else}
-                <a href="{link Chat:}"><span id="messageIcon" class="glyphicon glyphicon-envelope"
+                <a href="{link Chat:}"><span id="messageIcon" class="glyphicon glyphicon-envelope{ifset $notify} rainbow{/ifset}"
                                              aria-hidden="true"></span></a>
-                <a href="{link Notification:}"><span id="notificationIcon" class="glyphicon glyphicon-list-alt"
-                                                     aria-hidden="true"></span></a>
+                {*<a href="{link Notification:}"><span id="notificationIcon" class="glyphicon glyphicon-list-alt"
+                                                     aria-hidden="true"></span></a>*}
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -81,6 +75,20 @@
     </div>
 </nav>
 
+<nav class="navbar navbar-default navbar-fixed-top" id="header2">
+        {control searchForm}
+        <div class="navbar-right">
+            <form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0"
+                       name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1"
+                     height="1">
+            </form>
+        </div>
+</nav>
 
 <!--tělo-->
 <div class="container-fluid" id="page">
@@ -152,6 +160,7 @@
         </div>
     </div>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"

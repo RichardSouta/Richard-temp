@@ -39,7 +39,7 @@ class UserPresenter extends BasePresenter
     protected function createComponentProfileForm()
     {
         /** @var Model\Entity\User $user */
-        $user = $this->em->find('App\Model\Entity\User',$this->user->getId());
+        $user = $this->em->find('App\Model\Entity\User', $this->user->getId());
         $form = new Form;
         $form->addProtection();
         $form->addUpload('avatar', 'Obrázek')->setAttribute('class', 'form-control')
@@ -90,14 +90,19 @@ class UserPresenter extends BasePresenter
             $image->save("../www/images/user/$name.jpg", 100, Image::JPEG);
         }
 
+            /** @var Model\Entity\User $user */
+            $user = $this->em->find('App\Model\Entity\User', $this->user->getId());
+            if ($user->getEmail()!=$values->email)
+            {
+                $user->setEmail($values->email);
+                //$this->getUser()->getIdentity()->email = $values->email;
+            }
 
-        try {
-
-            $user = $this->em->find('App\Model\Entity\User',$this->user->getId());
-            $user->setEmail($values->email)->setUsername($values->username);
-
-            //$this->getUser()->getIdentity()->email = $values->email;
-            $this->getUser()->getIdentity()->username = $values->username;
+            if ($user->getUsername()!=$values->username)
+            {
+                $user->setUsername($values->username);
+                $this->getUser()->getIdentity()->username = $values->username;
+            }
 
             if (!empty($values->password)) {
                 $user->setPassword(password_hash($values->password, PASSWORD_DEFAULT));
@@ -110,24 +115,27 @@ class UserPresenter extends BasePresenter
                 $user->setDescription($values->description);
                 //$this->getUser()->getIdentity()->description = $values->description;
             }
+            $this->em->getConnection()->beginTransaction();
+            try {
+                $this->em->persist($user);
+                $this->em->flush();
+                $this->em->getConnection()->commit();
+            } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+                $this->em->getConnection()->rollback();
+                $this->em->close();
+                if (Strings::contains($e, 'username')) {
+                    $form['username']->addError('uživatelské jméno je obsazeno');
+                    return;
+                }
+                if (Strings::contains($e, 'email')) {
+                    $form['email']->addError('Email je již použit');
+                    return;
+                } else {
+                    $this->flashMessage('Profil nebyl upraven.','warning');
+                    $this->redirect('User:', $this->getParameter('id'));
+                }
+            }
 
-            if ($this->em->safePersist($user)===false) {
-                $form->addError('Uživatelské jméno nebo email jsou již obsazeny.');
-                return ;
-            }
-            $this->em->flush();
-
-        } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
-            if (Strings::contains($e, 'username')) {
-                $form['username']->addError('Username is already taken');
-            }
-            if (Strings::contains($e, 'email')) {
-                $form['email']->addError('Email is already used');
-            } else {
-                $this->flashMessage('Profil nebyl upraven.');
-                $this->redirect('User:', $this->getParameter('id'));
-            }
-        }
         $this->flashMessage('Profil byl upraven.');
         $this->redirect('User:', $this->getParameter('id'));
     }
