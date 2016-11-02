@@ -33,9 +33,8 @@ class ChatPresenter extends BasePresenter
         $this->template->messages = $messages;
 
         /** @var Message $message */
-        foreach ($messages as  $message)
-        {
-            if ($message->getSender()->getId()!=$this->user->id) {
+        foreach ($messages as $message) {
+            if ($message->getSender()->getId() != $this->user->id) {
                 $message->setSeen(1);
                 $this->em->persist($message);
             }
@@ -48,6 +47,8 @@ class ChatPresenter extends BasePresenter
 
 
     }
+
+
 
     protected function createComponentMessageForm()
     {

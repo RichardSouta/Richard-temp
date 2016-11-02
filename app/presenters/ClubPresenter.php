@@ -7,6 +7,7 @@ use Nette;
 use App\Model;
 use Nette\Utils\Strings;
 use Nette\Application\UI\Multiplier;
+use Nette\Mail\Message;
 
 
 class ClubPresenter extends BasePresenter
@@ -85,13 +86,43 @@ class ClubPresenter extends BasePresenter
         if ((!empty($values->text))) {
             $comment = new Model\Entity\Comment();
             $user = $this->em->getRepository('App\Model\Entity\User')->find($this->getUser()->id);
-            $topic = $this->em->getRepository('App\Model\Entity\Topic')->findById($this->getParameter('id'));
+            $topic = $this->em->getRepository('App\Model\Entity\Topic')->findOneById($this->getParameter('id'));
             $comment->setText($values->text)->setUser($user)->setTopic($topic);
             $this->em->persist($comment);
             $this->em->flush();
-            $this->redirect('Club:show', $this->getParameter('id'));
+            $this->redirect('Club:display', $this->getParameter('id'));
         }
     }
 
+    protected function createComponentReportCommentForm()
+    {
+        return new Multiplier(function ($comment_id) {
+            $form = new Form;
+            $form->addProtection();
+            $form->addTextArea('text')->setAttribute('placeholder', 'Uveďte důvod nahlášení')->setAttribute('class', 'form-control');
+            $form->addSubmit('send', 'Odeslat')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
+            $form->addHidden('comment_id', $comment_id);
+            $form->onSuccess[] = $this->reportCommentFormSubmitted;
+            $renderer = $form->getRenderer();
+            $renderer->wrappers['controls']['container'] = NULL;
+            $renderer->wrappers['pair']['container'] = NULL;
+            $renderer->wrappers['label']['container'] = NULL;
+            $renderer->wrappers['control']['container'] = NULL;
+            return $form;
 
+        });
+    }
+
+    public function reportCommentFormSubmitted($form, $values)
+    {
+        $mail = new Message;
+        $mail->setFrom('postmaster@collectorsnest.eu')
+            ->addTo('info@collectorsnest.eu')
+            ->setSubject('Hlášení příspěvku '.$values->comment_id)
+            ->setHTMLBody('<style>.wrapper{width:100%;height:auto;}.container{max-width: 90%;margin:0 auto;}.mail_header{background-color:#5cb85c;padding: 0.5em;}.mail_body{text-align:center;margin-top: 1em;}.mail_body p{max-width: 80%; margin: 1em auto;}.large{font-size: 1.5em;margin-top: 2em;}.bottom{margin-top: 2em;}.confirm_button{background-color:#5cb85c; padding: 0.5em; margin: 150px auto 0;}.confirm_button a {text-decoration: none; color: #000;}.confirm_button:hover{opacity:0.9;}</style><div class="wrapper"><div class="container"><div class="mail_header">collectors\' nest</div><div class="mail_body">'.$values->text.'</div></div>');
+        $this->mailer->send($mail);
+
+        $this->flashMessage('Děkujeme za pomoc. Zpráva nyní bude prověřena.', 'success');
+
+    }
 }

@@ -7,7 +7,6 @@
                 <img alt="uživatel {$topic->getUser()->getUsername()}"
                      src="{$topic->getUser()->getPicture()}"
                      class="img-responsive img-circle komentar-foto"></a><span><a n:href="User:,$topic->getUser()->getId()">{$topic->getUser()->getUsername()}</a> {$topic->getCreatedDateTime()|date:'d.m.Y H:i'}</span>
-
         </div>
         <div class="komentar">
             <h2>{$topic->getDescription()}</h2>
@@ -18,9 +17,31 @@
                     <img alt="uživatel {$comment->getUser()->getUsername()}"
                          src="{$comment->getUser()->getPicture()}"
                          class="img-responsive img-circle komentar-foto"></a><span><a n:href="User:,$comment->getUser()->getId()">{$comment->getUser()->getUsername()}</a> {$comment->getCreatedDateTime()|date:'d.m.Y H:i'}</span>
+                <div class="report">
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#zpravaModal">
+                        Příspěvek se mi nelíbí
+                    </button>
+                </div>
             </div>
             <div class="komentar">
                 <h2>{$comment->getText()}</h2>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="zpravaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Nahlásit příspěvek</h4>
+                        </div>
+                        <div class="modal-body">
+                            {var $commentId = $comment->getId()}
+                            {control reportCommentForm-$commentId}
+                        </div>
+                    </div>
+                </div>
             </div>
         {/foreach}
 
@@ -28,5 +49,7 @@
             {control clubForm}
         {/if}
     </div>
+
+
 {/block}
 

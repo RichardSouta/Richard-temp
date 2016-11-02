@@ -163,6 +163,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         // call method signInFormSubmitted() on success
         $form->onSuccess[] = $this->signInFormSubmitted;
         $renderer = $form->getRenderer();
+
         $renderer->wrappers['error']['container'] = 'div class="alert alert-danger"';
         $renderer->wrappers['error']['item'] = 'p';
 
@@ -193,9 +194,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             return;
         }
         if ($this->isAjax()) {
-            $this->template->hide = 'true';
+            /*$this->template->hide = 'true';
             $this->redrawControl('user_controls');
-            $this->redrawControl('flashMessages');
+            $this->redrawControl('flashMessages');*/
+            $this->redirect('this');
         } else {
             $this->redirect('Homepage:');
         }
@@ -206,13 +208,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
         $this->getUser()->logout();
         $this->flashMessage('Byl jste odhlášen.');
-        if ($this->isAjax()) {
-            $this->redrawControl('sign');
-            $this->redrawControl('user_controls');
-            $this->redrawControl('flashMessages');
-        } else {
-            $this->redirect('Homepage:');
-        }
+        $this->redirect('this');
+
+
     }
 
     protected function createComponentSearchForm()
@@ -243,8 +241,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         return new Multiplier(function ($receiver_id) {
             $form = new Form;
             $form->addProtection();
-            $form->addText('text')->setAttribute('placeholder', 'Napište zprávu')->setAttribute('class', 'form-control');
-            $form->addSubmit('send', 'Send')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
+            $form->addTextArea('text')->setAttribute('placeholder', 'Napište zprávu')->setAttribute('class', 'form-control');
+            $form->addSubmit('send', 'Odeslat')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
             $form->addHidden('reciever_id', $receiver_id);
             $form->onSuccess[] = $this->messageFormSubmitted;
             $renderer = $form->getRenderer();
