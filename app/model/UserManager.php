@@ -41,6 +41,9 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
 
         /** @var User $user */
 		$user = $this->em->getRepository('App\Model\Entity\User')->findOneByUsername($username);
+        if (!$user){
+            $user = $this->em->getRepository('App\Model\Entity\User')->findOneByEmail($username);
+        }
 
 
 		if (!$user) {

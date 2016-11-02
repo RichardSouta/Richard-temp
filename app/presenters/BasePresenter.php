@@ -150,11 +150,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $form = new Form;
         $form->elementPrototype->addAttributes(array('class' => 'ajax'));
         $form->addProtection();
-        $form->addText('username', 'Username:')->setAttribute('class', 'form-control')
-            ->setRequired('Please enter your username.');
+        $form->addText('username', 'e-mail')->setAttribute('placeholder', 'nebo uživatelské jméno')->setAttribute('class', 'form-control')
+            ->setRequired('Prosím zadejte e-mail nebo uživatelské jméno.');
 
         $form->addPassword('password', 'heslo:')->setAttribute('class', 'form-control')
-            ->setRequired('Please enter your password.');
+            ->setRequired('Prosím zadejte heslo.');
 
         $form->addCheckbox('remember', 'Zůstat přihlášen');
 
