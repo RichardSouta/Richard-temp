@@ -1,14 +1,19 @@
-{var $title = 'Úvodní stránka'}
+{var $title = 'Vítejte mezi sběrateli'}
 {block content}
-{include '../galerie.latte'}
+    {include '../galerie.latte'}
 {/block}
 {block intro}
 
     <div class="jumbotron">
         <div class="container">
             <h1><img alt="logo" title="The collectors' nest" src="{$basePath}/mainLogo.png"> The collectors' nest</h1>
-            <p>Vítejte na stránkách collectorsnest.eu. The collectors' nest je aplikace od sběratelů pro sběratele.
-            <br>Níže můžete vidět poslední přidané sběratelské předměty. Pro plnou funkcionalitu se prosím přihlašte.</p>
+            <p>Vítejte mezi sběrateli collectorsnest.eu! The collectors' nest je aplikace od sběratelů pro sběratele.
+                <br> Zapojte se do sběratelské komunity, poznávejte sběratele a zvětšujte sbírku!
+                {if !$user->isLoggedIn()}
+                    <br>Níže můžete vidět poslední přidané sběratelské předměty. Pro plnou funkcionalitu se prosím
+                        přihlašte.
+                {/if}
+            </p>
         </div>
     </div>
 {/block}

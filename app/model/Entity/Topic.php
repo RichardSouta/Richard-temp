@@ -61,6 +61,35 @@ class Topic
     private $comments;
 
     /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $relevance;
+
+    /**
+     * @return mixed
+     */
+    public function getRelevance()
+    {
+        return $this->relevance;
+    }
+
+    public function setRelevance()
+    {
+        $now = new \DateTime();
+        $lastMessage = end($this->comments);
+        if ($lastMessage) {
+            $lastMessageDate = $lastMessage->getCreatedDateTime();
+            $mesageCount = count($this->comments);
+        } else {
+            $lastMessageDate = $this->getCreatedDateTime();
+            $mesageCount = 1;
+        }
+        $daysLastMessage = $now->diff($lastMessageDate)->format('%d days');
+        $this->relevance = (float)($mesageCount / (1 + ($daysLastMessage / 30)));
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getId()

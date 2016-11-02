@@ -23,7 +23,7 @@ class ClubPresenter extends BasePresenter
 
     public function renderDefault($page)
     {
-        $this->template->topics = $this->em->getRepository('App\Model\Entity\Topic')->findBy([],['createdDateTime' => 'DESC']);
+        $this->template->topics = $this->em->getRepository('App\Model\Entity\Topic')->findBy([],['relevance' => 'DESC']);
         //relevance SELECT (COUNT(*) / (1 + TIMESTAMPDIFF(DAY, `datetime`, NOW())/30))  FROM comments where `topic_id`=3
     }
 
