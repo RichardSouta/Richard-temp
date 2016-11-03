@@ -76,7 +76,7 @@ class Topic
     public function setRelevance()
     {
         $now = new \DateTime();
-        $lastMessage = end($this->comments);
+        $lastMessage = $this->comments->last();;
         if ($lastMessage) {
             $lastMessageDate = $lastMessage->getCreatedDateTime();
             $mesageCount = count($this->comments);

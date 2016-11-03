@@ -87,6 +87,7 @@ class ClubPresenter extends BasePresenter
             $comment = new Model\Entity\Comment();
             $user = $this->em->getRepository('App\Model\Entity\User')->find($this->getUser()->id);
             $topic = $this->em->getRepository('App\Model\Entity\Topic')->findOneById($this->getParameter('id'));
+            $topic->setRelevance();
             $comment->setText($values->text)->setUser($user)->setTopic($topic);
             $this->em->persist($comment);
             $this->em->flush();
