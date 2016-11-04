@@ -531,6 +531,10 @@ label > input[name="remember"] {
     margin-left: auto;
     margin-right: auto;
 }
+#ccc {
+    position: absolute;
+    top: 0;
+}
 
 .komentar-hlavicka span {
     position: absolute;
@@ -607,9 +611,10 @@ span.select2:nth-child(3) > span:nth-child(1) > span:nth-child(1) {
 
 #ccc a {
     position: fixed;
-    right: 50%;
     color: white;
     font-size: 25px;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 
 .collectible-image-main {

@@ -32,25 +32,38 @@
             <div class="collectible-image-main"><img alt="foto pro {$collectible->getName()}"
                                                      data-src="{$collectible->getImages()[0]}">
             </div>
-            <div class="collectible-image-2"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení"
-                                                  data-src="{if $collectible->getImages()[1]}{$collectible->getImages()[1]}{else}placeholder{/if}">
-            </div>
-            <div class="collectible-image-3"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení"
-                                                  data-src="{if $collectible->getImages()[2]}{$collectible->getImages()[2]}{else}placeholder{/if}">
-            </div>
-            <div class="collectible-image-4"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení"
-                                                  data-src="{if $collectible->getImages()[3]}{$collectible->getImages()[3]}{else}placeholder{/if}">
-            </div>
-            <div class="collectible-image-5"><img alt="foto pro {$collectible->getName()}" title="klikněte pro zvětšení"
-                                                  data-src="{if $collectible->getImages()[4]}{$collectible->getImages()[4]}{else}placeholder{/if}">
-            </div>
+            {if $collectible->getImages()[1]}
+                <div class="collectible-image-2"><img alt="foto pro {$collectible->getName()}"
+                                                      title="klikněte pro zvětšení"
+                                                      data-src="{$collectible->getImages()[1]}">
+                </div>
+            {/if}
+            {if $collectible->getImages()[2]}
+                <div class="collectible-image-3"><img alt="foto pro {$collectible->getName()}"
+                                                      title="klikněte pro zvětšení"
+                                                      data-src="{$collectible->getImages()[2]}">
+                </div>
+            {/if}
+            {if $collectible->getImages()[3]}
+                <div class="collectible-image-4"><img alt="foto pro {$collectible->getName()}"
+                                                      title="klikněte pro zvětšení"
+                                                      data-src="{$collectible->getImages()[3]}">
+                </div>
+            {/if}
+            {if $collectible->getImages()[4]}
+                <div class="collectible-image-5"><img alt="foto pro {$collectible->getName()}"
+                                                      title="klikněte pro zvětšení"
+                                                      data-src="{$collectible->getImages()[4]}">
+                </div>
+            {/if}
         </div>
 
     </div>
 
 
     <div class="col-md-4">
-        <div class="fb-like" data-href="{link Collectible:, $collectible->getId()}" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+        <div class="fb-like" data-href="{link Collectible:, $collectible->getId()}" data-layout="button_count"
+             data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
         <div id="seznam">
             <table>
                 <tr>

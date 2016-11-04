@@ -17,6 +17,7 @@ class User
         $this->regDateTime = new \DateTime();
         $this->topics = new ArrayCollection;
         $this->confirmedEmail = Strings::random(15, '0-9a-zA-Z');
+        $this->notification = 1;
     }
 
     /**

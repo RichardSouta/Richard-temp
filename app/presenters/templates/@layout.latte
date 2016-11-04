@@ -45,7 +45,7 @@
         <div class="navbar-header" id="logo">
             <a href="{link Homepage:}"><img alt="logo" title="The collectors' nest" src="{$basePath}/mainLogo.png"></a>
         </div>
-        <div id="ccc"><a n:href="Club:">Sběratelský&nbsp;klub</a></div>
+        <div id="ccc"><a n:href="Club:"><button class="btn btn-info btn-lg">Sběratelský&nbsp;klub</button></a></div>
         <div class="navbar-right" n:snippet="user_controls">
             {ifset $hide} {include 'hideModal.latte'} {/ifset}
             {if (!($user->isLoggedIn()))}

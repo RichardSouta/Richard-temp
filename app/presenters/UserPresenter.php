@@ -51,10 +51,13 @@ class UserPresenter extends BasePresenter
 
         $form->addText('email', 'E-mail')->setValue($user->getEmail())->setAttribute('class', 'form-control')
             ->setRequired()
-            ->addRule(Form::EMAIL, 'Please fill in your valid adress')
+            ->addRule(Form::EMAIL, 'Prosím vyplňte skutečný e-mail.')
             ->emptyValue = '@';
 
         $form->addTextArea('description', 'Zde napište něco o sobě')->setValue($user->getDescription())->setAttribute('class', 'form-control');
+
+        $form->addCheckbox('notification', 'Chcete dostávat na e-mail notifikace?')
+            ->setValue($user->getNotification());
 
         $form->addPassword('password', 'heslo')->setAttribute('class', 'form-control')
             ->setRequired(false)
@@ -115,6 +118,9 @@ class UserPresenter extends BasePresenter
                 $user->setDescription($values->description);
                 //$this->getUser()->getIdentity()->description = $values->description;
             }
+
+            $user->setNotification($values->notification);
+
             $this->em->getConnection()->beginTransaction();
             try {
                 $this->em->persist($user);
