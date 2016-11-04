@@ -27,13 +27,11 @@ class UserPresenter extends BasePresenter
 
     }
 
-    public function renderEdit($id)
+    public function renderEdit()
     {
         if (!($this->user->isLoggedIn())) {
             $this->redirect('Homepage:');
-
         }
-        if ($this->user->identity->id != $id) $this->redirect('User:', $id);
     }
 
     protected function createComponentProfileForm()
@@ -47,6 +45,12 @@ class UserPresenter extends BasePresenter
             ->addCondition(Form::FILLED)
             ->addRule(Form::IMAGE, 'Musí být obrázek!');
         $form->addText('username', 'Uživatelské jméno')->setValue($user->getUsername())->setAttribute('class', 'form-control')
+            ->setRequired('Toto pole je povinné');
+
+        $form->addText('name', 'Jméno')->setValue($user->getName())->setAttribute('class', 'form-control')
+            ->setRequired('Toto pole je povinné');
+
+        $form->addText('surname', 'Příjmení')->setValue($user->getSurname())->setAttribute('class', 'form-control')
             ->setRequired('Toto pole je povinné');
 
         $form->addText('email', 'E-mail')->setValue($user->getEmail())->setAttribute('class', 'form-control')
@@ -105,6 +109,14 @@ class UserPresenter extends BasePresenter
             $this->getUser()->getIdentity()->username = $values->username;
         }
 
+        if (!empty($values->name)) {
+            $user->setName($values->name);
+        }
+
+        if (!empty($values->surname)) {
+            $user->setSurname($values->surname);
+        }
+
         if (!empty($values->password)) {
             $user->setPassword(password_hash($values->password, PASSWORD_DEFAULT));
         }
@@ -141,7 +153,7 @@ class UserPresenter extends BasePresenter
         }
 
         $this->flashMessage('Profil byl upraven.');
-        $this->redirect('User:', $this->getParameter('id'));
+        $this->redirect('User:', $this->user->id);
     }
 
     protected function createComponentCategoryForm()

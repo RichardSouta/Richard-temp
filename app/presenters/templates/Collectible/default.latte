@@ -1,6 +1,6 @@
 {var $title = $collectible->getName()}
 {var $share = true}
-{block content}
+{block intro}
 {if $user->isLoggedIn()&&$user->identity->id==$collectible->getUser()->getId()}
     <nav class="navbar navbar-inverse" id="submenu">
         <a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil předmětu</a>
@@ -9,7 +9,8 @@
         </div>
     </nav>
 {/if}
-
+{/block}
+{block content}
 <div class="container-fluid">
 
     <div class="col-md-2">

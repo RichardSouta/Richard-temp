@@ -136,30 +136,25 @@ class CollectiblePresenter extends BasePresenter
     {
         /** @var Model\Entity\Collectible $collectible */
         $collectible = $this->template->collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($this->getParameter('id'));
-        $newImageCount = count($values['imgs']);
-        /*$imageCount = count($collectible->getImages());
-        $toReplaceCount = $imageCount + $newImageCount - 5;
-        if ($toReplaceCount>0) {
-            $this->flashMessage($toReplaceCount.' obrázků bylo nahrazeno.');
-        }
-        $originalImages = $collectible->getImages();*/
-        $collectible->emptyImages();
-        $collectible->setImages($newImageCount);
-        $this->em->persist($collectible);
-        $this->em->flush();
+        if (!empty($values['imgs'])) {
+            $newImageCount = count($values['imgs']);
+            $collectible->emptyImages();
+            $collectible->setImages($newImageCount);
+            $this->em->persist($collectible);
+            $this->em->flush();
 
-        foreach ($values['imgs'] as $key => $image) {
-            /** @var Nette\Http\FileUpload $image */
-            if ($image->isOk()) {
-                $image = $image->toImage();
-                /** @var Nette\Utils\Image $image */
-                $image->resize(2560, null, Image::SHRINK_ONLY);
-                $image->sharpen();
-                $name = $collectible->getImages()[$key];
-                $image->save("../www/images/collectible/$name.jpg", 100, Image::JPEG);
+            foreach ($values['imgs'] as $key => $image) {
+                /** @var Nette\Http\FileUpload $image */
+                if ($image->isOk()) {
+                    $image = $image->toImage();
+                    /** @var Nette\Utils\Image $image */
+                    $image->resize(2560, null, Image::SHRINK_ONLY);
+                    $image->sharpen();
+                    $name = $collectible->getImages()[$key];
+                    $image->save("../www/images/collectible/$name.jpg", 100, Image::JPEG);
+                }
             }
         }
-
         if (!empty($values->name)) {
             $collectible->setName($values->name);
         }

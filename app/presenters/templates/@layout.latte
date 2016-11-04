@@ -43,7 +43,7 @@
 <nav class="navbar navbar-default navbar-fixed-top" id="header">
     <div class="container-fluid">
         <div class="navbar-header" id="logo">
-            <a href="{link Homepage:}"><img alt="logo" title="The collectors' nest" src="{$basePath}/mainLogo.png"></a>
+            <a href="{link Homepage:}"><img alt="logo" title="Přejít domů na The collectors' nest" src="{$basePath}/mainLogo.png"></a>
         </div>
         <div id="ccc"><a n:href="Club:"><button class="btn btn-info btn-lg">Sběratelský&nbsp;klub</button></a></div>
         <div class="navbar-right" n:snippet="user_controls">
@@ -53,7 +53,7 @@
                 </button>
                 <a href="{link Register:}" class="btn btn-primary">Registrovat</a>
             {else}
-                <a href="{link Chat:}"><span id="messageIcon" class="glyphicon glyphicon-envelope{ifset $notify} rainbow{/ifset}"
+                <a href="{link Chat:}" title="Vaše zprávy"><span id="messageIcon" class="glyphicon glyphicon-envelope{ifset $notify} rainbow{/ifset}"
                                              aria-hidden="true"></span></a>
                 {*<a href="{link Notification:}"><span id="notificationIcon" class="glyphicon glyphicon-list-alt"
                                                      aria-hidden="true"></span></a>*}
@@ -64,9 +64,10 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="{link User:,$user->identity->id}">Profil</a></li>
+                        <li><a href="{link User:,$user->identity->id}">Zobrazit profil</a></li>
+                        <li><a href="{link User:edit}">Upravit profil a nastavení</a></li>
                         <li><a href="{link Collectible:new}">Přidat předmět</a></li>
-                        {*<li><a href="{link Category:new}">Přidat kategorii</a></li>*}
+                        <li><a href="{link Category:new}">Přidat kategorii</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="{link Logout!}">Odhlásit</a></li>
                     </ul>
