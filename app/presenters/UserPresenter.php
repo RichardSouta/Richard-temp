@@ -50,7 +50,7 @@ class UserPresenter extends BasePresenter
             ->setRequired('Toto pole je povinné');
 
         $form->addText('email', 'E-mail')->setValue($user->getEmail())->setAttribute('class', 'form-control')
-            ->setRequired()
+            ->setRequired('Toto pole je povinné')
             ->addRule(Form::EMAIL, 'Prosím vyplňte skutečný e-mail.')
             ->emptyValue = '@';
 
@@ -93,54 +93,52 @@ class UserPresenter extends BasePresenter
             $image->save("../www/images/user/$name.jpg", 100, Image::JPEG);
         }
 
-            /** @var Model\Entity\User $user */
-            $user = $this->em->find('App\Model\Entity\User', $this->user->getId());
-            if ($user->getEmail()!=$values->email)
-            {
-                $user->setEmail($values->email);
-                //$this->getUser()->getIdentity()->email = $values->email;
-            }
+        /** @var Model\Entity\User $user */
+        $user = $this->em->find('App\Model\Entity\User', $this->user->getId());
+        if ($user->getEmail() != $values->email) {
+            $user->setEmail($values->email);
+            //$this->getUser()->getIdentity()->email = $values->email;
+        }
 
-            if ($user->getUsername()!=$values->username)
-            {
-                $user->setUsername($values->username);
-                $this->getUser()->getIdentity()->username = $values->username;
-            }
+        if ($user->getUsername() != $values->username) {
+            $user->setUsername($values->username);
+            $this->getUser()->getIdentity()->username = $values->username;
+        }
 
-            if (!empty($values->password)) {
-                $user->setPassword(password_hash($values->password, PASSWORD_DEFAULT));
-            }
-            if (!empty($values->phone)) {
-                $user->setPhone($values->phone);
-                //$this->getUser()->getIdentity()->phone = $values->phone;
-            }
-            if (!empty($values->description)) {
-                $user->setDescription($values->description);
-                //$this->getUser()->getIdentity()->description = $values->description;
-            }
+        if (!empty($values->password)) {
+            $user->setPassword(password_hash($values->password, PASSWORD_DEFAULT));
+        }
+        if (!empty($values->phone)) {
+            $user->setPhone($values->phone);
+            //$this->getUser()->getIdentity()->phone = $values->phone;
+        }
+        if (!empty($values->description)) {
+            $user->setDescription($values->description);
+            //$this->getUser()->getIdentity()->description = $values->description;
+        }
 
-            $user->setNotification($values->notification);
+        $user->setNotification($values->notification);
 
-            $this->em->getConnection()->beginTransaction();
-            try {
-                $this->em->persist($user);
-                $this->em->flush();
-                $this->em->getConnection()->commit();
-            } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
-                $this->em->getConnection()->rollback();
-                $this->em->close();
-                if (Strings::contains($e, 'username')) {
-                    $form['username']->addError('uživatelské jméno je obsazeno');
-                    return;
-                }
-                if (Strings::contains($e, 'email')) {
-                    $form['email']->addError('Email je již použit');
-                    return;
-                } else {
-                    $this->flashMessage('Profil nebyl upraven.','warning');
-                    $this->redirect('User:', $this->getParameter('id'));
-                }
+        $this->em->getConnection()->beginTransaction();
+        try {
+            $this->em->persist($user);
+            $this->em->flush();
+            $this->em->getConnection()->commit();
+        } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+            $this->em->getConnection()->rollback();
+            $this->em->close();
+            if (Strings::contains($e, 'username')) {
+                $form['username']->addError('uživatelské jméno je obsazeno');
+                return;
             }
+            if (Strings::contains($e, 'email')) {
+                $form['email']->addError('Email je již použit');
+                return;
+            } else {
+                $this->flashMessage('Profil nebyl upraven.', 'warning');
+                $this->redirect('User:', $this->getParameter('id'));
+            }
+        }
 
         $this->flashMessage('Profil byl upraven.');
         $this->redirect('User:', $this->getParameter('id'));
@@ -151,8 +149,19 @@ class UserPresenter extends BasePresenter
         $form = new Form;
         $form->addProtection();
         $categories = $this->em->getRepository('App\Model\Entity\Category')->findPairs('name', 'id');
-        if ($this->getParameter('category') != NULL) $form->addSelect('category', '', $categories)->setAttribute('class', 'form-control')->setAttribute('onchange', "document.getElementById('frm-categoryForm').submit();")->setPrompt('Všechny kategorie')->setValue($this->getParameter('category'));
-        else $form->addSelect('category', '', $categories)->setAttribute('class', 'form-control')->setAttribute('onchange', "document.getElementById('frm-categoryForm').submit();")->setPrompt('Všechny kategorie');
+        $userCategories = [];
+        $user = $this->em->getRepository('App\Model\Entity\User')->find($this->getParameter('id'));
+        $collectibles = $user->getCollectibles();
+        /** @var Model\Entity\Collectible $collectible */
+        foreach ($collectibles as $collectible) {
+            if ($key = array_search($collectible->getCategory()->getName(), $categories)) {
+                $userCategories[$key] = $categories[$key];
+                unset($categories[$key]);
+            }
+        }
+
+        if ($this->getParameter('category') != NULL) $form->addSelect('category', '', $userCategories)->setAttribute('class', 'form-control')->setAttribute('onchange', "document.getElementById('frm-categoryForm').submit();")->setPrompt('Všechny kategorie')->setValue($this->getParameter('category'));
+        else $form->addSelect('category', '', $userCategories)->setAttribute('class', 'form-control')->setAttribute('onchange', "document.getElementById('frm-categoryForm').submit();")->setPrompt('Všechny kategorie');
         $form->onSuccess[] = $this->categoryFormSubmitted;
         $renderer = $form->getRenderer();
         $renderer->wrappers['controls']['container'] = NULL;

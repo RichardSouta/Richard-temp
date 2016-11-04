@@ -28,14 +28,14 @@ class CategoryPresenter extends BasePresenter
     {
         $form = new Form;
         $form->addProtection();
-        $form->addText('name', 'Název kategorie')->setRequired()->setAttribute('class', 'form-control');
+        $form->addText('name', 'Název kategorie')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control');
 
-        $form->addTextArea('description', 'Popis kategorie')->setRequired()->setAttribute('class', 'form-control');
+        $form->addTextArea('description', 'Popis kategorie')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control');
         $form->addUpload('icon', 'Vyberte ikonku pro Vaši novou kategorii')->setRequired(false)
             ->addCondition(Form::FILLED)
             ->addRule(Form::IMAGE, 'Musí být obrázek!');
 
-        $form->addSubmit('send', 'nová kategorie')->setRequired()->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
+        $form->addSubmit('send', 'nová kategorie')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
 
         $form->onSuccess[] = $this->categoryFormSubmitted;
 

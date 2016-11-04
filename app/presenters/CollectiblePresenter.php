@@ -52,23 +52,23 @@ class CollectiblePresenter extends BasePresenter
     {
         $form = new Form;
         $form->addProtection();
-        $form->addText('name', 'Název předmětu')->setRequired()->setAttribute('class', 'form-control');
+        $form->addText('name', 'Název předmětu')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control');
 
-        $form->addTextArea('description', 'Popis předmětu')->setRequired()->setAttribute('class', 'form-control');
+        $form->addTextArea('description', 'Popis předmětu')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control');
 
-        $form->addTextArea('origin', 'Původ předmětu')->setRequired()->setAttribute('class', 'form-control');
+        $form->addTextArea('origin', 'Původ předmětu')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control');
 
         $categories = $this->em->getRepository('App\Model\Entity\Category')->findPairs('name', 'id');
         $form->addSelect('category', 'Kategorie', $categories)->setAttribute('class', 'form-control');
 
 
-        $form->addMultiUpload('imgs', 'Fotky předmětu')->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost obrázku je 4 MB.', 4 * 1024 * 1024 /* v bytech */)
+        $form->addMultiUpload('imgs', 'Fotky předmětu')->setRequired('Toto pole je povinné')->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost obrázku je 4 MB.', 4 * 1024 * 1024 /* v bytech */)
             ->addRule(Form::IMAGE, 'Pouze obrázky!')
             ->addRule(Form::MAX_LENGTH, 'Maximální počet obrázků je 5.', 5)
             ->setAttribute('class', 'form-control');
 
 
-        $form->addSubmit('send', 'nový předmět')->setRequired()->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
+        $form->addSubmit('send', 'nový předmět')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
 
 
         $form->onSuccess[] = $this->collectibleFormSubmitted;
@@ -110,7 +110,7 @@ class CollectiblePresenter extends BasePresenter
         $form->addProtection();
         /** @var Model\Entity\Collectible $collectible */
         $collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($this->getParameter('id'));
-        $form->addText('name', 'název')->setValue($collectible->getName())->setRequired()->setAttribute('class', 'form-control');
+        $form->addText('name', 'název')->setValue($collectible->getName())->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control');
 
         $form->addTextArea('description', 'popis')->setValue($collectible->getDescription())->setAttribute('class', 'form-control')->setRequired('Toto pole je povinné');
 
