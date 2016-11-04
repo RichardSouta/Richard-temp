@@ -5,7 +5,7 @@
             <div n:snippet="collectibles" data-ajax-append="true">
                 {foreach $collectibles as $collectible}
                     <div class="col-xs-6  col-sm-4 col-md-3 pet" id="galerie">
-                        <div class="polozka">
+                        <div class="polozka{if $collectible->getTradeable()} forTrade {/if}" {if $collectible->getTradeable()} title="Předmět k výměně" {/if}>
                             <div class="polozka_head">
                                 <center><h3>{$collectible->getName()}</h3></center>
                                 <a href="{link Collectible:,$collectible->getId()}"><img alt="titulní foto pro {$collectible->getName()}"

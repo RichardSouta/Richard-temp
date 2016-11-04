@@ -1,10 +1,11 @@
 {var $title = $uzivatel->getUsername()}
 {block content}
     <div class="col-xs-2">
-    <div id="profil">
+        <div id="profil">
 
             <h1>{$uzivatel->getUsername()}</h1>
-            <center><img alt="uživatel {$uzivatel->getUsername()}" src="{$uzivatel->getPicture()}" title="uživatel {$uzivatel->getUsername()}"
+            <center><img alt="uživatel {$uzivatel->getUsername()}" src="{$uzivatel->getPicture()}"
+                         title="uživatel {$uzivatel->getUsername()}"
                          class="img-responsive img-rounded"></center>
             {if ($user->isLoggedIn()&&$uzivatel->getId()!=$user->id)}
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal">
@@ -14,15 +15,16 @@
             <p>
             <div class="col-xs-12">{$uzivatel->getDescription()}</div>
         </div>
-    </div>
-        <div class="col-xs-10">
-
-
         {control categoryForm}
+    </div>
+    <div class="col-xs-10">
 
 
-    {include '../userGalerie.latte'}
-        </div>
+
+
+
+        {include '../galerie.latte'}
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="zpravaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
