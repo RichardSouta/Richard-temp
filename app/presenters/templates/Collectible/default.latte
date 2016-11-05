@@ -1,150 +1,175 @@
 {var $title = $collectible->getName()}
 {var $share = true}
-{block intro}
-{if $user->isLoggedIn()&&$user->identity->id==$collectible->getUser()->getId()}
-    <nav class="navbar navbar-inverse" id="submenu">
-        <a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil předmětu</a>
-        <div class="navbar-right">
-            {if $collectible->getTradeable()}<a n:href="Collectible:cancel, $presenter->getParameter('id')">Předmět již není k výměně</a> {else}<a n:href="Collectible:trade, $presenter->getParameter('id')">Vyměnit předmět&nbsp;&nbsp;</a>{/if}
-        </div>
-    </nav>
-{/if}
-{/block}
+{*{block intro}
+    {if $user->isLoggedIn()&&$user->identity->id==$collectible->getUser()->getId()}
+        <nav class="navbar navbar-inverse" id="submenu">
+            <a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil předmětu</a>
+            <div class="navbar-right">
+                {if $collectible->getTradeable()}<a n:href="Collectible:cancel, $presenter->getParameter('id')">Předmět
+                    již není k výměně</a> {else}<a n:href="Collectible:trade, $presenter->getParameter('id')">Vyměnit
+                    předmět&nbsp;&nbsp;</a>{/if}
+            </div>
+        </nav>
+    {/if}
+{/block}*}
 {block content}
 <div class="container-fluid">
 
     <div class="col-md-2">
+
         {if $collectible->getTradeable()&&($user->isLoggedIn()&&$collectible->getUser()->getId()!=$user->id)}
-        <div class="tradeable"><p>Tento předmět je k výměně! <br> <a n:href="Collectible:offer, $presenter->getParameter('id')"><button class="btn btn-info btn-sm">Nabídnout svůj předmět za tento</button></a></div>
-        {/if}
-
-        <div id="profil">
-            <h1>Vlastník: {$collectible->getUser()->getUsername()}</h1>
-            <a n:href="User:,$collectible->getUser()->getId()"><img alt="uživatel {$collectible->getUser()->getUsername()}" src="{$collectible->getUser()->getPicture()}"
-                 title="uživatel {$collectible->getUser()->getUsername()}"
-                 class="img-responsive img-rounded"></a>
-            {if ($user->isLoggedIn()&&$collectible->getUser()->getId()!=$user->id)}
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal">
-                    <span class="glyphicon glyphicon-envelope"></span> Poslat zprávu
-                </button>
-            {/if}
-            <p>Popis:<br>
-            <div class="col-xs-12">{$collectible->getUser()->getDescription()}</div>
-        </div>
-    </div>
-    <div class="col-md-6" id="collectible">
-        <div class="collectible-images">
-            <div class="collectible-image-main"><img alt="foto pro {$collectible->getName()}"
-                                                     data-src="{$collectible->getImages()[0]}">
+        <div class="tradeable">
+            <p>Tento předmět je k výměně! <br> <a n:href="Collectible:offer, $presenter->getParameter('id')">
+                    <button class="btn btn-info btn-sm">Nabídnout svůj předmět za tento</button>
+                </a>
+                {elseif $user->isLoggedIn()&&$user->identity->id==$collectible->getUser()->getId()}
+            <div class="user-controls">
+                <a n:href="Collectible:edit, $presenter->getParameter('id')">
+                    <button class="btn btn-success btn-sm">Upravit profil předmětu</button>
+                </a>
+                {if $collectible->getTradeable()}
+                    <a n:href="Collectible:cancel, $presenter->getParameter('id')">
+                        <button class="btn btn-success btn-sm">Předmět již není k výměně
+                        </button>
+                    </a>
+                {else}
+                <a n:href="Collectible:trade, $presenter->getParameter('id')">
+                        <button class="btn btn-success btn-sm">
+                            Vyměnit předmět
+                        </button></a>{/if}
+                {/if}
             </div>
-            {if $collectible->getImages()[1]}
-                <div class="collectible-image-2"><img alt="foto pro {$collectible->getName()}"
-                                                      title="klikněte pro zvětšení"
-                                                      data-src="{$collectible->getImages()[1]}">
-                </div>
-            {/if}
-            {if $collectible->getImages()[2]}
-                <div class="collectible-image-3"><img alt="foto pro {$collectible->getName()}"
-                                                      title="klikněte pro zvětšení"
-                                                      data-src="{$collectible->getImages()[2]}">
-                </div>
-            {/if}
-            {if $collectible->getImages()[3]}
-                <div class="collectible-image-4"><img alt="foto pro {$collectible->getName()}"
-                                                      title="klikněte pro zvětšení"
-                                                      data-src="{$collectible->getImages()[3]}">
-                </div>
-            {/if}
-            {if $collectible->getImages()[4]}
-                <div class="collectible-image-5"><img alt="foto pro {$collectible->getName()}"
-                                                      title="klikněte pro zvětšení"
-                                                      data-src="{$collectible->getImages()[4]}">
-                </div>
-            {/if}
-        </div>
-
-    </div>
 
 
-    <div class="col-md-4">
-        <div class="fb-like" data-href="{link Collectible:, $collectible->getId()}" data-layout="button_count"
-             data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
-        <div id="seznam">
-            <table>
-                <tr>
-                    <td>Název:</td>
-                    <td>{$collectible->getName()}</td>
-                    {ifset $category}
-                <tr>
-                    <td>Kategorie:</td>
-                    <td>{$collectible->getCategory()->getName()}</td>{/ifset}
-                <tr>
-                    <td>Původ:</td>
-                    <td>{$collectible->getOrigin()}</td>
-                <tr>
-                    <td>Popis:</td>
-                    <td>{$collectible->getDescription()}</td>
-            </table>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="zpravaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Poslat zprávu
-                        uživateli {$collectible->getUser()->getUserName()}</h4>
-                </div>
-                <div class="modal-body">
-                    {var $userId = $collectible->getUser()->getId()}
-                    {control messageForm-$userId}
-                </div>
+            <div id="profil">
+                <h1>Vlastník: {$collectible->getUser()->getUsername()}</h1>
+                <a n:href="User:,$collectible->getUser()->getId()"><img
+                            alt="uživatel {$collectible->getUser()->getUsername()}"
+                            src="{$collectible->getUser()->getPicture()}"
+                            title="uživatel {$collectible->getUser()->getUsername()}"
+                            class="img-responsive img-rounded"></a>
+                {if ($user->isLoggedIn()&&$collectible->getUser()->getId()!=$user->id)}
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal">
+                        <span class="glyphicon glyphicon-envelope"></span> Poslat zprávu
+                    </button>
+                {/if}
+                <p>Popis:<br>
+                <div class="col-xs-12">{$collectible->getUser()->getDescription()}</div>
             </div>
         </div>
-    </div>
-    {/block}
+        <div class="col-md-6" id="collectible">
+            <div class="collectible-images">
+                <div class="collectible-image-main"><img alt="foto pro {$collectible->getName()}"
+                                                         data-src="{$collectible->getImages()[0]}">
+                </div>
+                {if $collectible->getImages()[1]}
+                    <div class="collectible-image-2"><img alt="foto pro {$collectible->getName()}"
+                                                          title="klikněte pro zvětšení"
+                                                          data-src="{$collectible->getImages()[1]}">
+                    </div>
+                {/if}
+                {if $collectible->getImages()[2]}
+                    <div class="collectible-image-3"><img alt="foto pro {$collectible->getName()}"
+                                                          title="klikněte pro zvětšení"
+                                                          data-src="{$collectible->getImages()[2]}">
+                    </div>
+                {/if}
+                {if $collectible->getImages()[3]}
+                    <div class="collectible-image-4"><img alt="foto pro {$collectible->getName()}"
+                                                          title="klikněte pro zvětšení"
+                                                          data-src="{$collectible->getImages()[3]}">
+                    </div>
+                {/if}
+                {if $collectible->getImages()[4]}
+                    <div class="collectible-image-5"><img alt="foto pro {$collectible->getName()}"
+                                                          title="klikněte pro zvětšení"
+                                                          data-src="{$collectible->getImages()[4]}">
+                    </div>
+                {/if}
+            </div>
 
-    {block scripts}
-        <script>
-            var resolution = $(document).width();
-            if (resolution <= 600) resolution = 120 * 2;
-            else if (resolution <= 1240) resolution = 240 * 2;
-            else if (resolution <= 2480) resolution = 360 * 2;
-            else resolution = 480 * 2;
-
-            $('#collectible img').each(function () {
-                $(this).attr('src', 'images/collectible/' + $(this).attr('data-src') + -resolution);
-            });
-        </script>
+        </div>
 
 
-        <script>
-            $mainImg = $('.collectible-image-main img');
-            $('.collectible-image-2 img').on('click', function () {
-                $newMainSrc = $(this).attr('src');
-                $(this).attr('src', $mainImg.attr('src'));
-                $mainImg.attr('src', $newMainSrc);
-            });
+        <div class="col-md-4">
+            <div class="fb-like" data-href="{link Collectible:, $collectible->getId()}" data-layout="button_count"
+                 data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+            <div id="seznam">
+                <table>
+                    <tr>
+                        <td>Název:</td>
+                        <td>{$collectible->getName()}</td>
+                        {ifset $category}
+                    <tr>
+                        <td>Kategorie:</td>
+                        <td>{$collectible->getCategory()->getName()}</td>{/ifset}
+                    <tr>
+                        <td>Původ:</td>
+                        <td>{$collectible->getOrigin()}</td>
+                    <tr>
+                        <td>Popis:</td>
+                        <td>{$collectible->getDescription()}</td>
+                </table>
+            </div>
+        </div>
 
-            $('.collectible-image-3 img').on('click', function () {
-                $newMainSrc = $(this).attr('src');
-                $(this).attr('src', $mainImg.attr('src'));
-                $mainImg.attr('src', $newMainSrc);
-            });
+        <!-- Modal -->
+        <div class="modal fade" id="zpravaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Poslat zprávu
+                            uživateli {$collectible->getUser()->getUserName()}</h4>
+                    </div>
+                    <div class="modal-body">
+                        {var $userId = $collectible->getUser()->getId()}
+                        {control messageForm-$userId}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/block}
 
-            $('.collectible-image-4 img').on('click', function () {
-                $newMainSrc = $(this).attr('src');
-                $(this).attr('src', $mainImg.attr('src'));
-                $mainImg.attr('src', $newMainSrc);
-            });
+        {block scripts}
+            <script>
+                var resolution = $(document).width();
+                if (resolution <= 600) resolution = 120 * 2;
+                else if (resolution <= 1240) resolution = 240 * 2;
+                else if (resolution <= 2480) resolution = 360 * 2;
+                else resolution = 480 * 2;
 
-            $('.collectible-image-5 img').on('click', function () {
-                $newMainSrc = $(this).attr('src');
-                $(this).attr('src', $mainImg.attr('src'));
-                $mainImg.attr('src', $newMainSrc);
-            });
-        </script>
-    {/block}
+                $('#collectible img').each(function () {
+                    $(this).attr('src', 'images/collectible/' + $(this).attr('data-src') + -resolution);
+                });
+            </script>
+
+
+            <script>
+                $mainImg = $('.collectible-image-main img');
+                $('.collectible-image-2 img').on('click', function () {
+                    $newMainSrc = $(this).attr('src');
+                    $(this).attr('src', $mainImg.attr('src'));
+                    $mainImg.attr('src', $newMainSrc);
+                });
+
+                $('.collectible-image-3 img').on('click', function () {
+                    $newMainSrc = $(this).attr('src');
+                    $(this).attr('src', $mainImg.attr('src'));
+                    $mainImg.attr('src', $newMainSrc);
+                });
+
+                $('.collectible-image-4 img').on('click', function () {
+                    $newMainSrc = $(this).attr('src');
+                    $(this).attr('src', $mainImg.attr('src'));
+                    $mainImg.attr('src', $newMainSrc);
+                });
+
+                $('.collectible-image-5 img').on('click', function () {
+                    $newMainSrc = $(this).attr('src');
+                    $(this).attr('src', $mainImg.attr('src'));
+                    $mainImg.attr('src', $newMainSrc);
+                });
+            </script>
+        {/block}

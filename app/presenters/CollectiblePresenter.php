@@ -56,10 +56,10 @@ class CollectiblePresenter extends BasePresenter
                 $collectible->setTradeable(true);
                 $this->em->persist($collectible);
                 $this->em->flush();
-                $this->flashMessage('Váš předmět byl vystaven k výměně.');
+                $this->flashMessage($collectible->getName().' byl vystaven k výměně.');
             }
         }
-        $this->redirect('User:', $this->user->id);
+        $this->redirect('Collectible:', $id);
     }
 
     public function actionCancel($id)
@@ -74,10 +74,10 @@ class CollectiblePresenter extends BasePresenter
                 $collectible->setTradeable(false);
                 $this->em->persist($collectible);
                 $this->em->flush();
-                $this->flashMessage('Váš předmět již není k výměně.');
+                $this->flashMessage($collectible->getName().' již není k výměně.');
             }
         }
-        $this->redirect('User:', $this->user->id);
+        $this->redirect('Collectible:', $id);
     }
 
     public function actionOffer($id)
@@ -141,7 +141,7 @@ class CollectiblePresenter extends BasePresenter
     {
         $form = new Form;
         $form->addProtection();
-        $form->addText('name', 'Název předmětu')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaků.', 5);
+        $form->addText('name', 'Název předmětu')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaky.', 3);
 
         $form->addTextArea('description', 'Popis předmětu')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaků.', 40);
 
@@ -196,7 +196,7 @@ class CollectiblePresenter extends BasePresenter
         $form->addProtection();
         /** @var Model\Entity\Collectible $collectible */
         $collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($this->getParameter('id'));
-        $form->addText('name', 'název')->setValue($collectible->getName())->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaků.', 5);
+        $form->addText('name', 'název')->setValue($collectible->getName())->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaky.', 3);
 
         $form->addTextArea('description', 'popis')->setValue($collectible->getDescription())->setAttribute('class', 'form-control')->setRequired('Toto pole je povinné')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaků.', 40);
 
