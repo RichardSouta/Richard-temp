@@ -1,17 +1,5 @@
 {var $title = $collectible->getName()}
 {var $share = true}
-{*{block intro}
-    {if $user->isLoggedIn()&&$user->identity->id==$collectible->getUser()->getId()}
-        <nav class="navbar navbar-inverse" id="submenu">
-            <a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil předmětu</a>
-            <div class="navbar-right">
-                {if $collectible->getTradeable()}<a n:href="Collectible:cancel, $presenter->getParameter('id')">Předmět
-                    již není k výměně</a> {else}<a n:href="Collectible:trade, $presenter->getParameter('id')">Vyměnit
-                    předmět&nbsp;&nbsp;</a>{/if}
-            </div>
-        </nav>
-    {/if}
-{/block}*}
 {block content}
 <div class="container-fluid">
 
@@ -22,6 +10,7 @@
             <p>Tento předmět je k výměně! <br> <a n:href="Collectible:offer, $presenter->getParameter('id')">
                     <button class="btn btn-info btn-sm">Nabídnout svůj předmět za tento</button>
                 </a>
+        </div>
                 {elseif $user->isLoggedIn()&&$user->identity->id==$collectible->getUser()->getId()}
             <div class="user-controls">
                 <a n:href="Collectible:edit, $presenter->getParameter('id')">
@@ -31,14 +20,15 @@
                     <a n:href="Collectible:cancel, $presenter->getParameter('id')">
                         <button class="btn btn-success btn-sm">Předmět již není k výměně
                         </button>
-                    </a>
+                    </a></div>
                 {else}
                 <a n:href="Collectible:trade, $presenter->getParameter('id')">
                         <button class="btn btn-success btn-sm">
                             Vyměnit předmět
-                        </button></a>{/if}
-            </div>
+                        </button></a>
+                    </div>
                 {/if}
+            {/if}
 
 
 
