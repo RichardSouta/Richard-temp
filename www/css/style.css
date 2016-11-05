@@ -8,7 +8,7 @@
 
 .dropdown-menu li {
     position: relative;
-    z-index: 10000;
+    z-index: 1000;
 }
 
 body {
@@ -25,7 +25,7 @@ body {
     border-bottom: 1px #00eb72;
     padding-left: 10px;
     padding-top: 10px;
-    z-index: 10000;
+    z-index: 1000;
 }
 
 .navbar-header a {
@@ -131,6 +131,8 @@ th, td {
     background: #5cb85c;
 }
 
+
+
 #new, #new button, #new a, #new p {
     margin: 0 auto;
     position: absolute;
@@ -192,8 +194,17 @@ th, td {
 
 }
 .fb-like{
-    position: relative;
-    top: 15%;
+    padding: 20px;
+    height: 30px;
+}
+
+.tradeable button {
+    margin-top: 10px;
+}
+#snippet--user_controls {
+    position: absolute;
+    right: 10px;
+    display: flex;
 }
 #seznam {
     position: relative;
@@ -347,6 +358,12 @@ label > input[name="remember"] {
     background-color: #005c8b !important;
 }
 
+.tradeable {
+    padding-top: 10px;
+    text-align: center;
+    color: #5cb85c;
+}
+
 .polozka_head {
     max-height: 25vh;
 }
@@ -382,7 +399,7 @@ label > input[name="remember"] {
 
 #profil {
     color: #5cb85c;
-    font-size: 25px;
+    font-size: 20px;
     padding: 20px;
     margin: 0 auto;
     text-align: center;
@@ -390,6 +407,9 @@ label > input[name="remember"] {
 
 #profil img {
     max-width: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #restore_form {
@@ -674,7 +694,7 @@ span.select2:nth-child(3) > span:nth-child(1) > span:nth-child(1) {
     max-height: 100%;
 }
 
-#frm-registerForm label, #frm-profileForm label, #frm-collectibleForm label, #frm-categoryForm label, #frm-collectibleEditForm label {
+#frm-registerForm label, #frm-profileForm label, #frm-collectibleForm label, #frm-collectibleEditForm label {
     color: #5cb85c;
     font-size: large;
     bottom: 10px;
@@ -683,12 +703,9 @@ span.select2:nth-child(3) > span:nth-child(1) > span:nth-child(1) {
 }
 
 #messageIcon {
-    position: absolute;
-    right: 135px;
-    top: 10px;
     color: white;
     font-size: 30px;
-
+    padding-right: 10px;
 }
 
 #notificationIcon {
@@ -895,4 +912,30 @@ span.select2:nth-child(3) > span:nth-child(1) > span:nth-child(1) {
     bottom: 0;
     position: absolute;
     right: 0;
+}
+
+#frm-categoryForm {
+    padding-top: 10px;
+}
+
+#frm-categoryForm label{
+    color: #5cb85c;
+    padding-bottom: 5px;
+}
+
+#tradeDetail {
+    padding: 20px;
+    text-align: center;
+    color: #5cb85c;
+}
+
+#tradeDetail .polozka{
+    max-width: 75%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+#trade-sign{
+    padding-top:30%
 }

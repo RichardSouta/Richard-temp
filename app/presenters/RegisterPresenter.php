@@ -21,8 +21,8 @@ class RegisterPresenter extends BasePresenter
         $form->addText('surname', 'Příjmení')->setAttribute('class', 'form-control')
             ->setRequired('Toto pole je povinné');
 
-        $form->addText('username', 'username')->setAttribute('class', 'form-control')
-            ->setRequired('Toto pole je povinné');
+        $form->addText('username', 'Uživatelské jméno')->setAttribute('class', 'form-control')
+            ->setRequired('Toto pole je povinné')->addRule(Form::MIN_LENGTH, 'Uživatelské jméno je příliš krátké, zvolte si jiné', 3)->addRule(Form::MAX_LENGTH, 'Uživatelské jméno je příliš dlouhé, zvolte si jiné', 30);
 
         $form->addText('email', 'Váš e-mail')->setAttribute('class', 'form-control')
             ->setRequired('Vyberte si e-mail')

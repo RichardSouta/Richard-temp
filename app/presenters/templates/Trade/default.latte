@@ -1,0 +1,53 @@
+{var $title = 'Detail nabídky výměny'}
+{block content}
+    <div id="tradeDetail">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-4">
+            Uživatel {$trade->getSender()} Vám nabízí svůj předmět
+
+            <div class="polozka">
+                <div class="polozka_head">
+                    <center><h3>{$trade->getCollectibleOffered()->getName()}</h3></center>
+                    <a href="{link Collectible:,$trade->getCollectibleOffered()->getId()}">
+                        <img alt="titulní foto pro {$trade->getCollectibleOffered()->getName()}"
+                             class="img-responsive" data-src="{$trade->getCollectibleOffered()->getImages()[0]}"
+                             title="{$trade->getCollectibleOffered()->getDescription()}"></a>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-xs-2"><img id="trade-sign" class="img-responsive" alt="trade-sign" src="{$basePath}/trade.png">
+        </div>
+        <div class="col-xs-4">
+            výměnou za Váš předmět
+
+            <div class="polozka">
+                <div class="polozka_head">
+                    <center><h3>{$trade->getCollectibleAsked()->getName()}</h3></center>
+                    <a href="{link Collectible:,$trade->getCollectibleAsked()->getId()}">
+                        <img alt="titulní foto pro {$trade->getCollectibleAsked()->getName()}"
+                             class="img-responsive" data-src="{$trade->getCollectibleAsked()->getImages()[0]}"
+                             title="{$trade->getCollectibleAsked()->getDescription()}"></a>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-xs-1"></div>
+    </div>
+    <div class="col-xs-5">
+    </div>
+    <div class="col-xs-1">
+        <a n:href='Trade:confirm, $presenter->getParameter("id")'>
+        <button type="button" class="btn btn-success">Potvrdit
+        </button>
+        </a>
+    </div>
+    <div class="col-xs-1">
+        <a n:href='Trade:decline,$presenter->getParameter("id")'>
+        <button type="button" class="btn btn-danger">Odmítnout
+        </button>
+        </a>
+    </div>
+    <div class="col-xs-5">
+    </div>
+{/block}

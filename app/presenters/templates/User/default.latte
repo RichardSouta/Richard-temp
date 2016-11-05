@@ -1,21 +1,23 @@
 {var $title = $uzivatel->getUsername()}
 {block content}
     <div class="col-xs-2">
+        {control categoryForm}
         <div id="profil">
 
-            <h1>{$uzivatel->getUsername()}</h1>
-            <center><img alt="uživatel {$uzivatel->getUsername()}" src="{$uzivatel->getPicture()}"
+            <h1>Vítej na mém profilu!<br> Já jsem {$uzivatel->getUsername()}</h1>
+            <img alt="uživatel {$uzivatel->getUsername()}" src="{$uzivatel->getPicture()}"
                          title="uživatel {$uzivatel->getUsername()}"
-                         class="img-responsive img-rounded"></center>
+                         class="img-responsive img-rounded">
             {if ($user->isLoggedIn()&&$uzivatel->getId()!=$user->id)}
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal">
                     <span class="glyphicon glyphicon-envelope"></span> Poslat zprávu
                 </button>
             {/if}
-            <p>
+            <p>Něco o mě:<br>
             <div class="col-xs-12">{$uzivatel->getDescription()}</div>
+
         </div>
-        {control categoryForm}
+
     </div>
     <div class="col-xs-10">
 

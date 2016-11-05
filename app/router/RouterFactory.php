@@ -21,6 +21,7 @@ class RouterFactory
         $router[] = new Route('club/new', 'Club:new');
         $router[] = new Route('club/<id>', 'Club:display');
         $router[] = new Route('chat/<id>','Chat:default');
+        $router[] = new Route('trade/<id>','Trade:default');
         $router[] = new Route('[<presenter>/]images/collectible/<id>', 'Collectible:show');
         $router[] = new Route('[<presenter>/]images/user/<id>', 'User:showPicture');
         $router[] = new Route('category/new', 'Category:new');
@@ -38,7 +39,8 @@ class RouterFactory
         ]);
         $router[] = new Route('collectible/edit/<id>', 'Collectible:edit');
         $router[] = new Route('collectible/trade/<id>', 'Collectible:trade');
-        $router[] = new Route('collectible/final/<id>', 'Collectible:final');
+        $router[] = new Route('collectible/cancel/<id>', 'Collectible:cancel');
+        $router[] = new Route('collectible/offer/<id>', 'Collectible:offer');
         $router[] = new Route('collectible/confirm/<id>', 'Collectible:confirm');
         $router[] = new Route('collectible/new', 'Collectible:new');
         $router[] = new Route('collectible[/<default>]/<id>', array(

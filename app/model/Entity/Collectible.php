@@ -59,6 +59,7 @@ class Collectible
     public function setTradeable($tradeable)
     {
         $this->tradeable = $tradeable;
+        return $this;
     }
 
     /**
@@ -103,7 +104,7 @@ class Collectible
     }
 
     /**
-     * @return Category
+     * @return User
      */
     public function getUser()
     {
@@ -111,7 +112,7 @@ class Collectible
     }
 
     /**
-     * @param Category $user
+     * @param User $user
      */
     public function setUser($user)
     {

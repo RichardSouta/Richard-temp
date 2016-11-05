@@ -45,7 +45,7 @@ class UserPresenter extends BasePresenter
             ->addCondition(Form::FILLED)
             ->addRule(Form::IMAGE, 'Musí být obrázek!');
         $form->addText('username', 'Uživatelské jméno')->setValue($user->getUsername())->setAttribute('class', 'form-control')
-            ->setRequired('Toto pole je povinné');
+            ->setRequired('Toto pole je povinné')->addRule(Form::MIN_LENGTH, 'Uživatelské jméno je příliš krátké, zvolte si jiné', 3)->addRule(Form::MAX_LENGTH, 'Uživatelské jméno je příliš dlouhé, zvolte si jiné', 30);
 
         $form->addText('name', 'Jméno')->setValue($user->getName())->setAttribute('class', 'form-control')
             ->setRequired('Toto pole je povinné');
@@ -172,8 +172,8 @@ class UserPresenter extends BasePresenter
             }
         }
 
-        if ($this->getParameter('category') != NULL) $form->addSelect('category', '', $userCategories)->setAttribute('class', 'form-control')->setAttribute('onchange', "document.getElementById('frm-categoryForm').submit();")->setPrompt('Všechny kategorie')->setValue($this->getParameter('category'));
-        else $form->addSelect('category', '', $userCategories)->setAttribute('class', 'form-control')->setAttribute('onchange', "document.getElementById('frm-categoryForm').submit();")->setPrompt('Všechny kategorie');
+        if ($this->getParameter('category') != NULL) $form->addSelect('category', 'Filtrovat sbírku dle kategorie', $userCategories)->setAttribute('class', 'form-control')->setAttribute('onchange', "document.getElementById('frm-categoryForm').submit();")->setPrompt('Všechny kategorie')->setValue($this->getParameter('category'));
+        else $form->addSelect('category', 'Filtrovat sbírku dle kategorie', $userCategories)->setAttribute('class', 'form-control')->setAttribute('onchange', "document.getElementById('frm-categoryForm').submit();")->setPrompt('Všechny kategorie');
         $form->onSuccess[] = $this->categoryFormSubmitted;
         $renderer = $form->getRenderer();
         $renderer->wrappers['controls']['container'] = NULL;

@@ -7,7 +7,7 @@ use Nette;
 use App\Model;
 use Nette\Application\UI\Multiplier;
 use Nette\Utils\Image;
-
+use Nette\Mail\Message;
 
 class CollectiblePresenter extends BasePresenter
 {
@@ -19,32 +19,121 @@ class CollectiblePresenter extends BasePresenter
 
     public function renderDefault($id = null)
     {
-        if (!empty($id)) $collectible = $this->template->collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($id);
-        else $this->redirect('Homepage:');
+        if (!empty($id)) {
+            $this->template->collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($id);
+        } else {
+            $this->redirect('Homepage:');
+        }
     }
 
     public function renderEdit($id)
     {
         if (!($this->user->isLoggedIn())) {
             $this->redirect('Homepage:');
+        }
 
+        $collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($id);
+        if ($collectible) {
+            if ($collectible->getUser()->getId() === $this->user->getId()) {
+
+            } else {
+                $this->redirect('Homepage:');
+            }
+        } else {
+            $this->redirect('Homepage:');
+        }
+    }
+
+    public function actionTrade($id)
+    {
+        if (!($this->user->isLoggedIn())) {
+            $this->redirect('Homepage:');
+        }
+        /** @var Model\Entity\Collectible $collectible */
+        $collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($id);
+        if ($collectible) {
+            if ($collectible->getUser()->getId() === $this->user->getId()) {
+                $collectible->setTradeable(true);
+                $this->em->persist($collectible);
+                $this->em->flush();
+                $this->flashMessage('Váš předmět byl vystaven k výměně.');
+            }
+        }
+        $this->redirect('User:', $this->user->id);
+    }
+
+    public function actionCancel($id)
+    {
+        if (!($this->user->isLoggedIn())) {
+            $this->redirect('Homepage:');
+        }
+        /** @var Model\Entity\Collectible $collectible */
+        $collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($id);
+        if ($collectible) {
+            if ($collectible->getUser()->getId() === $this->user->getId()) {
+                $collectible->setTradeable(false);
+                $this->em->persist($collectible);
+                $this->em->flush();
+                $this->flashMessage('Váš předmět již není k výměně.');
+            }
+        }
+        $this->redirect('User:', $this->user->id);
+    }
+
+    public function actionOffer($id)
+    {
+        if (!($this->user->isLoggedIn())) {
+            $this->redirect('Homepage:');
+        }
+
+        /** @var Model\Entity\Collectible $collectible */
+        $collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($id);
+        if (!$collectible || !$collectible->getTradeable()) {
+            $this->redirect('Homepage:');
+        }
+        /** @var Model\Entity\User $user */
+        $user = $this->em->find('App\Model\Entity\User', $this->getUser()->id);
+        $collectibles = $user->getCollectibles();
+        if (count($collectibles) < 1) {
+            $this->flashMessage('Nemáte žádné předměty k nabídnutí.');
+            $this->redirect('Homepage:');
         }
 
     }
 
-    public function renderTrade($id)
+    protected function createComponentOfferForm()
     {
-        if (!($this->user->isLoggedIn())) {
-            $this->redirect('Homepage:');
+        $form = new Form;
+        $form->addProtection();
+        $collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findPairs(['user' => $this->getUser()->id], 'name', 'id');
+        $form->addSelect('collectible', 'Vybrat předmět k nabídnutí', $collectibles)->setAttribute('class', 'form-control');
+        $form->addSubmit('send', 'Potvrdit nabídku')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
 
-        }
-        $collectible = $this->template->collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($id);
-        $collectible->setTradeable(true);
-        $this->em->persist($collectible);
+        $form->onSuccess[] = $this->offerFormSubmitted;
+
+        return $form;
+    }
+
+    public function offerFormSubmitted($form, $values)
+    {
+        $trade = new Model\Entity\Trade();
+        /** @var Model\Entity\Collectible $collectibleAsked */
+        $collectibleAsked = $this->em->getRepository('App\Model\Entity\Collectible')->find($this->getParameter('id'));
+        /** @var Model\Entity\Collectible $collectibleOffered */
+        $collectibleOffered = $this->em->getRepository('App\Model\Entity\Collectible')->find($values->collectible);
+        $trade->setCollectibleAsked($collectibleAsked)->setCollectibleOffered($collectibleOffered)->setStatus('pending')->setSender($collectibleOffered->getUser())->setReceiver($collectibleAsked->getUser());
+        $this->em->persist($trade);
         $this->em->flush();
-        $this->flashMessage('Váš předmět byl vystaven k výměně.');
-        $this->redirect('User:', $this->user->id);
+        $link = Nette\Utils\Html::el('a')->href($this->link('//Trade:default', $trade->getId()))->setText('Zobrazit žádost o výměnu');
+        $mail = new Message;
+        $mail->setFrom('postmaster@collectorsnest.eu')
+            ->addTo($collectibleAsked->getUser()->getEmail())
+            ->setSubject('Nová nabídka výměny na collectors\' nest')
+            ->setHTMLBody('<style>.wrapper{width:100%;height:auto;}.container{max-width: 90%;margin:0 auto;}.mail_header{background-color:#5cb85c;padding: 0.5em;}.mail_body{text-align:center;margin-top: 1em;}.mail_body p{max-width: 80%; margin: 1em auto;}.large{font-size: 1.5em;margin-top: 2em;}.bottom{margin-top: 2em;}.confirm_button{background-color:#5cb85c; padding: 0.5em; margin: 150px auto 0;}.confirm_button a {text-decoration: none; color: #000;}.confirm_button:hover{opacity:0.9;}</style><div class="wrapper"><div class="container"><div class="mail_header">The collectors\' nest</div><div class="mail_body"><p class="large">Ahoj ' . $collectibleAsked->getUser()->getUsername() . ', máte novou nabídku výměny předmětů. </p><p> Detail nabídky zobrazíte kliknutím na odkaz níže. Team collectors\' nest</p><p class="bottom"><span class="confirm_button">' . $link . '</span></p></div></div>');
+        $this->mailer->send($mail);
 
+        $this->flashMessage('Nabídka vytvořena a majitel předmětu o tom byl informován e-mailem.');
+        $this->redirect('User:', $this->user->id);
 
     }
 
@@ -52,11 +141,11 @@ class CollectiblePresenter extends BasePresenter
     {
         $form = new Form;
         $form->addProtection();
-        $form->addText('name', 'Název předmětu')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control');
+        $form->addText('name', 'Název předmětu')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaků.', 5);
 
-        $form->addTextArea('description', 'Popis předmětu')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control');
+        $form->addTextArea('description', 'Popis předmětu')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaků.', 40);
 
-        $form->addTextArea('origin', 'Původ předmětu')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control');
+        $form->addTextArea('origin', 'Původ předmětu')->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaků.', 5);
 
         $categories = $this->em->getRepository('App\Model\Entity\Category')->findPairs('name', 'id');
         $form->addSelect('category', 'Kategorie', $categories)->setAttribute('class', 'form-control');
@@ -96,11 +185,8 @@ class CollectiblePresenter extends BasePresenter
                 $image->save("../www/images/collectible/$name.jpg", 100, Image::JPEG);
             }
         }
-
-
         $this->flashMessage('Předmět byl vytvořen.');
         $this->redirect('Homepage:');
-
     }
 
 
@@ -110,11 +196,11 @@ class CollectiblePresenter extends BasePresenter
         $form->addProtection();
         /** @var Model\Entity\Collectible $collectible */
         $collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($this->getParameter('id'));
-        $form->addText('name', 'název')->setValue($collectible->getName())->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control');
+        $form->addText('name', 'název')->setValue($collectible->getName())->setRequired('Toto pole je povinné')->setAttribute('class', 'form-control')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaků.', 5);
 
-        $form->addTextArea('description', 'popis')->setValue($collectible->getDescription())->setAttribute('class', 'form-control')->setRequired('Toto pole je povinné');
+        $form->addTextArea('description', 'popis')->setValue($collectible->getDescription())->setAttribute('class', 'form-control')->setRequired('Toto pole je povinné')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaků.', 40);
 
-        $form->addTextArea('origin', 'původ')->setValue($collectible->getOrigin())->setAttribute('class', 'form-control')->setRequired('Toto pole je povinné');
+        $form->addTextArea('origin', 'původ')->setValue($collectible->getOrigin())->setAttribute('class', 'form-control')->setRequired('Toto pole je povinné')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaků.', 5);
 
         $categories = $this->em->getRepository('App\Model\Entity\Category')->findPairs('name', 'id');
         $form->addSelect('category', 'kategorie', $categories)->setValue($collectible->getCategory()->getId())->setAttribute('class', 'form-control');

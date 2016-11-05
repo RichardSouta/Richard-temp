@@ -5,7 +5,7 @@
     <nav class="navbar navbar-inverse" id="submenu">
         <a n:href="Collectible:edit, $presenter->getParameter('id')">Upravit profil předmětu</a>
         <div class="navbar-right">
-            <a n:href="Collectible:trade, $presenter->getParameter('id')">Vyměnit předmět&nbsp;&nbsp;</a>
+            {if $collectible->getTradeable()}<a n:href="Collectible:cancel, $presenter->getParameter('id')">Předmět již není k výměně</a> {else}<a n:href="Collectible:trade, $presenter->getParameter('id')">Vyměnit předmět&nbsp;&nbsp;</a>{/if}
         </div>
     </nav>
 {/if}
@@ -14,17 +14,21 @@
 <div class="container-fluid">
 
     <div class="col-md-2">
+        {if $collectible->getTradeable()&&($user->isLoggedIn()&&$collectible->getUser()->getId()!=$user->id)}
+        <div class="tradeable"><p>Tento předmět je k výměně! <br> <a n:href="Collectible:offer, $presenter->getParameter('id')"><button class="btn btn-info btn-sm">Nabídnout svůj předmět za tento</button></a></div>
+        {/if}
+
         <div id="profil">
-            <h1>{$collectible->getUser()->getUsername()}</h1>
-            <center><a n:href="User:,$collectible->getUser()->getId()"><img
-                            alt="uživatel {$collectible->getUser()->getUsername()}"
-                            src="{$collectible->getUser()->getPicture()}"
-                            class="img-responsive img-rounded"></a></center>
-            {if ($user->isLoggedIn()&&$user->id!=$collectible->getUser()->getId())}
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal"><span
-                            class="glyphicon glyphicon-envelope"></span> Poslat zprávu
-                </button>{/if}
-            <p>
+            <h1>Vlastník: {$collectible->getUser()->getUsername()}</h1>
+            <a n:href="User:,$collectible->getUser()->getId()"><img alt="uživatel {$collectible->getUser()->getUsername()}" src="{$collectible->getUser()->getPicture()}"
+                 title="uživatel {$collectible->getUser()->getUsername()}"
+                 class="img-responsive img-rounded"></a>
+            {if ($user->isLoggedIn()&&$collectible->getUser()->getId()!=$user->id)}
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#zpravaModal">
+                    <span class="glyphicon glyphicon-envelope"></span> Poslat zprávu
+                </button>
+            {/if}
+            <p>Popis:<br>
             <div class="col-xs-12">{$collectible->getUser()->getDescription()}</div>
         </div>
     </div>

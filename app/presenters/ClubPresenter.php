@@ -39,8 +39,8 @@ class ClubPresenter extends BasePresenter
         $form->addProtection();
         $categories = $this->em->getRepository('App\Model\Entity\Category')->findPairs('name', 'id');
         $form->addMultiSelect('categories', 'Vyberte sběratelské kategorie.', $categories)->setAttribute('class', 'form-control');
-        $form->addText('title')->setAttribute('placeholder', 'Zadejte název klubu')->setAttribute('class', 'form-control')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaků.', 5)->addRule(Form::MAX_LENGTH, 'Název je příliš dlouhý.', 40);
-        $form->addTextArea('description')->setAttribute('placeholder', 'Zde zadejte úvodní příspěvek nového sběratelského klubu, typicky specifikaci tématu.')->setAttribute('class', 'form-control');
+        $form->addText('title')->setAttribute('placeholder', 'Zadejte název klubu')->setAttribute('class', 'form-control')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaků.', 5)->addRule(Form::MAX_LENGTH, 'Název je příliš dlouhý.', 100);
+        $form->addTextArea('description')->setAttribute('placeholder', 'Zde zadejte úvodní příspěvek nového sběratelského klubu, typicky specifikaci tématu.')->setAttribute('class', 'form-control')->addRule(Form::MIN_LENGTH, 'Minimálně %d znaků.', 20);
         $form->addSubmit('send', 'Založit klub')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
         $form->onSuccess[] = $this->newClubFormSubmitted;
         $renderer = $form->getRenderer();
