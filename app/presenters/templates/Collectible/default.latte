@@ -3,7 +3,7 @@
 {block content}
 <div class="container-fluid">
 
-    <div class="col-md-2">
+    <div class="col-xs-2">
 
         {if $collectible->getTradeable()&&($user->isLoggedIn()&&$collectible->getUser()->getId()!=$user->id)}
         <div class="tradeable">
@@ -48,7 +48,7 @@
                 <div class="col-xs-12">{$collectible->getUser()->getDescription()}</div>
             </div>
         </div>
-        <div class="col-md-6" id="collectible">
+        <div class="col-xs-6" id="collectible">
             <div class="collectible-images">
                 <div class="collectible-image-main"><img alt="foto pro {$collectible->getName()}"
                                                          data-src="{$collectible->getImages()[0]}">
@@ -82,7 +82,7 @@
         </div>
 
 
-        <div class="col-md-4">
+        <div class="col-xs-4">
             <div class="fb-like" data-href="{link Collectible:, $collectible->getId()}" data-layout="button_count"
                  data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
             <div id="seznam">

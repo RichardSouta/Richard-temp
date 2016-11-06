@@ -12,7 +12,7 @@ class CategoryPresenter extends BasePresenter
 {
     public $category, $page, $collectibles;
 
-    public function renderDefault($category = NULL)
+    public function actionDefault($category = NULL)
     {
         if (!$category) {
             $this->redirect('Homepage:');

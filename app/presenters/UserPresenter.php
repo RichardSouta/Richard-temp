@@ -14,14 +14,14 @@ class UserPresenter extends BasePresenter
 {
     public $id, $page, $category;
 
-    public function renderDefault($id, $category)
+    public function actionDefault($id, $category)
     {
         $user = $this->template->uzivatel = $this->em->getRepository('App\Model\Entity\User')->find($id);
         if (isset($category)) {
-            $this->template->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findBy(['user' => $user, 'category' => $category]);
+            $this->template->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findBy(['user' => $user, 'category' => $category],['dateTimeAdded' => 'DESC']);
             $this->template->forTrade = $this->em->getRepository('App\Model\Entity\Collectible')->findBy(['user' => $user, 'tradeable' => true, 'category' => $category]);
         } else {
-            $this->template->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findByUser($user);
+            $this->template->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findByUser($user,['dateTimeAdded' => 'DESC']);
             $this->template->forTrade = $this->em->getRepository('App\Model\Entity\Collectible')->findBy(['user' => $user, 'tradeable' => true]);
         }
 

@@ -36,13 +36,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     public function handleLoad($page)
     {
         if ($this->isAjax()) {
-            $this->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findBy([], ['dateTimeAdded' => 'DESC'], 15, $page * 15);
-            $this->payload->stopLoading = false;
+            $this->collectibles = $this->template->collectibles = $this->em->getRepository('App\Model\Entity\Collectible')->findBy([], ['dateTimeAdded' => 'DESC'], 15, $page * 15);
             if (count($this->collectibles) != 15) {
                 $this->payload->stopLoading = true;
             }
 
             if (count($this->collectibles) != 0) {
+                $this->redrawControl('wrapper');
                 $this->redrawControl('collectibles');
             } else {
                 $this->sendPayload();

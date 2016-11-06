@@ -13,7 +13,7 @@
 
 body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     background-color: #f5f580;
     color: #333;
     padding-top: 100px;
@@ -50,8 +50,9 @@ body {
 }
 
 #paypal {
-    position: relative;
-    bottom: 40px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
 
 #select2-frm-searchForm-category-container {
@@ -200,7 +201,7 @@ th, td {
 
 .user-controls button{
     margin-top: 10px;
-    width: 100%;
+    min-width: 100%;
 }
 .tradeable button {
     margin-top: 10px;
@@ -411,8 +412,6 @@ label > input[name="remember"] {
 }
 
 #profil img {
-    max-width: 150px;
-    display: block;
     margin-left: auto;
     margin-right: auto;
 }
@@ -439,7 +438,7 @@ label > input[name="remember"] {
 
     position: absolute;
     text-align: left;
-    font-size: 2em;
+    font-size: 2vw;
     width: 20%;
     top: 10px;
     color: #fefefe;
@@ -887,6 +886,7 @@ span.select2:nth-child(3) > span:nth-child(1) > span:nth-child(1) {
     color: white;
     background-color: #5cb85c;
     z-index: 1000;
+    font-size: 1vw;
 }
 
 .eu-cookies-buttons {
