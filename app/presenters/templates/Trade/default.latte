@@ -3,7 +3,7 @@
     <div id="tradeDetail">
         <div class="col-xs-1"></div>
         <div class="col-xs-4">
-            Uživatel {$trade->getSender()} Vám nabízí svůj předmět
+            <a n:href="User:, $trade->getSender()->getId()">Uživatel {$trade->getSender()}</a> Vám nabízí svůj předmět
 
             <div class="polozka">
                 <div class="polozka_head">
@@ -13,7 +13,17 @@
                              class="img-responsive" data-src="{$trade->getCollectibleOffered()->getImages()[0]}"
                              title="{$trade->getCollectibleOffered()->getDescription()}"></a>
                 </div>
-
+                <div class="polozka_body">
+                    {if $trade->getCollectibleOffered()->getCategory()}
+                        {if $trade->getCollectibleOffered()->getCategory()->getIcon()}
+                            <img alt="Ikona kategorie" title="Kategorie {$trade->getCollectibleOffered()->getCategory()->getName()}"
+                                 src="{$basePath}/images/category/{$trade->getCollectibleOffered()->getCategory()->getId()}.png"
+                                 class="img-responsive">
+                        {else}
+                            <center>Kategorie: {$trade->getCollectibleOffered()->getCategory()}</center>
+                        {/if}
+                    {/if}
+                </div>
             </div>
         </div>
         <div class="col-xs-2"><img id="trade-sign" class="img-responsive" alt="trade-sign" src="{$basePath}/trade.png">
@@ -28,6 +38,17 @@
                         <img alt="titulní foto pro {$trade->getCollectibleAsked()->getName()}"
                              class="img-responsive" data-src="{$trade->getCollectibleAsked()->getImages()[0]}"
                              title="{$trade->getCollectibleAsked()->getDescription()}"></a>
+                </div>
+                <div class="polozka_body">
+                    {if $trade->getCollectibleAsked()->getCategory()}
+                        {if $trade->getCollectibleAsked()->getCategory()->getIcon()}
+                            <img alt="Ikona kategorie" title="Kategorie {$trade->getCollectibleAsked()->getCategory()->getName()}"
+                                 src="{$basePath}/images/category/{$trade->getCollectibleAsked()->getCategory()->getId()}.png"
+                                 class="img-responsive">
+                        {else}
+                            <center>Kategorie: {$trade->getCollectibleAsked()->getCategory()}</center>
+                        {/if}
+                    {/if}
                 </div>
 
             </div>

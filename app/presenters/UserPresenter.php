@@ -160,20 +160,13 @@ class UserPresenter extends BasePresenter
     {
         $form = new Form;
         $form->addProtection();
-        $categories = $this->em->getRepository('App\Model\Entity\Category')->findPairs('name', 'id');
-        $userCategories = [];
-        $user = $this->em->getRepository('App\Model\Entity\User')->find($this->getParameter('id'));
-        $collectibles = $user->getCollectibles();
-        /** @var Model\Entity\Collectible $collectible */
-        foreach ($collectibles as $collectible) {
-            if ($key = array_search($collectible->getCategory()->getName(), $categories)) {
-                $userCategories[$key] = $categories[$key];
-                unset($categories[$key]);
-            }
-        }
+        $userCategories = $this->em->getRepository('App\Model\Entity\Category')->findPairs(['collectibles.user' => $this->getParameter('id')], 'name', 'id');
+        $form->addSelect('category', 'Filtrovat sbírku dle kategorie', $userCategories)->setAttribute('class', 'form-control')->setAttribute('onchange', "document.getElementById('frm-categoryForm').submit();")
+            ->setPrompt('Všechny kategorie');
+        if ($this->getParameter('category') != NULL) {
+            $form['category']->setValue($this->getParameter('category'));
 
-        if ($this->getParameter('category') != NULL) $form->addSelect('category', 'Filtrovat sbírku dle kategorie', $userCategories)->setAttribute('class', 'form-control')->setAttribute('onchange', "document.getElementById('frm-categoryForm').submit();")->setPrompt('Všechny kategorie')->setValue($this->getParameter('category'));
-        else $form->addSelect('category', 'Filtrovat sbírku dle kategorie', $userCategories)->setAttribute('class', 'form-control')->setAttribute('onchange', "document.getElementById('frm-categoryForm').submit();")->setPrompt('Všechny kategorie');
+        }
         $form->onSuccess[] = $this->categoryFormSubmitted;
         $renderer = $form->getRenderer();
         $renderer->wrappers['controls']['container'] = NULL;
