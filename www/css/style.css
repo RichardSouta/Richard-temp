@@ -51,7 +51,7 @@ body {
 
 #paypal {
     position: relative;
-    bottom: 30px;
+    bottom: 40px;
 }
 
 #select2-frm-searchForm-category-container {
@@ -439,11 +439,16 @@ label > input[name="remember"] {
 
     position: absolute;
     text-align: left;
-    font-size: 25px;
+    font-size: 2em;
     width: 20%;
     top: 10px;
     color: #fefefe;
 
+}
+
+#frm-contactForm {
+    top: -10px;
+    position: relative;
 }
 
 #frm-searchForm-category {
@@ -940,4 +945,14 @@ span.select2:nth-child(3) > span:nth-child(1) > span:nth-child(1) {
 
 #trade-sign{
     padding-top:30%
+}
+
+#contribute {
+    color: #5cb85c !important;
+    text-align: center;
+    padding: 5px;
+}
+
+#contribute form {
+    padding-top: 15px;
 }

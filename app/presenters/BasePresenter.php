@@ -128,14 +128,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             /** @var Model\Entity\User $user */
             $user = $this->em->find('App\Model\Entity\User', $this->user->getId());
             $chats = $user->getChats();
-            foreach ($chats as $chat)
-            {
-                foreach ($chat->getMessages() as $message)
-                {
-                    if ($message->getSender()->getId()!=$this->user->id)
-                    {
-                        if ($message->getSeen()===false)
-                        {
+            foreach ($chats as $chat) {
+                foreach ($chat->getMessages() as $message) {
+                    if ($message->getSender()->getId() != $this->user->id) {
+                        if ($message->getSeen() === false) {
                             $this->template->notify = true;
                             break;
                         }
@@ -361,28 +357,41 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         return $dialog;
     }
 
-    /*
-      protected function createComponentOptionForm()
-        {
-      $form = new Form;
-      $form->addProtection();
-      $options = array(
-        'g' => 'galerie',
-        's' => 'seznam',);
-    $form->addRadioList('option','', $options)->setAttribute('class','form-control')->getSeparatorPrototype()->setName(NULL);
+    protected function createComponentContactForm()
+    {
 
+        $form = new Form;
+        $form->addProtection();
+        $form->addTextArea('text')->setAttribute('placeholder', 'Napište zprávu')->setAttribute('class', 'form-control');
+        $form->addSubmit('send', 'Poslat')->setAttribute('class', 'form-control')->setAttribute('id', 'submit_button');
+        $form->onSuccess[] = $this->contactFormSubmitted;
+        $renderer = $form->getRenderer();
+        $renderer->wrappers['controls']['container'] = NULL;
+        $renderer->wrappers['pair']['container'] = NULL;
+        $renderer->wrappers['label']['container'] = NULL;
+        $renderer->wrappers['control']['container'] = NULL;
+        return $form;
 
-            // call method signInFormSubmitted() on success
-            $form->onSuccess[] = $this->optionFormSubmitted;
+    }
 
-            return $form;
+    public function contactFormSubmitted($form, $values)
+    {
+        if (!empty($values->text)) {
+            $mail = new Message;
+            if ($this->user->isLoggedIn()) {
+                /** @var Model\Entity\User $user */
+                $user = $this->em->find('App\Model\Entity\User', $this->user->id);
+                $mail->setSubject('Zpráva pro administrátora od uživatele '.$user->getUsername());
+            }
+            else {
+               $mail->setSubject('Zpráva pro administrátora');
+            }
+            $mail->setFrom('postmaster@collectorsnest.eu')
+                ->addTo('info@collectorsnest.eu')
+                ->setBody($values->text);
+            $this->mailer->send($mail);
+
+            $this->flashMessage('Zpráva byla úspěšně odeslána.', 'success');
         }
-
-      public function optionFormSubmitted($form)
-        {
-            $values = $form->getValues();
-
-            $this->redirect('Category:',$values->option);
-        }
-    */
+    }
 }
