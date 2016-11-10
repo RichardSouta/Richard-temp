@@ -8,6 +8,7 @@ use App\Model;
 use Nette\Application\UI\Multiplier;
 use Nette\Utils\Image;
 use Nette\Mail\Message;
+use App\Model\Entity\Image as Img;
 
 class CollectiblePresenter extends BasePresenter
 {
@@ -221,13 +222,26 @@ class CollectiblePresenter extends BasePresenter
     public function collectibleEditFormSubmitted($form, $values)
     {
         /** @var Model\Entity\Collectible $collectible */
-        $collectible = $this->template->collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($this->getParameter('id'));
+        $collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($this->getParameter('id'));
         if (!empty($values['imgs'])) {
             $newImageCount = count($values['imgs']);
+            foreach ($collectible->getImages() as $image)
+            {
+                $this->em->remove($image);
+            }
             $collectible->emptyImages();
-            $collectible->setImages($newImageCount);
-            $this->em->persist($collectible);
+            for ($i=0;$i<$newImageCount;$i++)
+            {
+                /** @var Image $image */
+                $image = new Img();
+                $image->setCollectible($collectible);
+                $collectible->setImage($image);
+                $this->em->persist($image);
+            }
+$this->em->persist($collectible);
             $this->em->flush();
+            /** @var Model\Entity\Collectible $collectible */
+            $collectible = $this->template->collectible = $this->em->getRepository('App\Model\Entity\Collectible')->find($this->getParameter('id'));
 
             foreach ($values['imgs'] as $key => $image) {
                 /** @var Nette\Http\FileUpload $image */
@@ -238,6 +252,10 @@ class CollectiblePresenter extends BasePresenter
                     $image->sharpen();
                     $name = $collectible->getImages()[$key];
                     $image->save("../www/images/collectible/$name.jpg", 100, Image::JPEG);
+                }
+
+                else {
+                    $this->flashMessage('Nahrávání obrázků se nepodařilo');
                 }
             }
         }

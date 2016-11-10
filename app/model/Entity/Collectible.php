@@ -5,6 +5,7 @@ namespace App\Model\Entity;
 use App\Model\Repository\CollectibleRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Nette\Utils\Finder;
 
 /**
  * @ORM\Entity(repositoryClass="App\Model\Repository\CollectibleRepository")
@@ -205,9 +206,10 @@ class Collectible
      */
     public function setImages($count)
     {
-        for ($i=0;$i<$count;$i++)
-        {
-            $this->setImage();
+        for ($i = 0; $i < $count; $i++) {
+            $image = new Image();
+            $image->setCollectible($this);
+            $this->setImage($image);
         }
         return $this;
     }
@@ -234,24 +236,23 @@ class Collectible
      * @param Image $image
      * @return Collectible
      */
-    public function setImage()
+    public function setImage($image)
     {
-        $image = new Image();
-        $image->setCollectible($this);
         $this->images [] = $image;
         return $this;
     }
 
     public function emptyImages()
     {
-        foreach ($this->getImages() as $image)
-        {
+        foreach ($this->getImages() as $image) {
             $name = $image;
             unlink("../www/images/collectible/$name.jpg");
-            //mazat i náhledy
+            $name = $name . '\-';
+            foreach (Finder::findFiles($name . '.*')->in('../www/images/collectible') as $key => $file) {
+                unlink($key);
+            }
         }
-
-        $this->images = new ArrayCollection;
+        $this->images->clear();
         return $this;
     }
 
