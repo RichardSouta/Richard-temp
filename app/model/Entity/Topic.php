@@ -15,6 +15,7 @@ class Topic
     {
         $this->categories = new ArrayCollection;
         $this->createdDateTime = new \DateTime();
+        $this->comments = new \DateTime();
     }
 
     /**
@@ -76,7 +77,7 @@ class Topic
     public function setRelevance()
     {
         $now = new \DateTime();
-        $lastMessage = $this->comments->last();;
+        $lastMessage = $this->comments->last();
         if ($lastMessage) {
             $lastMessageDate = $lastMessage->getCreatedDateTime();
             $mesageCount = count($this->comments);

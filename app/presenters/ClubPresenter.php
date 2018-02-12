@@ -59,7 +59,7 @@ class ClubPresenter extends BasePresenter
             $categories[] = $this->em->find('App\Model\Entity\Category', $category);
         }
         $user = $this->em->find('App\Model\Entity\User', $this->getUser()->getId());
-        $topic->setUser($user)->setDescription($values->description)->setCategories($categories)->setTitle($values->title);
+        $topic->setUser($user)->setDescription($values->description)->setCategories($categories)->setTitle($values->title)->setRelevance();
         $this->em->persist($topic);
         $this->em->flush();
         $this->redirect('Club:display', $topic->getId());
@@ -88,6 +88,9 @@ class ClubPresenter extends BasePresenter
             /** @var Model\Entity\Topic $topic */
             $topic = $this->em->getRepository('App\Model\Entity\Topic')->findOneById($this->getParameter('id'));
             $topic->setRelevance();
+            $comment->setText($values->text)->setUser($user)->setTopic($topic);
+            $this->em->persist($comment);
+            $this->em->flush();
             $userList = [];
             $userList[] = $this->user->getId();
             foreach ($topic->getComments() as $comment) {
@@ -103,9 +106,6 @@ class ClubPresenter extends BasePresenter
                 }
             }
 
-            $comment->setText($values->text)->setUser($user)->setTopic($topic);
-            $this->em->persist($comment);
-            $this->em->flush();
             $this->redirect('Club:display', $this->getParameter('id'));
         }
     }

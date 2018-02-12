@@ -6,6 +6,7 @@ use Nette\Application\UI\Form as Form;
 use Nette;
 use Nette\Utils\Html;
 use Nette\Mail\Message;
+use Nette\Utils\Strings;
 
 
 class RegisterPresenter extends BasePresenter
@@ -76,7 +77,7 @@ class RegisterPresenter extends BasePresenter
 
             $this->redirect('Homepage:');
 
-        } catch (\PDOException $e) {
+        } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
             if (Strings::contains($e, 'username')) {
                 $form['username']->addError('Username is already taken');
             }

@@ -956,3 +956,12 @@ span.select2:nth-child(3) > span:nth-child(1) > span:nth-child(1) {
 #contribute form {
     padding-top: 15px;
 }
+
+.terms p {
+    padding: 10px;
+    margin: 10px;
+}
+
+.terms {
+    color: #5cb85c !important;
+}

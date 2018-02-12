@@ -152,7 +152,7 @@ class CollectiblePresenter extends BasePresenter
         $form->addSelect('category', 'Kategorie', $categories)->setAttribute('class', 'form-control');
 
 
-        $form->addMultiUpload('imgs', 'Fotky předmětu')->setRequired('Toto pole je povinné')->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost obrázku je 4 MB.', 4 * 1024 * 1024 /* v bytech */)
+        $form->addMultiUpload('imgs', 'Fotky předmětu')->setRequired('Toto pole je povinné')->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost obrázku je 1 MB.', (1 * 1024 * 1024) /* v bytech */)
             ->addRule(Form::IMAGE, 'Pouze obrázky!')
             ->addRule(Form::MAX_LENGTH, 'Maximální počet obrázků je 5.', 5)
             ->setAttribute('class', 'form-control');
